@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
-
+// eslint-disable-next-line
 const PLAYER_1 = 'X';
+// eslint-disable-next-line
 const PLAYER_2 = 'O';
 
 const generateSquares = () => {
@@ -25,21 +26,32 @@ const generateSquares = () => {
   return squares;
 }
 
+//ask if we can add parameters to generate squares
+
 const App = () => {
 
-  const [squares, setSquares] = useState(generateSquares());
-
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const [squares, setSquares] = useState(generateSquares()); //initial state 
 
 
+  const onClickCallback = (event) => { 
+    
+    alert(event);
+    for(let i = 0; i < squares.length; i++){
+      for(let j = 0; j < squares.length; j++){
+        if(event === squares[i][j].id){
+          squares[i][j]["value"] = 'x';
+        }
+      }
+    }
+    setSquares(squares);
+  }
+
+// eslint-disable-next-line
   const checkForWinner = () => {
     // Complete in Wave 3
 
   }
-
+// eslint-disable-next-line
   const resetGame = () => {
     // Complete in Wave 4
   }
@@ -52,7 +64,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={onClickCallback} />
       </main>
     </div>
   );

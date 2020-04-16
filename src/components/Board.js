@@ -5,11 +5,10 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  
   let squareComponents = [];
   for(let i=0; i < squares.length; i++){
     for(let j=0; j < squares.length; j++){
-      squareComponents.push(<Square value={squares[i][j].value} id={squares[i][j].id} onClickCallback={onClickCallback} />);
+      squareComponents.push(<Square key={squares[i][j].id} value={squares[i][j].value} id={squares[i][j].id} onClickCallback={onClickCallback} />);
     }
   }
   return squareComponents;
@@ -17,7 +16,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+  
   return <div className="grid" >
     {squareList}
   </div>
