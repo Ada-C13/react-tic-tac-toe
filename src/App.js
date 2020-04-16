@@ -59,11 +59,20 @@ const App = () => {
  
   const checkForWinner = () => {
     if(squares[0][0].value === squares[1][1].value  && squares[0][0].value === squares[2][2].value && squares[0][0].value !== ''){
-      console.log(squares[0][0]);
       return squares[0][0].value;
+
     }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== ''){
-      console.log(squares[0][2]);
       return squares[0][2].value;
+
+    }else if(squares[0][0].value === squares[1][0].value && squares[0][0].value === squares[2][0].value && squares[0][0].value !== ''){
+        return squares[0][0].value;
+
+    }else if(squares[0][1].value === squares[1][1].value && squares[0][1].value === squares[2][1].value && squares[0][1].value !== ''){
+      return squares[0][1].value;
+      
+    }else if(squares[0][2].value === squares[1][2].value && squares[0][2].value === squares[2][2].value && squares[0][2].value !== ''){
+      return squares[0][2].value;
+
     }else{
       for(let i = 0; i < squares.length; i++){
         if(squares[i][0].value === squares[i][1].value && squares[i][0].value === squares[i][2].value && squares[i][0].value !== '' ){
@@ -77,6 +86,7 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares());
   }
+
   let winner = checkForWinner();
   if( winner !== -1){
 
@@ -88,7 +98,7 @@ const App = () => {
           <button onClick={resetGame}>Reset Game</button>
         </header>
         <main>
-          <Board squares={squares} onClickCallback={onClickCallback} />
+            <p> YAY! </p>
         </main>
       </div>
     );
