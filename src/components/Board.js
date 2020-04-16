@@ -3,13 +3,25 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
+//squares is an array of 3 arrays
+//use the object in each sub-array to create a Square component and return all those components to the Board component generator function
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-
+  
+  const allSquares = []
+  
+  squares.forEach((row) => {
+    row.forEach((square) => {
+        allSquares.push(
+          <Square id={square.id} value={square.value} />
+        );
+    });
+  });
+  
+  return allSquares;
 }
 
 const Board = ({ squares, onClickCallback }) => {
+  console.log(squares)
   const squareList = generateSquareComponents(squares, onClickCallback);
   console.log(squareList);
   return <div className="grid" >
