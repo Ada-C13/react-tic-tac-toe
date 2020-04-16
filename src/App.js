@@ -29,9 +29,9 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
 
-  const onClickCallback = (param) => {
+  const onClickCallback = (row, col) => {
 
-    console.log('click', param);
+    console.log('click', row, col);
   }
   // Wave 2
   // You will need to create a method to change the square 
