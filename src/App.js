@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
-// eslint-disable-next-line
+
 const PLAYER_1 = 'X';
-// eslint-disable-next-line
+
 const PLAYER_2 = 'O';
 
 const generateSquares = () => {
@@ -26,33 +26,34 @@ const generateSquares = () => {
   return squares;
 }
 
-//ask if we can add parameters to generate squares
+
 
 const App = () => {
 
-  const [squares, setSquares] = useState(generateSquares()); //initial state 
-
-
+  const [squares, setSquares] = useState(generateSquares()); 
+  const [current, changeCurrent] = useState(true);
   const onClickCallback = (event) => { 
     
     let newSquares =[];
-    for(let i = 0; i < squares.length; i++){ //[[0, 1, 2]]
-        
+    for(let i = 0; i < squares.length; i++){
       for(let j = 0; j < squares.length; j++){
         
         if(event === squares[i][j].id){
-          squares[i][j]["value"] = 'x';
+          squares[i][j]["value"] = (switchPlayer() ? PLAYER_2 : PLAYER_1);
         }
-        
-        //newSquares.push(row);
       }
       newSquares.push(squares[i]);
-      
     }
-   
-    console.log(newSquares);
     setSquares(newSquares);
   }
+  
+  
+
+  function switchPlayer() {
+    changeCurrent(!current);
+    return current;
+  };
+  
 
 // eslint-disable-next-line
   const checkForWinner = () => {

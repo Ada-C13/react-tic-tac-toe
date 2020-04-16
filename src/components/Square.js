@@ -5,17 +5,10 @@ import './Square.css'
 
 const Square = (props) => {
  
-  
-  //let value = props.value;
-
-  const onSquareClick = (event) => {
-    console.log("hi");
+  const onSquareClick = () => {
     props.onClickCallback(props.id);
   }
-  
- 
-  
-  
+
   return <button
     className="square"  key={props.id} onClick={onSquareClick} >
     {props.value}
