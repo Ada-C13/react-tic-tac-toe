@@ -35,15 +35,23 @@ const App = () => {
 
   const onClickCallback = (event) => { 
     
-    alert(event);
-    for(let i = 0; i < squares.length; i++){
+    let newSquares =[];
+    for(let i = 0; i < squares.length; i++){ //[[0, 1, 2]]
+        
       for(let j = 0; j < squares.length; j++){
+        
         if(event === squares[i][j].id){
           squares[i][j]["value"] = 'x';
         }
+        
+        //newSquares.push(row);
       }
+      newSquares.push(squares[i]);
+      
     }
-    setSquares(squares);
+   
+    console.log(newSquares);
+    setSquares(newSquares);
   }
 
 // eslint-disable-next-line

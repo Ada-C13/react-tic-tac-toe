@@ -9,6 +9,7 @@ const Square = (props) => {
   //let value = props.value;
 
   const onSquareClick = (event) => {
+    console.log("hi");
     props.onClickCallback(props.id);
   }
   
