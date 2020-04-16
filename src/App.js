@@ -32,12 +32,12 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares()); 
   const [current, changeCurrent] = useState(true);
+
   const onClickCallback = (event) => { 
     
     let newSquares =[];
     for(let i = 0; i < squares.length; i++){
       for(let j = 0; j < squares.length; j++){
-        
         if(event === squares[i][j].id){
           squares[i][j]["value"] = (switchPlayer() ? PLAYER_2 : PLAYER_1);
         }
@@ -47,14 +47,12 @@ const App = () => {
     setSquares(newSquares);
   }
   
-  
 
   function switchPlayer() {
     changeCurrent(!current);
     return current;
   };
   
-
 // eslint-disable-next-line
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -62,7 +60,7 @@ const App = () => {
   }
 // eslint-disable-next-line
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
   }
 
   return (
@@ -70,7 +68,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
