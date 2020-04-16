@@ -44,30 +44,62 @@ const App = () => {
       }
       newSquares.push(squares[i]);
     }
+   
     setSquares(newSquares);
   }
   
-
+  //toggle back a forth for player turn
   function switchPlayer() {
     changeCurrent(!current);
     return current;
   };
-  
-// eslint-disable-next-line
-  const checkForWinner = () => {
-    // Complete in Wave 3
 
+ 
+  
+ 
+  const checkForWinner = () => {
+    if(squares[0][0].value === squares[1][1].value  && squares[0][0].value === squares[2][2].value && squares[0][0].value !== ''){
+      console.log(squares[0][0]);
+      return squares[0][0].value;
+    }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== ''){
+      console.log(squares[0][2]);
+      return squares[0][2].value;
+    }else{
+      for(let i = 0; i < squares.length; i++){
+        if(squares[i][0].value === squares[i][1].value && squares[i][0].value === squares[i][2].value && squares[i][0].value !== '' ){
+          return squares[i][0].value
+        }
+      }
+    }
+    return -1;
   }
-// eslint-disable-next-line
+
   const resetGame = () => {
     setSquares(generateSquares());
   }
+  let winner = checkForWinner();
+  if( winner !== -1){
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>React Tic Tac Toe</h1>
+          <h2>The winner is  {winner}</h2>
+          <button onClick={resetGame}>Reset Game</button>
+        </header>
+        <main>
+          <Board squares={squares} onClickCallback={onClickCallback} />
+        </main>
+      </div>
+    );
+  }
+
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2> Still playing...  </h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
@@ -75,6 +107,11 @@ const App = () => {
       </main>
     </div>
   );
+
+
+
+
+
 }
 
 export default App;
