@@ -17,6 +17,7 @@ const generateSquares = () => {
       squares[row].push({
         id: currentId,
         value: '',
+        disabled: false
       });
       currentId += 1;
     }
@@ -31,7 +32,6 @@ const App = () => {
   
   // Updates the correct square for new value.
   const updateSquare = (updatedSquare) => {
-    console.log(updatedSquare);
     const squaresNew = [];
 
     for (let row = 0; row < 3; row ++) { // Each row
@@ -50,6 +50,7 @@ const App = () => {
     setSquares(squaresNew);
   };
 
+  // Updates the value for the new square.
   const updateMarker = (updatedSquare) => {
     if (itsXTurn) {
       setXturn(false);

@@ -10,9 +10,15 @@ const Square = (props) => {
     const updatedSquare = {
       id: props.id,
       value: props.value,
+      disabled: props.disabled
     };
 
-    props.onClickCallback(updatedSquare);
+    if (updatedSquare.disabled === true) {
+      return;
+    } else {
+      updatedSquare.disabled = true;
+      props.onClickCallback(updatedSquare);
+    };
   };
 
   return (
@@ -29,6 +35,7 @@ Square.propTypes = {
   value: PropTypes.string.isRequired,
   onClickCallback: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired
 };
 
 export default Square
