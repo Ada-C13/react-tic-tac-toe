@@ -11,9 +11,16 @@ const Square = (props) => {
   const onSquareClick =() => {
     const changedSquare ={
       id: props.id,
-      value: "X"
+      value:props.value
     }
-    props.onClickCallback(changedSquare);
+
+    if(props.value!==""){
+      console.log("cannot play here");
+    }
+    else {
+      props.onClickCallback(changedSquare);
+    }
+
   }
 
   return <button

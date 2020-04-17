@@ -33,12 +33,20 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+
+  const [turn, setTurn] = useState(true);
+
   const changeSquare = (changedSquare)=>{
     const squareNew =[];
     squares.forEach((row)=>{
       const rowNew = [];
       row.forEach((square)=>{
-        if(square.id===changedSquare.id){
+        if(square.id===changedSquare.id && turn===true){
+          changedSquare.value = "X";
+          rowNew.push(changedSquare);
+        }
+        else if(square.id===changedSquare.id && turn===false){
+          changedSquare.value = "O";
           rowNew.push(changedSquare);
         }
         else {
@@ -49,6 +57,7 @@ const App = () => {
     })
 
     setSquares(squareNew);
+    setTurn(!turn);
 
   }
 
