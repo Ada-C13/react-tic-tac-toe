@@ -28,11 +28,36 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [xIsNext, setXisNext] = useState(true);
+  // const winner = checkforWinner(board);
+  
+  // Wave 2: create a method to change the square when clicked
+  // then pass it into the squares as a callback
+  const handleSquareClick = (i) => {
+    const squaresCopy = [...squares];
+    
+    // If user clicks an occupied square or if game is won, return
+    // if (winner || squaresCopy[i].value === "") return;
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+    // Put an X or an O in clicked square
+    squaresCopy[i] = xIsNext ? 'X' : 'O';
+    setSquares(squaresCopy);
+    setXisNext(!xIsNext);
+}
+
+  //   let newSquares = [];
+  //   //iterate through current squares
+  //   squares.forEach((square) => {
+  //     //if square value changed, push updated square to newSquares
+  //     if (square.value !== i.value) {
+  //       newSquares.push(i);
+  //     } else {
+  //       newSquares.push(square);
+  //     };
+  //   })
+    
+  //   setSquares(newSquares);
+  // }
 
 
   const checkForWinner = () => {
@@ -52,7 +77,8 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        {/* // add onClickCallback props with our handleSquareClick callback function */}
+        <Board squares={squares} onClickCallback={handleSquareClick}/>
       </main>
     </div>
   );

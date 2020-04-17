@@ -7,19 +7,31 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
   // squares is an array of arrays [[1,2,3], [4,5,6], [7,8,9]]
   // modifying squares so that each index contains a Square Component
-  
-  for (const row in squares) {
-    for (const col in squares[row]) {
-      squares[row][col] = <Square 
-                              id={squares[row][col].id}
-                              value={squares[row][col].value}
-                              // onClickCallback={onClickCallback}
-                          />
-    }
-  }
 
-  return squares;
+  const allSquares = [].concat(...squares);
+  return allSquares.map(square => {
+    return <Square
+      key={square.id}
+      id={square.id}
+      value={square.value}
+      onClickCallback={onClickCallback}
+    />
+  });
 }
+
+//   for (const row in squares) {
+//     for (const col in squares[row]) {
+//       squares[row][col] = <Square
+//                               key={squares[row][col].id}
+//                               id={squares[row][col].id}
+//                               value={squares[row][col].value}
+//                               onClickCallback={onClickCallback}
+//                           />
+//     };
+//   };
+
+//   return squares;
+// }
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
