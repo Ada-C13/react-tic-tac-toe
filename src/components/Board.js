@@ -5,9 +5,28 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
+  const squaresArray = [];
+  // console.log(squaresArray);
+  console.log(onClickCallback);
 
+  squares.forEach((row) => {
+    row.forEach((square)=> {
+      // console.log(square)
+
+      squaresArray.push(
+        <Square
+          key={square.id}
+          id={square.id}
+          value={square.value}
+          onClickCallback={square.onClickCallback}
+        />
+      );
+    })
+  });
+  console.log(squaresArray);
+  return squaresArray;
 }
+
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
