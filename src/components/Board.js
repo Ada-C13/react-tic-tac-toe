@@ -15,18 +15,19 @@ const generateSquareComponents = (squares, onClickCallback) => {
           <Square 
           id={square.id} 
           value={square.value} 
-          onClickCallback={square.onClickCallback}/>
+          onClickCallback={onClickCallback}/>
         );
     });
   });
   
   return allSquares;
 }
+// you can destructure this parameter to: {squares, onClickCallback}
+// and then in generateSquareComponents you can just have (squares, onClickCallback)
+const Board = (props) => {
 
-const Board = ({ squares, onClickCallback }) => {
-  console.log(squares)
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+  const squareList = generateSquareComponents(props.squares, props.onClickCallback);
+
   return <div className="grid" >
     {squareList}
   </div>

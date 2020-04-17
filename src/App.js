@@ -27,19 +27,35 @@ const generateSquares = () => {
   return squares;
 }
 
-//squares is the result of generateSquares, setSqares is the method to use to update the state of sqares
 const App = () => {
 
-  const [squares, setSquares] = useState(generateSquares());  // this passes in the array of arrays of squares
-  const [player, setPlayer] = useState(PLAYER_1) // this sets player as player 1
+  const [squares, setSquares] = useState(generateSquares());
+  const [xTurn, setXTurn] = useState(true);
+  const whosUp = (xTurn ? "X" : "O");
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
-
-
-
+  const onClickCallback = (id) => {
+    let newSquares = [];
+    
+    squares.forEach((row) => {
+      let newRow = [];
+      row.forEach((squareComponent) => {
+        if (squareComponent.id === id) {
+          squareComponent = {
+            id: id,
+            value: whosUp
+          }
+          newRow.push(squareComponent);
+        } else {
+          newRow.push(squareComponent);
+        }
+      })
+      newSquares.push(newRow);
+    });
+  
+    setSquares(newSquares);
+    setXTurn(!xTurn);
+    //checkForWinner
+  } 
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -58,7 +74,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squaresList} onClickCallback={updateSquare} />
+        <Board squares={squares} onClickCallback={onClickCallback} />
       </main>
     </div>
   );
