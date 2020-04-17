@@ -8,9 +8,16 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
   const onSquareClick = () => {
+    let value = ""
+    if (props.turn === "X") {
+      value = "X";
+    } else {
+      value = "O";
+    }
+
     const clickedSquare = {
       id: props.id,
-      value: "N"
+      value: value
     };
 
     console.log("clicked!");

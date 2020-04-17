@@ -28,6 +28,7 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [turn, setTurn] = useState(PLAYER_1);
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -35,8 +36,6 @@ const App = () => {
   //   Then pass it into the squares as a callback
   const clickSquare = (clickedSquare) => {
     const updatedSquares = [...squares];
-
-    // const updatedSquares = squares;
   
     for (let row = 0; row < 3; row += 1) {
       for (let col = 0; col < 3; col += 1) {
@@ -47,7 +46,6 @@ const App = () => {
     }
 
     console.log(updatedSquares);
-
     setSquares(updatedSquares);
   };
 
@@ -69,7 +67,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={clickSquare} />
+        <Board squares={squares} turn={turn} onClickCallback={clickSquare} />
       </main>
     </div>
   );

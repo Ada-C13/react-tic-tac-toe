@@ -4,7 +4,7 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
-const generateSquareComponents = (squares, onClickCallback) => {
+const generateSquareComponents = (squares, onClickCallback, turn) => {
   // Complete this for Wave 1
   const renderedSquares = [];
   
@@ -15,6 +15,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
         value={square.value}
         id={square.id}
         onClickCallback={onClickCallback}
+        turn={turn}
       />;
       renderedSquares.push(squareComponent);
     })
@@ -23,8 +24,8 @@ const generateSquareComponents = (squares, onClickCallback) => {
   return renderedSquares;
 }
 
-const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
+const Board = ({ squares, onClickCallback, turn }) => {
+  const squareList = generateSquareComponents(squares, onClickCallback, turn);
   console.log(squareList);
   return <div className="grid" >
     {squareList}
