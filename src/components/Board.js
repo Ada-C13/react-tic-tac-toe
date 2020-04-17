@@ -6,7 +6,21 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
-
+  const renderedSquares = [];
+  
+  let row = 0;
+  while (row < 3) {
+    squares[row].forEach((square) => {
+      let squareComponent = <Square 
+        value={square.value}
+        id={square.id}
+        onClickCallback={onClickCallback}
+      />;
+      renderedSquares.push(squareComponent);
+    })
+    row += 1;
+  }
+  return renderedSquares;
 }
 
 const Board = ({ squares, onClickCallback }) => {

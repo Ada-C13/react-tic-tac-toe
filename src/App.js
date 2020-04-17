@@ -16,7 +16,7 @@ const generateSquares = () => {
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
-        value: '',
+        value: '-',
       });
       currentId += 1;
     }
@@ -33,6 +33,23 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+  const clickSquare = (clickedSquare) => {
+    const updatedSquares = [...squares];
+
+    // const updatedSquares = squares;
+  
+    for (let row = 0; row < 3; row += 1) {
+      for (let col = 0; col < 3; col += 1) {
+        if (updatedSquares[row][col].id === clickedSquare.id) {
+          updatedSquares[row][col].value = clickedSquare.value;
+        }
+      }
+    }
+
+    console.log(updatedSquares);
+
+    setSquares(updatedSquares);
+  };
 
 
   const checkForWinner = () => {
@@ -52,7 +69,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={clickSquare} />
       </main>
     </div>
   );
