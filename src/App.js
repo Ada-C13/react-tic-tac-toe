@@ -29,8 +29,9 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   
+  // Updates the correct square for new value.
   const updateSquare = (updatedSquare) => {
-    const squaresNew = [];
+    let squaresNew = [];
 
     squares.forEach( (square) => {
       if (square.id === updatedSquare.id) {
