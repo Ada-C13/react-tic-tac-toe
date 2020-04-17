@@ -32,8 +32,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares()); 
   const [current, changeCurrent] = useState(true);
 
-  const onClickCallback = (event) => { 
-    
+  const onClickCallback = (event) => {  //event handler
     let newSquares =[];
     for(let i = 0; i < squares.length; i++){
       for(let j = 0; j < squares.length; j++){
@@ -43,7 +42,6 @@ const App = () => {
       }
       newSquares.push(squares[i]);
     }
-   
     setSquares(newSquares);
   }
   
@@ -55,11 +53,13 @@ const App = () => {
 
  
   const checkForWinner = () => {
+    //checks diagonals
     if(squares[0][0].value === squares[1][1].value  && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '' ){
       return squares[0][0].value;
     }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== ''){
       return squares[0][2].value;
     }else{
+      //checks rows and columns 
       for(let i = 0; i < squares.length; i++){
         for(let j = 0; j < squares.length; j++){
           if(squares[i][0].value === squares[i][1].value && squares[i][0].value === squares[i][2].value && squares[i][0].value !== '' ){

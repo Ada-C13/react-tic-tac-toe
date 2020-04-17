@@ -5,7 +5,7 @@ import './Square.css'
 
 const Square = (props) => {
  
-  const onSquareClick = () => {
+  const onSquareClick = () => { //event listener
     props.onClickCallback(props.id);
   }
 
