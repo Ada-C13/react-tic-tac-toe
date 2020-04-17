@@ -3,28 +3,28 @@ import "./Board.css";
 import Square from "./Square";
 import PropTypes from "prop-types";
 
-const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-
-  // Find a way to make a 2D array 1D
-  const flattenSquares = squares.flat();
-  const squareComponents = flattenSquares.map((square) => {
+// we de-structured here, so using squares.whatever instead of props.whatever
+const SquareComponents = ({ squares, onClickCallback }) => {
+  const generateSquareComponents = squares.flat().map((square) => {
     return (
       <Square
         id={square.id}
         value={square.value}
         key={square.id}
-        onClickCallback={square.onClickCallback}
+        onClickCallback={onClickCallback}
       />
     );
   });
-  return squareComponents;
+  return generateSquareComponents;
 };
-// const Board = (props) => {
+
+// this is destructoring - takes the place of props (props.whatever)
 const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
-  return <div className="grid">{squareList}</div>;
+  return (
+    <div className="grid">
+      <SquareComponents squares={squares} onClickCallback={onClickCallback} />
+    </div>
+  );
 };
 
 Board.propTypes = {
