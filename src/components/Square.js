@@ -8,11 +8,16 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
-  return <button
-    className="square"
-  >
+    // const updatedSquare = {
+      // id:props.id
+    // }
+
+  return (
+  <button className="square">
+
     {props.value}
   </button>
+  )
 }
 
 Square.propTypes = {
@@ -21,4 +26,4 @@ Square.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
-export default Square
+export default Square;
