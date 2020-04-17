@@ -48,12 +48,16 @@ const App = () => {
     console.log(updatedSquares);
     setSquares(updatedSquares);
     turn === "X"? setTurn(PLAYER_2) : setTurn(PLAYER_1);
+
+    checkForWinner();
   };
 
 
   const checkForWinner = () => {
     // Complete in Wave 3
-
+    if (squares[0][0].value === "X") {
+      console.log("Player 1 wins!")
+    }
   }
 
   const resetGame = () => {
