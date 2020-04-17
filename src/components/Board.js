@@ -9,7 +9,8 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // modifying squares so that each index contains a Square Component
 
   const allSquares = [].concat(...squares);
-  return allSquares.map(square => {
+  console.log(allSquares);
+  const answer = allSquares.map(square => {
     return <Square
       key={square.id}
       id={square.id}
@@ -17,21 +18,12 @@ const generateSquareComponents = (squares, onClickCallback) => {
       onClickCallback={onClickCallback}
     />
   });
+  console.log(answer);
+  return (answer);
+
+  
+  //needs to return one-d array of 9 components
 }
-
-//   for (const row in squares) {
-//     for (const col in squares[row]) {
-//       squares[row][col] = <Square
-//                               key={squares[row][col].id}
-//                               id={squares[row][col].id}
-//                               value={squares[row][col].value}
-//                               onClickCallback={onClickCallback}
-//                           />
-//     };
-//   };
-
-//   return squares;
-// }
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
