@@ -5,9 +5,29 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
+  // console.log(squares[0])
+  let squareList = []
+  // console.log(squareList)
 
+  let i = 0
+  while (i < squares.length){
+    let j = 0
+    while(j < squares.length){
+      // console.log(squares[i][j])
+      squareList.push(
+        <Square 
+        value = {squares[i][j].value}
+        id = {squares[i][j].id}
+        onClickCallback = {onClickCallback}/>
+      )
+      j++
+    }
+    i++
+  }
+  return squareList
 }
+
+
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
@@ -22,7 +42,7 @@ Board.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string.isRequired,
       })
     )
   ),
