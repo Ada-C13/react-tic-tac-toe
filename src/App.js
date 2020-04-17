@@ -32,19 +32,27 @@ const App = () => {
  
   // Wave 2
   // You will need to create a method to change the square 
-  const updateValue = (id) => {
+  const updateValue = (squareClickedId) => {
     const squareList = [];
 
-    squares.forEach((row) => {
+    squares.forEach((row, i) => {
+      // console.log(row);
+      // console.log(i);
+      squareList.push([]);
+      // squareList.push(row)
+      // console.log(squareList);
       row.forEach((square) => {
-        if (square.id === id) {
-          // square.value = "x"
-          squareList.push(square.value = "x")
+        // console.log(square)
+        if (square.id === squareClickedId.id) {
+          squareClickedId.value = "x"
+          squareList[i].push(squareClickedId)
+          // squareList.push(squareClickedId)
         } else {
-          squareList.push(square)
+          squareList[i].push(square)
         }
       });
     });
+    console.log(squareList);
     setSquares(squareList);
   }
   
