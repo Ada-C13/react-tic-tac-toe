@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import './Square.css'
 
 const Square = (props) => {
-  console.log(props.onClickCallback);
-  const onClickCallback = () => {
+  // Changes value of square on click.
+  const onTileClick = () => {
     const updatedSquare = {
       id: props.id,
       value: 'x',
@@ -14,12 +14,14 @@ const Square = (props) => {
     props.onClickCallback(updatedSquare);
   };
 
-  return <button
-    className="square"
-    onClick={onClickCallback}
-  >
-    {props.value}
-  </button>
+  return (
+    <button
+      className="square"
+      onClick={onTileClick}
+    >
+      {props.value}
+    </button>
+  );
 }
 
 Square.propTypes = {

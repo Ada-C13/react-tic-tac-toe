@@ -8,7 +8,6 @@ const PLAYER_2 = 'O';
 
 const generateSquares = () => {
   const squares = [];
-
   let currentId = 0;
 
   for (let row = 0; row < 3; row += 1) {
@@ -17,6 +16,7 @@ const generateSquares = () => {
       squares[row].push({
         id: currentId,
         value: '',
+        
       });
       currentId += 1;
     }
@@ -31,15 +31,18 @@ const App = () => {
   
   // Updates the correct square for new value.
   const updateSquare = (updatedSquare) => {
-    let squaresNew = [];
+    const squaresNew = [];
 
-    squares.forEach( (square) => {
-      if (square.id === updatedSquare.id) {
-        squaresNew.push(updatedSquare);
-      } else {
-        squaresNew.push(square);
-      }
-    });
+    for (let row = 0; row < 3; row ++) {
+      squaresNew.push([]);
+      for (let col = 0; col < 3; col ++) {
+        if (squares[row][col].id === updatedSquare.id) {
+          squaresNew[row].push(updatedSquare);
+        } else {
+          squaresNew[row].push(squares[row][col]);
+        };
+      };
+    };
 
     setSquares(squaresNew);
   };
