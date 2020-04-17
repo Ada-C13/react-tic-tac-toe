@@ -2,12 +2,23 @@ import React from 'react';
 import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-
+  // generate array of square components
+  // flatten 2D array to 1D
+  // then can iterate over each square with Square component
+  const squares1DArray = _.flatten(squares);
+  return squares1DArray.map((square) => {
+    return <Square
+      id={square.id}
+      key={square.id}
+    />
+  });
 }
+
+// const Board = (props) => -- same as line below
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
