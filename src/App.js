@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
+import Square from './components/Square'
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
@@ -26,14 +27,18 @@ const generateSquares = () => {
   return squares;
 }
 
+//squares is the result of generateSquares, setSqares is the method to use to update the state of sqares
 const App = () => {
 
-  const [squares, setSquares] = useState(generateSquares());
+  const [squares, setSquares] = useState(generateSquares());  // this passes in the array of arrays of squares
+  const [player, setPlayer] = useState(PLAYER_1) // this sets player as player 1
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+
+
 
 
   const checkForWinner = () => {
@@ -53,7 +58,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squaresList} onClickCallback={updateSquare} />
       </main>
     </div>
   );
