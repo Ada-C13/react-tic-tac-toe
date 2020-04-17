@@ -29,15 +29,11 @@ const generateSquares = () => {
 const App = () => {
   
   const [squares, setSquares] = useState(generateSquares());
-  // console.log(squares);
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
 
   const [turn, setTurn] = useState(true);
   const [winnerExist, setWinner] = useState(false);
   let winner = "NO ONE";
+
   const changeSquare = (changedSquare)=>{
       if(winnerExist === false){
         const squareNew =[];
@@ -65,6 +61,9 @@ const App = () => {
         
        
       }
+      else {
+        console.log("winner is", winnerExist);
+      }
 
 
   }
@@ -73,61 +72,62 @@ const App = () => {
   
 
   const checkForWinner = (squares) => {
-    // Complete in Wave 3
-    let winnerFound = false;
+
+    // let winnerFound = false;
     if(squares[0][0].value===squares[0][1].value && squares[0][1].value===squares[0][2].value && squares[0][0].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[0][0].value;
     }
     else if 
     (squares[1][0].value===squares[1][1].value && squares[1][1].value===squares[1][2].value && squares[1][0].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[1][0].value;
     }
     else if 
     (squares[2][0].value===squares[2][1].value && squares[2][1].value===squares[2][2].value && squares[2][0].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[2][0].value;
     }
     else if 
     (squares[0][0].value===squares[1][0].value && squares[1][0].value===squares[2][0].value && squares[0][0].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[0][0].value;
     }
     else if 
     (squares[0][1].value===squares[1][1].value && squares[1][1].value===squares[2][1].value && squares[0][1].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[0][1].value;
     }
     else if 
     (squares[0][2].value===squares[1][2].value && squares[1][2].value===squares[2][2].value && squares[0][2].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[0][2].value;
     }
     else if 
     (squares[0][0].value===squares[1][1].value && squares[1][1].value===squares[2][2].value && squares[0][0].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[0][0].value;
     }
     else if 
     (squares[0][2].value===squares[1][1].value && squares[1][1].value===squares[2][0].value && squares[0][2].value !==""){
-      winnerFound = true;
+      // winnerFound = true;
       setWinner(true);
       winner =squares[0][2].value;
     }
     // console.log("has someone won:", winnerFound);
     // console.log("winnerExist:", winnerFound);
     else {
-      console.log("no winner");
+
     }
     console.log("who is the winner:", winner);
+
   }
 
   
@@ -143,7 +143,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is {winner} </h2>
+        <h2>The winner is idk {winner}</h2>
         <button>Reset Game</button>
       </header>
       <main>
