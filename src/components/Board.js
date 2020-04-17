@@ -6,25 +6,24 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   const squaresArray = [];
-  // console.log(squaresArray);
-  console.log(onClickCallback);
 
   squares.forEach((row) => {
     row.forEach((square)=> {
-      // console.log(square)
 
       squaresArray.push(
         <Square
           key={square.id}
           id={square.id}
           value={square.value}
-          onClickCallback={square.onClickCallback}
+          onClickCallback={onClickCallback}
         />
       );
     })
   });
-  console.log(squaresArray);
+
+  // console.log(squaresArray);
   return squaresArray;
+
 }
 
 
