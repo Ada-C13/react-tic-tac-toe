@@ -42,11 +42,11 @@ const App = () => {
       const rowNew = [];
       row.forEach((square)=>{
         if(square.id===changedSquare.id && turn===true){
-          changedSquare.value = "X";
+          changedSquare.value = PLAYER_1;
           rowNew.push(changedSquare);
         }
         else if(square.id===changedSquare.id && turn===false){
-          changedSquare.value = "O";
+          changedSquare.value = PLAYER_2;
           rowNew.push(changedSquare);
         }
         else {
