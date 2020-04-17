@@ -47,6 +47,7 @@ const App = () => {
 
     console.log(updatedSquares);
     setSquares(updatedSquares);
+    turn === "X"? setTurn(PLAYER_2) : setTurn(PLAYER_1);
   };
 
 
