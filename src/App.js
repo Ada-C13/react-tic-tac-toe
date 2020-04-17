@@ -37,9 +37,8 @@ const App = () => {
 
   const [turn, setTurn] = useState(true);
   const [winnerExist, setWinner] = useState(false);
-
+  let winner = "NO ONE";
   const changeSquare = (changedSquare)=>{
-      checkForWinner();
       if(winnerExist === false){
         const squareNew =[];
         squares.forEach((row)=>{
@@ -61,7 +60,7 @@ const App = () => {
         })
   
         setSquares(squareNew);
-        checkForWinner();
+        checkForWinner(squareNew);
         setTurn(!turn);
         
        
@@ -71,15 +70,64 @@ const App = () => {
   }
 
   
-  let winner = "NO ONE";
+  
 
-  const checkForWinner = () => {
+  const checkForWinner = (squares) => {
     // Complete in Wave 3
+    let winnerFound = false;
     if(squares[0][0].value===squares[0][1].value && squares[0][1].value===squares[0][2].value && squares[0][0].value !==""){
+      winnerFound = true;
       setWinner(true);
-      winner ="someone";
+      winner =squares[0][0].value;
     }
-    console.log(winnerExist);
+    else if 
+    (squares[1][0].value===squares[1][1].value && squares[1][1].value===squares[1][2].value && squares[1][0].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[1][0].value;
+    }
+    else if 
+    (squares[2][0].value===squares[2][1].value && squares[2][1].value===squares[2][2].value && squares[2][0].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[2][0].value;
+    }
+    else if 
+    (squares[0][0].value===squares[1][0].value && squares[1][0].value===squares[2][0].value && squares[0][0].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[0][0].value;
+    }
+    else if 
+    (squares[0][1].value===squares[1][1].value && squares[1][1].value===squares[2][1].value && squares[0][1].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[0][1].value;
+    }
+    else if 
+    (squares[0][2].value===squares[1][2].value && squares[1][2].value===squares[2][2].value && squares[0][2].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[0][2].value;
+    }
+    else if 
+    (squares[0][0].value===squares[1][1].value && squares[1][1].value===squares[2][2].value && squares[0][0].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[0][0].value;
+    }
+    else if 
+    (squares[0][2].value===squares[1][1].value && squares[1][1].value===squares[2][0].value && squares[0][2].value !==""){
+      winnerFound = true;
+      setWinner(true);
+      winner =squares[0][2].value;
+    }
+    // console.log("has someone won:", winnerFound);
+    // console.log("winnerExist:", winnerFound);
+    else {
+      console.log("no winner");
+    }
+    console.log("who is the winner:", winner);
   }
 
   
