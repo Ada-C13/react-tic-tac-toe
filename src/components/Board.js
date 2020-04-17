@@ -7,12 +7,14 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
   const boardSquares = [];
 
+  // Generate each square of each row into the table.
   for (let squareRow of squares) {
     for (let square of squareRow) {
       boardSquares.push(
         <Square
           id={square.id}
           value={square.value}
+          onClick={onClickCallback}
           key={square.id}
         />
       );

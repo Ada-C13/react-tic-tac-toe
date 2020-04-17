@@ -28,11 +28,20 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  
+  const updateSquare = (updatedSquare) => {
+    const squaresNew = [];
 
+    squares.forEach( (square) => {
+      if (square.id === updatedSquare.id) {
+        squaresNew.push(updatedSquare);
+      } else {
+        squaresNew.push(square);
+      }
+    });
+
+    setSquares(squaresNew);
+  };
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -51,7 +60,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquare} />
       </main>
     </div>
   );
