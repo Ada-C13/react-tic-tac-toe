@@ -4,8 +4,26 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
+
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
+
+  const squareBoxes = [];
+
+  for (let row of squares) {
+    for (let col of row) {
+      squareBoxes.push(
+        <Square 
+          id={col.id}
+          value={col.value}
+          onClickCallback={onClickCallback}
+          key={col.id}
+        />
+      );
+    };
+  };
+
+  return squareBoxes;
 
 }
 
