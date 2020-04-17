@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Square.css'
+import { tsPropertySignature } from '@babel/types';
 
 const Square = (props) => {
   // Changes value of square on click.
   const onTileClick = () => {
     const updatedSquare = {
       id: props.id,
-      value: 'x',
+      value: props.value,
     };
 
     props.onClickCallback(updatedSquare);
