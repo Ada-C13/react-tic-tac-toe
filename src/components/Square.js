@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import './Square.css'
 import { tsPropertySignature } from '@babel/types';
 
@@ -13,6 +12,7 @@ const Square = (props) => {
       disabled: props.disabled
     };
 
+    // Prevents further updates to tile after first marking.
     if (updatedSquare.disabled === true) {
       return;
     } else {

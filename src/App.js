@@ -26,6 +26,12 @@ const generateSquares = () => {
   return squares;
 }
 
+let trackBoard = [
+  "", "", "",
+  "", "", "",
+  "", "", "",
+];
+
 const App = () => {
   const [itsXTurn, setXturn] = useState(true);
   const [squares, setSquares] = useState(generateSquares());
@@ -40,6 +46,7 @@ const App = () => {
         if (squares[row][col].id === updatedSquare.id) {
           const newMarker = updateMarker(updatedSquare);
           updatedSquare.value = newMarker;
+          checkForWinner(updatedSquare.id, updatedSquare.value);
           squaresNew[row].push(updatedSquare);
         } else {
           squaresNew[row].push(squares[row][col]);
@@ -61,10 +68,10 @@ const App = () => {
     };
   };
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
-
-  }
+  const checkForWinner = (id, value) => {
+    trackBoard[id] = value;
+    console.log(trackBoard);
+  };
 
   const resetGame = () => {
     // Complete in Wave 4
