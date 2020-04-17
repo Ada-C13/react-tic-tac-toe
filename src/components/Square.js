@@ -14,14 +14,13 @@ const Square = (props) => {
       value:props.value
     }
 
-    if(props.value!==""){
-      console.log("cannot play here");
-    }
-    else {
-      props.onClickCallback(changedSquare);
-    }
 
+    props.onClickCallback(changedSquare);
+    
   }
+
+
+
 
   return <button
     className="square Square"
