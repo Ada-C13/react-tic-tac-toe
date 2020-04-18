@@ -3,10 +3,6 @@ import './App.css';
 
 import Board from './components/Board';
 
-// const PLAYER_1 = 'X';
-// const PLAYER_2 = 'O';
-
-
 const generateSquares = () => {
   const squares = [];
 
@@ -79,7 +75,6 @@ const App = () => {
       // any diagonals  
       } else if ((squares[0][0].value===squares[1][1].value) && (squares[1][1].value===squares[2][2].value) && squares[0][0].value !== ''){
         setTheWinner();
-        
       } else if ((squares[0][2].value===squares[1][1].value) && (squares[1][1].value===squares[2][0].value) && squares[0][2].value !== '') {
         setTheWinner();
       }
@@ -124,7 +119,7 @@ const App = () => {
         <h1 className='title'>React Tic Tac Toe</h1>
         {/* could conditionally class name this h2 for css purposes */}
         <h2 className='winner'>{(winner || boardFull) ? `The winner is...${whoWins}` : `${whosUp}, it's your turn!`}</h2>
-        <button onClick={resetGame}>Reset Game</button>
+        <button className='reset' onClick={resetGame}>Reset Game</button>
       </header>
       <main className='main'>
         <Board squares={squares} onClickCallback={onClickCallback} />
