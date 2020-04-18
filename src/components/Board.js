@@ -5,19 +5,17 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // console.log(squares[0])
   let squareList = []
-  // console.log(squareList)
 
   let i = 0
   while (i < squares.length){
     let j = 0
     while(j < squares.length){
-      // console.log(squares[i][j])
       squareList.push(
         <Square 
         value = {squares[i][j].value}
         id = {squares[i][j].id}
+        key = {squares[i][j].id}
         onClickCallback = {onClickCallback}/>
       )
       j++

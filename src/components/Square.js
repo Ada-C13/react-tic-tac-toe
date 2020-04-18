@@ -4,16 +4,12 @@ import './Square.css'
 
 const Square = (props) => {
 
-  //Event Listenner
   const onSquareClick = () => {
-    const updateSquare = {
-      id: props.id,
-      value: props.value,
-    };
-    props.onClickCallback(updateSquare);
+    props.onClickCallback(props.id);
   };
-
-  return(<button className="square" onClick = {onSquareClick}>
+  
+  return(
+  <button className="square" onClick = {onSquareClick}> 
     {props.value}
   </button>)
 }
