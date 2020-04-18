@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = "X";
+const PLAYER_2 = "O";
 
 const generateSquares = () => {
   const squares = [];
@@ -31,13 +31,14 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setPlayer] = useState(PLAYER_1); // Tracks state of "X" and "O". Sets the initial state to be "X"
+  const [winner, setWinner] = useState("");
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const updateSquare = (squareToUpdate) => {
-    if (squareToUpdate.value !== "") {
+    if (squareToUpdate.value !== "" || winner !== "") {
       return;
     }
 
@@ -50,22 +51,86 @@ const App = () => {
     setPlayer(currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1) // updating the state of the current player
 
     setSquares(squares); // updating the state of squares
+
+    checkForWinner();
   }
 
   const checkForWinner = () => {
     // Complete in Wave 3
+    const isPlayerWin = (values, player) => 
+      values.filter(value => value === player).length === values.length
+
+    const checkHorizontals = () => {
+      for (let i = 0; i < 3; i++) {
+        const values = [squares[i][0].value, squares[i][1].value, squares[i][2].value];
+        if (isPlayerWin(values, PLAYER_1) || isPlayerWin(values, PLAYER_2)) {
+          return values[0];
+        }
+      }
+
+      return null;
+    }
+
+    const checkVerticals = () => {
+      for (let i = 0; i < 3; i++) {
+        const values = [squares[0][i].value, squares[1][i].value, squares[2][i].value];
+        if (isPlayerWin(values, PLAYER_1) || isPlayerWin(values, PLAYER_2)) {
+          return values[0];
+        }
+      }
+
+      return null;
+    }
+
+    const checkCrossToBottomRight = () => {
+      const values = [squares[0][0].value, squares[1][1].value, squares[2][2].value];
+      if (isPlayerWin(values, PLAYER_1) || isPlayerWin(values, PLAYER_2)) {
+        return values[0];
+      }
+
+      return null;
+    }
+
+    const checkCrossToUpperRight = () => {
+      const values = [squares[2][0].value, squares[1][1].value, squares[0][2].value];
+      if (isPlayerWin(values, PLAYER_1) || isPlayerWin(values, PLAYER_2)) {
+        return values[0];
+      }
+
+      return null;
+    }
+
+    const winner = checkHorizontals() || 
+      checkVerticals() || 
+      checkCrossToBottomRight() ||
+      checkCrossToUpperRight()
+
+    if (winner !== null) {
+      setWinner(winner);
+    }
   }
 
   const resetGame = () => {
     // Complete in Wave 4
+    setWinner("");
+    setSquares(generateSquares());
+    setPlayer(PLAYER_1);
+  }
+
+  const winnerText = () => {
+    if (winner !== "") {
+      return (
+        <h2>The winner is {winner}</h2>
+      )
+    }
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        {winnerText()}
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquare}/>

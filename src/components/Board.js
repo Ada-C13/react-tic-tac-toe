@@ -18,7 +18,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = (props) => {
   const squareComponents = generateSquareComponents(props.squares, props.onClickCallback);
-  console.log(squareComponents);
   return <div className="grid" >
     {squareComponents}
   </div>
