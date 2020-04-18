@@ -5,6 +5,7 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 const NOPLAYER = '' ;
+const GAMETIED = '#';
 
 const generateSquares = () => {
   const initialSquares = [];
@@ -63,6 +64,24 @@ const App = () => {
     }
   }
 
+  const checkForTie = () => {
+    if (winner === NOPLAYER) {
+      let filledSquares = 0;
+      for (let row = 0; row < 3; row += 1) {
+        for (let col = 0; col < 3; col += 1) {
+          if (squares[row][col].value !== NOPLAYER) {
+            filledSquares += 1;
+          }
+        }
+    
+      }   
+      if (filledSquares === 9) {
+        setWinner(GAMETIED);
+      }
+    }
+
+  }
+
   const checkForWinner = () => {
     for (let i = 0; i < 3; i++) {
       checkForThree(i, 0, i, 1, i, 2);
@@ -70,6 +89,7 @@ const App = () => {
     }
     checkForThree(0, 0, 1, 1, 2, 2);
     checkForThree(2, 0, 1, 1, 0, 2);
+    checkForTie();
   }
 
   const resetGame = () => {
@@ -79,7 +99,7 @@ const App = () => {
 
   checkForWinner();
 
-  const message = winner === NOPLAYER ? `Player is ${player}` : `Winner is ${winner}`;
+  const message = winner === NOPLAYER ? `Player is ${player}!` : winner === GAMETIED ? `Game is tied` : `Winner is ${winner}!`;
 
   return (
     <div className="App">
