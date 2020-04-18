@@ -46,9 +46,9 @@ const App = () => {
       squaresNew.push([]);
       for (let col = 0; col < 3; col ++) { // Each column
         if (squares[row][col].id === updatedSquare.id) {
-          updatedSquare.value = updateMarker(updatedSquare);
-          checkForWinner(updatedSquare.id, updatedSquare.value);
-          squaresNew[row].push(updatedSquare);
+          updatedSquare.value = updateMarker(updatedSquare); // Set new value.
+          checkForWinner(updatedSquare.id, updatedSquare.value); // Check if there is a winner yet.
+          squaresNew[row].push(updatedSquare); // Update board.
         } else {
           squaresNew[row].push(squares[row][col]);
         };
@@ -90,6 +90,8 @@ const App = () => {
       const[x, y, z] = possibleCombos[i];
       if (trackBoard[x] && trackBoard[x] === trackBoard[y] && trackBoard[x] === trackBoard[z]) {
         setWinner(trackBoard[x]);
+      } else if (!trackBoard.includes('')) {
+        setWinner('TIE');
       };
     };
   };  
