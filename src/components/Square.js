@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 
 import './Square.css'
 
-const Square = (props) => { 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
+const Square = ({value, id, onClickCallback}) => { 
+
   return <button
     className="square"
-    // id={props.id}
-    onClick={props.onClickCallback} //
+    onClick={() => {onClickCallback(id)}} 
   >
-    {props.value}
+    {value}
   </button>
 }
 

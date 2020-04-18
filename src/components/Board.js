@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   return squares.flat().map((square) =>{
-    return <Square id={square.id} value={square.value} onClickCallback={onClickCallback}/>
+    return <Square key={square.id} id={square.id} value={square.value} onClickCallback={onClickCallback}/>
   });
 }
 
