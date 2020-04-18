@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+// emojify because why not 😉
+const PLAYER_1 = '⚔️';
+const PLAYER_2 = '🕸';
 
 const generateSquares = () => {
   const squares = [];
@@ -31,7 +31,7 @@ const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [winner, setWinner] = useState(null);
 
-  const handleSquareClick = (id) => {
+  const onClickCallback = (id) => {
     
     if (winner) return;
     let newSquares = [];
@@ -61,40 +61,34 @@ const App = () => {
   const checkForWinner = () => {
 
     for (let i = 0; i < 3; i++) {
-      // check rows for winner
+      // check rows
       if (squares[i][0].value !== "" &&
         squares[i][0].value === squares[i][1].value &&
         squares[i][0].value === squares[i][2].value) {
-          // winner = squares[i][0].value;
-          console.log("Winner was found!");
           setWinner(currentPlayer);
           return currentPlayer;
         }
 
-      // check columns for winner
+      // check columns
       if (squares[0][i].value !== "" &&
         squares[0][i].value === squares[1][i].value &&
         squares[0][i].value === squares[2][i].value) {
-          // winner = squares[0][i].value;
-          console.log("Winner was found!");
           setWinner(currentPlayer);
           return currentPlayer;
         }
 
-      // check downward diagonal for winner
+      // check downward diagonal
         if (squares[0][0].value !== "" &&
           squares[0][0].value === squares[1][1].value &&
           squares[1][1].value === squares[2][2].value) {
-            console.log("Winner was found!");
             setWinner(currentPlayer);
             return currentPlayer;
         }
 
-      // check upward diagonal for winner
+      // check upward diagonal
         if (squares[2][0].value !== "" &&
           squares[2][0].value === squares[1][1].value &&
           squares[2][0].value === squares[0][2].value) {
-            console.log("Winner was found!");
             setWinner(currentPlayer);
             return currentPlayer;
         }
@@ -103,21 +97,22 @@ const App = () => {
     return null;
   }
 
-  const resetGame = () => {
-    // Complete in Wave 4
+  const newGame = () => {
+    // update setSquares, setCurrentPlayer, and setWinner to beginning play state
+    setSquares(generateSquares());
+    setCurrentPlayer(PLAYER_1);
+    setWinner(null);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h4>Next up: {currentPlayer}</h4>
-        <h2>The winner is ... {winner}! </h2>
-        <button>Reset Game</button>
+        {winner ? <h2>The winner is ... {winner}! </h2> : <h2>Next up: {currentPlayer}</h2>}
+        <button className="reset-button" onClick={newGame}>Play Again</button>
       </header>
       <main>
-        {/* // add onClickCallback props with our handleSquareClick callback function */}
-        <Board squares={squares} onClickCallback={handleSquareClick}/>
+        <Board squares={squares} onClickCallback={onClickCallback}/>
       </main>
     </div>
   );
