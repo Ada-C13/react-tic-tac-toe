@@ -74,11 +74,27 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
+  const checkRow = () => {
     for (let row = 0; row < squares.length; row++) {
+      let counter = 0;
       for (let column = 0; column < squares.length; column++) {
-       
+        if (squares[row][column].value === turn) {
+          counter++;
+        }
+      }
+      if (counter === 3) {
+        return true;
+      }
+    }
+  };
+
+  const checkForWinner = () => {
+    // pass in a ->"turn" on line  77
+    // check row -
+    // Complete in Wave 3
+    if (checkRow()) {
+      return true;
+    }
   };
 
   const resetGame = () => {
