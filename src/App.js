@@ -32,6 +32,10 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setPlayer] = useState(PLAYER_1); // Tracks state of "X" and "O". Sets the initial state to be "X"
 
+  // Wave 2
+  // You will need to create a method to change the square 
+  //   When it is clicked on.
+  //   Then pass it into the squares as a callback
   const updateSquare = (squareToUpdate) => {
     if (squareToUpdate.value !== "") {
       return;
@@ -47,10 +51,7 @@ const App = () => {
 
     setSquares(squares); // updating the state of squares
   }
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+
   const checkForWinner = () => {
     // Complete in Wave 3
   }
