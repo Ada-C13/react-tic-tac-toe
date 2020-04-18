@@ -11,7 +11,7 @@ const Square = (props) => {
   const onButtonClick = (event) => {            //setvalue(!gameValue);
     const updatedSquare = {
       id: props.id,
-      value: props.playerTurn,      //event.target.value??    !props.value, 
+      value: props.player,      //event.target.value??    !props.value, 
   
     }
     props.onClickCallback(updatedSquare);

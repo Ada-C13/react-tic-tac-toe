@@ -24,9 +24,18 @@ const generateSquares = () => {
   return squares;
 }
 
+const playerTurn = (oldPlayer) => {
+  if (oldPlayer == 'X') {
+    return 'O';
+  }else { 
+    return 'X';
+  };
+};
+
 const App = () => {
 
-  const [squares, setSquares] = useState(generateSquares());  //Where is Generate Squares?
+  const [squares, setSquares] = useState(generateSquares());  
+  const [player, setPlayer] = useState(playerTurn());
 
   const onClickCallback = (updatedSquare) => {
     const newSquares = [];
@@ -36,27 +45,18 @@ const App = () => {
 
       row.forEach( (indvSquarePerRow) => {
         if (indvSquarePerRow.id == updatedSquare.id){
+          updatedSquare.value = player
           newRow.push(updatedSquare);  
+          setPlayer(playerTurn(player));
         }else {
           newRow.push(indvSquarePerRow);
         }
       });
       newSquares.push(newRow);
     });
+    
     setSquares(newSquares);
   };
-
-  const playerTurn = () => {
-    flatArray = squares.flat();
-    let values = squares.values
-    let count = values.count('')
-      if (count % 2 == 0) {
-        return "O";
-      }else { 
-        return "x";
-      };
-  };
-
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -66,6 +66,7 @@ const App = () => {
   const resetGame = () => {
     // Complete in Wave 4
   }
+console.log(squares);
 
   return (
     <div className="App">
@@ -75,7 +76,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback} playerTurn={playerTurn}/>  
+        <Board squares={squares} onClickCallback={onClickCallback}/>  
       </main>
     </div>
   );

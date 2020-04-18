@@ -14,7 +14,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
           key={singleSquare.id}
           value={singleSquare.value}
           onClickCallback={onClickCallback}
-          // playerTurn={playerTurn}
         />
     
     );
@@ -40,7 +39,7 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
-  playerTurn: PropTypes.func.isRequired,
+
 };
 
 export default Board;
