@@ -32,6 +32,10 @@ const App = () => {
  
   // Wave 2
   // You will need to create a method to change the square 
+  // When it is clicked on.
+  // Then pass it into the squares as a callback
+
+
   const updateValue = (squareClickedId) => {
     const squareList = [];
 
@@ -43,12 +47,18 @@ const App = () => {
       // console.log(squareList);
       row.forEach((square) => {
         // console.log(square)
-        if (square.id === squareClickedId.id) {
-          squareClickedId.value = "x"
+        if (square.id === squareClickedId.id && square.value === "" ) {
+
+          // squareClickedId.value = PLAYER_1
+
+          squareClickedId.value = itsPlayer1Turn ? PLAYER_1 : PLAYER_2;
+          setPlayer1Turn(!itsPlayer1Turn);
+
           squareList[i].push(squareClickedId)
           // squareList.push(squareClickedId)
         } else {
-          squareList[i].push(square)
+          
+          squareList[i].push({...square})
         }
       });
     });
@@ -56,12 +66,12 @@ const App = () => {
     setSquares(squareList);
   }
   
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  console.log("Rendering");
 
-
-  const checkForWinner = () => {
+  const checkForWinner = (setSquares) => {
     // Complete in Wave 3
+
+
 
   }
 
