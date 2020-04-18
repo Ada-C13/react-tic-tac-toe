@@ -78,9 +78,13 @@ const App = () => {
 				squaref[a].value === squaref[b].value &&
 				squaref[a].value === squaref[c].value
 			) {
+        console.log("winner");
 				return squaref[a].value;
-			}
-		}
+      }
+    }
+      if ( squaref.every((square)=> square.value != "")){
+        return "it's a tie!";
+      }
 		return null;
 	};
 
