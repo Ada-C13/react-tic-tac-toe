@@ -3,9 +3,9 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
+// Function to generate nine squares
 const generateSquareComponents = (squares, onClickCallback) => {
-
+  
   const allRows = [];
   for (let row = 0; row < 3; row += 1) {
 
@@ -14,20 +14,21 @@ const generateSquareComponents = (squares, onClickCallback) => {
       allRows.push(
           <Square key={currentSquare.id}
                   id={currentSquare.id}
-                  row={row}
-                  col={col}
                   value={currentSquare.value}
                   onClickCallback={onClickCallback} />
       );
     }
+
   }
   return allRows
 }
 
+// Board Component
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
   return <div className="grid" >{squareList}</div>
 }
+
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(

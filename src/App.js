@@ -25,26 +25,30 @@ const generateSquares = () => {
   return initialSquares;
 }
 
+// App component
 const App = () => {
 
+  // State
   const [squares, setSquares] = useState(generateSquares());
   const [player, setPlayer]   = useState(PLAYER_1);
 
-  const onClickCallback = (row, col) => {
-    if (squares[row][col].value === "") {
-      console.log('beforeclick', row, col, player, squares[row][col]);
-      const updatedSquare = squares;
-      updatedSquare[row][col].value = player;
-      setSquares(updatedSquare);
-      if (player === PLAYER_1) {
-        setPlayer(PLAYER_2)
-      } else {
-        setPlayer(PLAYER_1)
-      }
-    }
-    console.log('afterclick', row, col, player, squares[row][col]);
-  }
+  // Callback function for square click
+  const onClickCallback = (id) => {
 
+    // calculates row and col from the id
+    const row = Math.floor(id / 3);
+    const col = id % 3;
+    
+    if (squares[row][col].value === "") {
+      // if square available, mark it for the player
+      squares[row][col].value = player;
+      setSquares(squares);
+
+      // change to next player
+      setPlayer(player === PLAYER_1 ? PLAYER_2 : PLAYER_1);
+    }
+
+  }
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -65,10 +69,10 @@ const App = () => {
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
-        
       </main>
     </div>
   );
+
 }
 
 export default App;
