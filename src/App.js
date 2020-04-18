@@ -30,6 +30,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [winner, setWinner] = useState(null);
+  const [movesPlayed, setMovesPlayed] = useState(0);
 
   const onClickCallback = (id) => {
     
@@ -41,6 +42,7 @@ const App = () => {
       for (const square of row) {
         if (square.id === id && square.value === "") {
           square.value = currentPlayer;
+          setMovesPlayed(movesPlayed + 1);
           if (currentPlayer === PLAYER_1) {
             setCurrentPlayer(PLAYER_2);
           } else {
@@ -59,6 +61,8 @@ const App = () => {
   }
 
   const checkForWinner = () => {
+
+    if (movesPlayed === 9 && winner === null) return;
 
     for (let i = 0; i < 3; i++) {
       // check rows
@@ -98,9 +102,10 @@ const App = () => {
   }
 
   const newGame = () => {
-    // update setSquares, setCurrentPlayer, and setWinner to beginning play state
+    // update setSquares, setCurrentPlayer, setMovesPlayed, and setWinner to beginning play state
     setSquares(generateSquares());
     setCurrentPlayer(PLAYER_1);
+    setMovesPlayed(0);
     setWinner(null);
   }
 
@@ -108,6 +113,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
+        {(winner === null && movesPlayed === 9) ? <h2>Tie Game!</h2> : null}
         {winner ? <h2>The winner is ... {winner}! </h2> : <h2>Next up: {currentPlayer}</h2>}
         <button className="reset-button" onClick={newGame}>Play Again</button>
       </header>
