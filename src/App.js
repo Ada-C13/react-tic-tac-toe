@@ -55,8 +55,41 @@ const App = () => {
 
   const checkForWinner = () => {
     // Complete in Wave 3
-    if (squares[0][0].value === "X") {
-      console.log("Player 1 wins!")
+   
+    for (let row = 0; row < 3; row++) {
+      let rowSum = "";
+      for (let col = 0; col < 3; col++) {
+        rowSum += squares[row][col].value;
+      }
+      if (rowSum === "OOO") {
+        console.log("Circle WIN!");
+      } else if (rowSum === "XXX") {
+        console.log("Cross WIN!");
+      }
+    }
+
+    for (let col = 0; col < 3; col++) {
+      let colSum = "";
+      for (let row = 0; row < 3; row++) {
+        colSum += squares[row][col].value;
+      }
+      if (colSum === "OOO") {
+        console.log("Circle WIN!");
+      } else if (colSum === "XXX") {
+        console.log("Cross WIN!");
+      }
+    }
+
+    if (squares[0][0].value + squares[1][1].value + squares[2][2].value === "OOO") {
+      console.log("Circle WIN!");
+    } else if (squares[0][0].value + squares[1][1].value + squares[2][2].value === "XXX") {
+      console.log("Cross WIN!");
+    }
+
+    if (squares[2][0].value + squares[1][1].value + squares[0][2].value === "OOO") {
+      console.log("Circle WIN!");
+    } else if (squares[2][0].value + squares[1][1].value + squares[0][2].value === "XXX") {
+      console.log("Cross WIN!");
     }
   }
 
