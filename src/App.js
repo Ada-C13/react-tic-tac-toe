@@ -41,21 +41,23 @@ const App = () => {
     let copiedSquares = [...squares];
     for(let row of copiedSquares) {
       for(let square of row) {
-       if (square.id === squareId) {
+       if (square.id === squareId && square.value === '') {
           square.value = isXTurn ? PLAYER_1 : PLAYER_2;
           setXTurn(!isXTurn);
         } 
       }
     }
     setSquares(copiedSquares);
-    // checkForWinner(setSquares);
+    // checkForWinner();
   }) 
 
 
-  const checkForWinner = (squares) => {
+  const checkForWinner = (newSquares) => {
     // Complete in Wave 3
-    
-  }
+    // if rows, cols, diagonal has no same pattern => no winner
+    // else the square.value ( PLAYER1 or PLAYER2 ) is the winner
+
+    }  
 
   const resetGame = () => {
     // Complete in Wave 4
