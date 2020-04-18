@@ -28,7 +28,6 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
-  const [current, changeCurrent] = useState(true);
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
 
   // Wave 2
@@ -36,8 +35,6 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const updateSquare = (id) => {//Event handler
-    // const updatedBoard = []
-    // console.log(id)
     let newBoard = [...squares]
     for(let row in newBoard){
       for(let column in newBoard){
@@ -65,16 +62,18 @@ const App = () => {
 
   }
 
+  //Event handler
   const resetGame = () => {
     // Complete in Wave 4
+    setSquares(generateSquares());
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>The winner is ... ${currentPlayer} </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquare}/>
