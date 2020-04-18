@@ -31,6 +31,9 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [xTurn, setXTurn] = useState(true);
+  const [winner, setWinner] = useState(false);
+  const [whoWins, setWhoWins] = useState()
+  //const [boardFull, setBoardFull] = useState(false);
   const whosUp = (xTurn ? "X" : "O");
 
   const onClickCallback = (id) => {
@@ -57,28 +60,49 @@ const App = () => {
     checkForWinner(newSquares);
   } 
 
-  const checkForWinner = (squares) => {
-    
+  const checkForWinner = (squares) => { 
     for(let i = 0; i < squares.length; i++) {
       // if any rows are the same
       if ((squares[i][0].value === squares[i][1].value ) && (squares[i][1].value === squares[i][2].value ) && squares[i][0].value !== '') {
-        return [true, squares[i][0].value];
+        setWinner(true);
+        if (squares[i][0].value === 'X') {
+          setWhoWins("PLAYER 1");
+        } else {
+          setWhoWins("PLAYER 2");
+        }
+
       // if any columns are the same
       } else if ((squares[0][i].value ===squares[1][i].value) && (squares[0][i].value===squares[2][i].value) && squares[0][i].value !== '') {
-        return [true, squares[0][i].value];
+        setWinner(true);
+        if (squares[0][i].value === 'X') {
+          setWhoWins("PLAYER 1");
+        } else {
+          setWhoWins("PLAYER 2");
+        }
+
       // any diagonals  
       } else if ((squares[0][0].value===squares[1][1].value) && (squares[1][1].value===squares[2][2].value) && squares[0][0].value !== ''){
-        return [true, squares[0][0].value];
+        setWinner(true);
+        if (squares[0][0].value === 'X') {
+          setWhoWins("PLAYER 1");
+        } else {
+          setWhoWins("PLAYER 2");
+        }
+        
       } else if ((squares[0][2].value===squares[1][1].value) && (squares[1][1].value===squares[2][0].value) && squares[0][2].value !== '') {
-        return [true, squares[2][0].value];
+        setWinner(true);
+        if (squares[0][2].value === 'X') {
+          setWhoWins("PLAYER 1");
+        } else {
+          setWhoWins("PLAYER 2");
+        }
       }
     }
-
-    return false;
   }
 
   const resetGame = () => {
-    setXTurn("X");
+    setXTurn('X');
+    setWhoWins();
     setSquares(generateSquares());
   }
 
@@ -86,11 +110,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        { 
-        (false) 
-          ? <h2>The winner is Player 1!</h2> 
-          : <h2>The winner is Player 2!</h2>
-        }
+        <h2>The winner is...{whoWins}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
