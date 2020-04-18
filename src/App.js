@@ -33,7 +33,7 @@ const App = () => {
   const [xTurn, setXTurn] = useState(true);
   const [winner, setWinner] = useState(false);
   const [whoWins, setWhoWins] = useState()
-  //const [boardFull, setBoardFull] = useState(false);
+  const [boardFull, setBoardFull] = useState(false);
   const whosUp = (xTurn ? "X" : "O");
 
   const onClickCallback = (id) => {
@@ -58,6 +58,7 @@ const App = () => {
   
     setSquares(newSquares);
     checkForWinner(newSquares);
+    checkBoardFull(newSquares);
   } 
 
   const checkForWinner = (squares) => { 
@@ -100,9 +101,26 @@ const App = () => {
     }
   }
 
+  const checkBoardFull = (squares) => {
+    let allSquaresFull = true
+    
+    squares.flat().forEach((square)  => {
+      if (square.value === '') {
+        allSquaresFull = false;
+      }
+    }) 
+
+    if (allSquaresFull) {
+      setWhoWins('CAT\'S GAME *meow*');
+      setBoardFull(true);
+    }
+  }
+
   const resetGame = () => {
     setXTurn('X');
     setWhoWins();
+    setWinner(false);
+    setBoardFull(false);
     setSquares(generateSquares());
   }
 
@@ -110,7 +128,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is...{whoWins}</h2>
+        <h2 className='winner'>{(winner || boardFull) ? `The winner is...${whoWins}` : ''}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
