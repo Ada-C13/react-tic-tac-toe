@@ -4,15 +4,12 @@ import PropTypes from 'prop-types';
 import './Square.css'
 
 const Square = (props) => {
-  // For Wave 1 enable this  //  Component to alert a parent  //  component when it's clicked on.
-  // const [gameValue, setValue] = useState(props.value);
   
-  // // Function to toggle present
-  const onButtonClick = (event) => {            //setvalue(!gameValue);
+  const onButtonClick = (event) => {            
     const updatedSquare = {
       id: props.id,
-      value: props.player,      //event.target.value??    !props.value, 
-  
+      value: props.player,      
+
     }
     props.onClickCallback(updatedSquare);
   };
