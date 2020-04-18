@@ -136,11 +136,8 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares());
     winner = false;
-    setPlayer('X');
-   
+    setPlayer('X'); 
   }
-  
-
   
   return (
     <div className="App">
