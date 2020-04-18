@@ -70,38 +70,18 @@ const App = () => {
     for(let i = 0; i < squares.length; i++) {
       // if any rows are the same
       if ((squares[i][0].value === squares[i][1].value ) && (squares[i][1].value === squares[i][2].value ) && squares[i][0].value !== '') {
-        setWinner(true);
-        if (whosUp === 'X') {
-          setWhoWins("PLAYER 1");
-        } else {
-          setWhoWins("PLAYER 2");
-        }
+        setTheWinner();
 
       // if any columns are the same
       } else if ((squares[0][i].value ===squares[1][i].value) && (squares[0][i].value===squares[2][i].value) && squares[0][i].value !== '') {
-        setWinner(true);
-        if (whosUp === 'X') {
-          setWhoWins("PLAYER 1");
-        } else {
-          setWhoWins("PLAYER 2");
-        }
+        setTheWinner();
 
       // any diagonals  
       } else if ((squares[0][0].value===squares[1][1].value) && (squares[1][1].value===squares[2][2].value) && squares[0][0].value !== ''){
-        setWinner(true);
-        if (whosUp === 'X') {
-          setWhoWins("PLAYER 1");
-        } else {
-          setWhoWins("PLAYER 2");
-        }
+        setTheWinner();
         
       } else if ((squares[0][2].value===squares[1][1].value) && (squares[1][1].value===squares[2][0].value) && squares[0][2].value !== '') {
-        setWinner(true);
-        if (whosUp === 'X') {
-          setWhoWins("PLAYER 1");
-        } else {
-          setWhoWins("PLAYER 2");
-        }
+        setTheWinner();
       }
     }
   }
@@ -121,6 +101,14 @@ const App = () => {
     }
   }
 
+  const setTheWinner = () => {
+    setWinner(true);
+      if (whosUp === 'X') {
+        setWhoWins("PLAYER 1");
+      } else {
+        setWhoWins("PLAYER 2");
+      }
+  }
 
   const resetGame = () => {
     setXTurn('X');
