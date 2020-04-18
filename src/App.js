@@ -32,6 +32,7 @@ const App = () => {
   // this is a 2D array of objects
   // setSquares() is a function to update squares - use setSquares to reset game
   const [squares, setSquares] = useState(generateSquares());
+  const [turn, setTurn] = useState(PLAYER_1);
   console.log(squares);
   let newSquares = [];
   const onClickCallback = (id) => {
@@ -39,8 +40,13 @@ const App = () => {
       newSquares.push([]);
       for (let column = 0; column < squares.length; column++) {
         let currentSquare = squares[row][column];
-        if (currentSquare.id === id) {
-          currentSquare.value = PLAYER_1;
+        if (currentSquare.id === id && currentSquare.value === "") {
+          currentSquare.value = turn;
+          if (turn === PLAYER_2) {
+            setTurn(PLAYER_1);
+          } else if (turn === PLAYER_1) {
+            setTurn(PLAYER_2);
+          }
         }
         newSquares[row].push(currentSquare);
       }
@@ -70,6 +76,9 @@ const App = () => {
 
   const checkForWinner = () => {
     // Complete in Wave 3
+    for (let row = 0; row < squares.length; row++) {
+      for (let column = 0; column < squares.length; column++) {
+       
   };
 
   const resetGame = () => {
