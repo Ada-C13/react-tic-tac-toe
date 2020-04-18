@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
+import Scorecard from './Scorecard';
 
 const PLAYER_1 = 'X';
+let playerOneCount = 0
 const PLAYER_2 = 'O';
+let playerTwoCount = 0
 
 const WINNING_LINES = [
   [0, 1, 2],
@@ -43,9 +46,6 @@ const App = () => {
   const [winner, setWinner] = useState(null);
 
   // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
   const updateSquare = (id) => {//Event handler
     let newBoard = [...squares]
     for(let row in newBoard){
@@ -59,9 +59,6 @@ const App = () => {
           setSquares(newBoard);
           switchPlayer(currentPlayer);
           setWinner(checkForWinner(newBoard));
-          // console.log(returnXIndexes(newBoard));
-          // console.log(returnOIndexes(newBoard));
-          console.log(checkForWinner(newBoard));
           return;
         };
       };
@@ -98,17 +95,18 @@ const App = () => {
     return indexOCollection;
   }
 
-  // For wave 3, you will add the game logic to detect if a player has won or if there is a tie (all squares filled and with no winner). To do this you will complete the checkForWinner method and display the winner in the header section. The game should also cease responding to clicks on the board if the game has a winner.
   const checkForWinner = (newBoard) => {
     // Complete in Wave 3
     let winner = null
-
+//TODO Add tie logic
     WINNING_LINES.forEach(combination => {
       if(combination.every(e => returnOIndexes(newBoard).includes(e))){
         winner = PLAYER_2;
+        playerTwoCount++;
       }
       else if(combination.every(e => returnXIndexes(newBoard).includes(e))){
         winner = PLAYER_1;
+        playerOneCount++;
       };
     });
     return winner;
@@ -127,7 +125,10 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... {winner} </h2>
-        {/* Event listener */}
+        <div className="Scorecard-section">
+          <Scorecard value="X" count={playerOneCount}/>
+          <Scorecard value="O" count={playerTwoCount}/>
+        </div>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
