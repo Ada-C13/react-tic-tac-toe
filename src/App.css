@@ -12,5 +12,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
   margin-bottom: 2em;
+  padding: 20px;
 }
 
+.main {
+  padding-bottom: 2em;
+}
