@@ -51,7 +51,6 @@ const App = () => {
     return current;
   };
 
- 
   const checkForWinner = () => {
     //checks diagonals
     if(squares[0][0].value === squares[1][1].value  && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '' ){
@@ -78,8 +77,7 @@ const App = () => {
   }
 
   let winner = checkForWinner();
-  if( winner !== -1){
-
+  if(winner !== -1){
     return (
       <div className="App">
         <header className="App-header">
@@ -106,7 +104,6 @@ const App = () => {
       </main>
     </div>
   );
-
 }
 
 export default App;
