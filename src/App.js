@@ -36,37 +36,28 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const updateSquare = (id) => {//Event handler
-    const updatedBoard = []
+    // const updatedBoard = []
     // console.log(id)
+    let newBoard = [...squares]
+    for(let row in newBoard){
+      for(let column in newBoard){
 
-    squares.forEach(row => {
-      row.forEach(column => {
-        let filledSquare = squares[row][column];
+        let playerMove = newBoard[row][column];
           
-        if (filledSquare.id === id && filledSquare.value === '') {
-          filledSquare.value = currentPlayer;
-          updatedBoard.push(filledSquare)
+        if (playerMove.id === id && playerMove.value === '') {
+          playerMove.value = currentPlayer;
 
-          setSquares(updatedBoard);
+
+          setSquares(newBoard);
           switchPlayer(currentPlayer);
           return;
         };
-      });
-    // squares.forEach(square => {
-    //   console.log(square)
-    //   // if(square.id === updatedSquare.id) {
-    //     //   updatedSquare.value = (switchPlayer() ? PLAYER_2 : PLAYER_1);
-    //     //   squares.push(updatedSquare);
-    //     // } else {
-    //     //   squares.push(square);
-    //     // }
-    //   })
-  });
+      };
+  };
 };
 
-  function switchPlayer() {
-    changeCurrent(!current);
-    return current
+  function switchPlayer(player) {
+    player === PLAYER_1 ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1);
   }
 
   const checkForWinner = () => {
