@@ -40,6 +40,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+  const [winner, setWinner] = useState(null);
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -55,11 +56,11 @@ const App = () => {
         if (playerMove.id === id && playerMove.value === '') {
           playerMove.value = currentPlayer;
 
-
           setSquares(newBoard);
           switchPlayer(currentPlayer);
-          console.log(returnXIndexes(newBoard));
-          console.log(returnOIndexes(newBoard));
+          setWinner(checkForWinner(newBoard));
+          // console.log(returnXIndexes(newBoard));
+          // console.log(returnOIndexes(newBoard));
           console.log(checkForWinner(newBoard));
           return;
         };
@@ -103,27 +104,14 @@ const App = () => {
     let winner = null
 
     WINNING_LINES.forEach(combination => {
-      // if(returnOIndexes(newBoard).includes(combination)){
-      //   winner = PLAYER_2
-      // }
-      // else if(returnXIndexes(newBoard).includes(combination)){
-      //   winner = PLAYER_1
-      // }
-      // if(returnOIndexes(newBoard).includes(combination)){
-      //  return true;}
-      // else if(returnXIndexes(newBoard).includes(combination)){
-      //   return true;}
       if(combination.every(e => returnOIndexes(newBoard).includes(e))){
         winner = PLAYER_2;
-        console.log('THIS TIME IT WAS '+ PLAYER_2 )
       }
       else if(combination.every(e => returnXIndexes(newBoard).includes(e))){
         winner = PLAYER_1;
-        console.log('THIS TIME IT WAS '+ PLAYER_1 )
       };
-      // console.log(returnOIndexes(newBoard).includes(combination))
     });
-    // console.log(winner)
+    return winner;
   }
 
   
@@ -131,13 +119,14 @@ const App = () => {
   const resetGame = () => {
     // Complete in Wave 4
     setSquares(generateSquares());
+    setWinner(null);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... ${currentPlayer} </h2>
+        <h2>The winner is ... {winner} </h2>
         {/* Event listener */}
         <button onClick={resetGame}>Reset Game</button>
       </header>
