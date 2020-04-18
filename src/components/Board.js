@@ -8,38 +8,25 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
   const allRows = [];
   for (let row = 0; row < 3; row += 1) {
-    const oneRow = [];
+
     for (let col = 0; col < 3; col += 1) {
       const currentSquare = squares[row][col];
-      oneRow.push(
-        <div key={col}>
+      allRows.push(
           <Square key={currentSquare.id}
                   id={currentSquare.id}
                   row={row}
                   col={col}
                   value={currentSquare.value}
                   onClickCallback={onClickCallback} />
-        </div>
       );
     }
-    allRows.push(
-      <div key={row}>
-        {oneRow}
-      </div>
-    );
   }
-  return (
-    <div>
-      {allRows}
-    </div>
-  )
+  return allRows
 }
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  return <div className="grid" >
-    {squareList}
-  </div>
+  return <div className="grid" >{squareList}</div>
 }
 
 Board.propTypes = {

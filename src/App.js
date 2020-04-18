@@ -1,42 +1,49 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
 const generateSquares = () => {
-  const squares = [];
-
+  const initialSquares = [];
   let currentId = 0;
 
   for (let row = 0; row < 3; row += 1) {
-    squares.push([]);
+
+    initialSquares.push([]);
     for (let col = 0; col < 3; col += 1) {
-      squares[row].push({
+      initialSquares[row].push({
         id: currentId,
-        value: '',
+        value: "",
       });
       currentId += 1;
     }
+
   }
 
-  return squares;
+  return initialSquares;
 }
 
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [player, setPlayer]   = useState(PLAYER_1);
 
   const onClickCallback = (row, col) => {
-
-    console.log('click', row, col);
+    if (squares[row][col].value === "") {
+      console.log('beforeclick', row, col, player, squares[row][col]);
+      const updatedSquare = squares;
+      updatedSquare[row][col].value = player;
+      setSquares(updatedSquare);
+      if (player === PLAYER_1) {
+        setPlayer(PLAYER_2)
+      } else {
+        setPlayer(PLAYER_1)
+      }
+    }
+    console.log('afterclick', row, col, player, squares[row][col]);
   }
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
 
 
   const checkForWinner = () => {
@@ -53,6 +60,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>Player is {player} </h2>
         <button>Reset Game</button>
       </header>
       <main>
