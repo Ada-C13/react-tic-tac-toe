@@ -5,24 +5,19 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // squares is an array of arrays [[1,2,3], [4,5,6], [7,8,9]]
-  // modifying squares so that each index contains a Square Component
-
+  // spread 2-D squares array
   const allSquares = [].concat(...squares);
-  console.log(allSquares);
-  const answer = allSquares.map(square => {
-    return <Square
-      key={square.id}
-      id={square.id}
-      value={square.value}
-      onClickCallback={onClickCallback}
-    />
-  });
-  console.log(answer);
-  return (answer);
 
-  
-  //needs to return one-d array of 9 components
+  return allSquares.map(square => {
+    return (
+      <Square
+        key={square.id}
+        id={square.id}
+        value={square.value}
+        onClickCallback={onClickCallback}
+      />
+    )
+  });
 }
 
 const Board = ({ squares, onClickCallback }) => {
