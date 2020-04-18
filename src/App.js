@@ -29,6 +29,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
+  const [winner, setWinner] = useState("");
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -62,9 +63,9 @@ const App = () => {
         rowSum += squares[row][col].value;
       }
       if (rowSum === "OOO") {
-        console.log("Circle WIN!");
+        setWinner("Player 2");
       } else if (rowSum === "XXX") {
-        console.log("Cross WIN!");
+        setWinner("Player 1");
       }
     }
 
@@ -74,22 +75,22 @@ const App = () => {
         colSum += squares[row][col].value;
       }
       if (colSum === "OOO") {
-        console.log("Circle WIN!");
+        setWinner("Player 2");
       } else if (colSum === "XXX") {
-        console.log("Cross WIN!");
+        setWinner("Player 1");
       }
     }
 
     if (squares[0][0].value + squares[1][1].value + squares[2][2].value === "OOO") {
-      console.log("Circle WIN!");
+      setWinner("Player 2");
     } else if (squares[0][0].value + squares[1][1].value + squares[2][2].value === "XXX") {
-      console.log("Cross WIN!");
+      setWinner("Player 1");
     }
 
     if (squares[2][0].value + squares[1][1].value + squares[0][2].value === "OOO") {
-      console.log("Circle WIN!");
+      setWinner("Player 2");
     } else if (squares[2][0].value + squares[1][1].value + squares[0][2].value === "XXX") {
-      console.log("Cross WIN!");
+      setWinner("Player 1");
     }
   }
 
@@ -101,11 +102,16 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is ... {winner}
+        </h2>
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} turn={turn} onClickCallback={clickSquare} />
+        <Board 
+          squares={squares} 
+          turn={turn} 
+          winner={winner}
+          onClickCallback={clickSquare} />
       </main>
     </div>
   );
