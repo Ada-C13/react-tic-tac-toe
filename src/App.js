@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -22,7 +21,7 @@ const generateSquares = () => {
     }
   }
 
-  return squares;
+  return squares; // array of 3 row arrays
 }
 
 const App = () => {
@@ -30,15 +29,25 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
-  const updateSquares = (clickedSquare) => {
-    if (clickedSquare.value === '') {
-      clickedSquare.value = currentPlayer;
+  const updateSquares = (id) => {
+    let newSquares = [...squares]; // copy squares array
+    let nextPlayer = '';
+    // look for the clicked Square, then update it's value
+    for (let row = 0; row < 3; row += 1) {
+      for (let col = 0; col < 3; col += 1) {
+        let selectedSquare = newSquares[row][col];
+        if (selectedSquare.id === id) {
+          if (selectedSquare.value === '') {
+            selectedSquare.value = currentPlayer;
+            newSquares[row][col] = selectedSquare;
+          }
+          // switch players
+          currentPlayer === PLAYER_1 ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1)
+        }
+      }
     }
-    setSquares(clickedSquare); // pass update
+    
+    setSquares(newSquares); // pass update which is an array of arrays
   };
 
 
