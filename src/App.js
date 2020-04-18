@@ -16,7 +16,7 @@ const generateSquares = () => {
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
-        value: '-',
+        value: '',
       });
       currentId += 1;
     }
@@ -28,7 +28,7 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
-  const [turn, setTurn] = useState(PLAYER_1);
+  const [turn, setTurn] = useState(1);
   const [winner, setWinner] = useState("");
 
   // Wave 2
@@ -48,7 +48,7 @@ const App = () => {
 
     console.log(updatedSquares);
     setSquares(updatedSquares);
-    turn === "X"? setTurn(PLAYER_2) : setTurn(PLAYER_1);
+    setTurn(turn + 1);
 
     checkForWinner();
   };
@@ -97,7 +97,7 @@ const App = () => {
   const resetGame = () => {
     console.log("Resetting the game...");
     setSquares(generateSquares);
-    setTurn(PLAYER_1);
+    setTurn(1);
     setWinner("");
   }
 

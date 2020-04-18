@@ -8,9 +8,9 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
   const onSquareClick = () => {
-    if (props.value === "-" && props.winner === ""){
+    if (props.value === "" && props.winner === ""){
       let value = ""
-      if (props.turn === "X") {
+      if (props.turn % 2 === 1) {
         value = "X";
       } else {
         value = "O";
