@@ -8,11 +8,11 @@ const Square = (props) => {
   // const [gameValue, setValue] = useState(props.value);
   
   // // Function to toggle present
-  const onButtonClick = () => {            //setvalue(!gameValue);
+  const onButtonClick = (event) => {            //setvalue(!gameValue);
     const updatedSquare = {
       id: props.id,
-      value: !props.value,      //negate won't work here
-      onClickCallback: props.onClickCallback
+      value: props.playerTurn,      //event.target.value??    !props.value, 
+  
     }
     props.onClickCallback(updatedSquare);
   };

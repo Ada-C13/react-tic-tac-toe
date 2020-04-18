@@ -31,15 +31,32 @@ const App = () => {
   const onClickCallback = (updatedSquare) => {
     const newSquares = [];
 
-    squares.forEach( (square) => {
-      if (square.id == updatedSquare.id){
-        newSquares.push(updatedSquare.id);
-      }else {
-        newSquares.push(square.id);
-      }
+    squares.forEach( (row) => { 
+      const newRow = []
+
+      row.forEach( (indvSquarePerRow) => {
+        if (indvSquarePerRow.id == updatedSquare.id){
+          newRow.push(updatedSquare);  
+        }else {
+          newRow.push(indvSquarePerRow);
+        }
+      });
+      newSquares.push(newRow);
     });
     setSquares(newSquares);
   };
+
+  const playerTurn = () => {
+    flatArray = squares.flat();
+    let values = squares.values
+    let count = values.count('')
+      if (count % 2 == 0) {
+        return "O";
+      }else { 
+        return "x";
+      };
+  };
+
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -58,7 +75,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback} />
+        <Board squares={squares} onClickCallback={onClickCallback} playerTurn={playerTurn}/>  
       </main>
     </div>
   );
