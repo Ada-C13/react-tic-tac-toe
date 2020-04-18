@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
+
   return (
     [<Square id={squares[0][0].id} value={squares[0][0].value} onClickCallback={onClickCallback} />,
     <Square id={squares[0][1].id} value={squares[0][1].value} onClickCallback={onClickCallback} />,
@@ -21,7 +21,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  // console.log(squareList);
+
   return <div className="grid" >
     {squareList}
   </div>

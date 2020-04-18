@@ -29,10 +29,10 @@ const generateSquares = () => {
 const App = () => {
   
   const [squares, setSquares] = useState(generateSquares());
-
   const [turn, setTurn] = useState(true);
   const [winnerExist, setWinner] = useState(false);
-  let winner = "NO ONE";
+  const [winner,showWinner] = useState("Let's play!");
+
 
   const changeSquare = (changedSquare)=>{
       if(winnerExist === false){
@@ -40,11 +40,11 @@ const App = () => {
         squares.forEach((row)=>{
           const rowNew = [];
           row.forEach((square)=>{
-            if(square.id===changedSquare.id && turn===true){
+            if(square.id===changedSquare.id && turn===true && changedSquare.value ===""){
               changedSquare.value = PLAYER_1;
               rowNew.push(changedSquare);
             }
-            else if(square.id===changedSquare.id && turn===false){
+            else if(square.id===changedSquare.id && turn===false && changedSquare.value ===""){
               changedSquare.value = PLAYER_2;
               rowNew.push(changedSquare);
             }
@@ -73,78 +73,74 @@ const App = () => {
 
   const checkForWinner = (squares) => {
 
-    // let winnerFound = false;
     if(squares[0][0].value===squares[0][1].value && squares[0][1].value===squares[0][2].value && squares[0][0].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[0][0].value;
+      showWinner("The winner is " + squares[0][0].value);
+
     }
     else if 
     (squares[1][0].value===squares[1][1].value && squares[1][1].value===squares[1][2].value && squares[1][0].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[1][0].value;
+      showWinner("The winner is " + squares[1][0].value);
     }
     else if 
     (squares[2][0].value===squares[2][1].value && squares[2][1].value===squares[2][2].value && squares[2][0].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[2][0].value;
+      showWinner("The winner is " + squares[2][0].value);
     }
     else if 
     (squares[0][0].value===squares[1][0].value && squares[1][0].value===squares[2][0].value && squares[0][0].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[0][0].value;
+      showWinner("The winner is " + squares[0][0].value);
     }
     else if 
     (squares[0][1].value===squares[1][1].value && squares[1][1].value===squares[2][1].value && squares[0][1].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[0][1].value;
+      showWinner("The winner is " + squares[0][1].value);
     }
     else if 
     (squares[0][2].value===squares[1][2].value && squares[1][2].value===squares[2][2].value && squares[0][2].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[0][2].value;
+      showWinner("The winner is " + squares[0][2].value);
     }
     else if 
     (squares[0][0].value===squares[1][1].value && squares[1][1].value===squares[2][2].value && squares[0][0].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[0][0].value;
+      showWinner("The winner is " + squares[0][0].value);
     }
     else if 
     (squares[0][2].value===squares[1][1].value && squares[1][1].value===squares[2][0].value && squares[0][2].value !==""){
-      // winnerFound = true;
       setWinner(true);
-      winner =squares[0][2].value;
+      showWinner("The winner is " + squares[0][2].value);
     }
-    // console.log("has someone won:", winnerFound);
-    // console.log("winnerExist:", winnerFound);
-    else {
 
+    else if (
+      squares[0][0].value !== "" && squares[0][1].value !== "" && squares[0][2].value !== "" && 
+      squares[1][0].value !== "" && squares[1][1].value !== "" && squares[1][2].value !== "" && 
+      squares[2][0].value !== "" && squares[2][1].value !== "" && squares[2][2].value !== "" )
+      {
+        showWinner("It's a tie!")
     }
     console.log("who is the winner:", winner);
-
   }
 
   
 
-
-
-
   const resetGame = () => {
-    // Complete in Wave 4
+
+    console.log("test");
+    setSquares(generateSquares());
+    setWinner(false);
+    showWinner("Let's play!");
+    setTurn(true);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is idk {winner}</h2>
-        <button>Reset Game</button>
+        <h2>{winner}</h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={changeSquare} />
