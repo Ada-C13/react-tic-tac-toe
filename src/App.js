@@ -28,16 +28,33 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
-
+  const [isXTurn, setXTurn] = useState(true);
+ 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+  const onClickCallback = ( (squareId) => {
+    // mark the square either X or O
+    // who's turn => get from the App.js (start from X, which is PLAYER 1)
+    // get the id => from the Square.js
+    let copiedSquares = [...squares];
+    for(let row of copiedSquares) {
+      for(let square of row) {
+       if (square.id === squareId) {
+          square.value = isXTurn ? PLAYER_1 : PLAYER_2;
+          setXTurn(!isXTurn);
+        } 
+      }
+    }
+    setSquares(copiedSquares);
+    // checkForWinner(setSquares);
+  }) 
 
 
-  const checkForWinner = () => {
+  const checkForWinner = (squares) => {
     // Complete in Wave 3
-
+    
   }
 
   const resetGame = () => {
@@ -52,7 +69,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={onClickCallback}/>
       </main>
     </div>
   );
