@@ -4,8 +4,8 @@ import './App.css';
 import Board from './components/Board';
 import GameInfo from './components/GameInfo';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+// PLAYER 1 is 'X'
+// PLAYER 2 is 'O'
 
 const generateSquares = () => {
   const squares = [];
