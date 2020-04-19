@@ -6,9 +6,6 @@ import './Square.css'
 const Square = (props) => {
   
   const onButtonClick = () => {
-    
-    console.log("Clicked")
-    console.log(props)
     props.onClickCallback(props.id)
   }
 
