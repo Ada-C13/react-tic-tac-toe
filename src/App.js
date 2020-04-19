@@ -22,7 +22,8 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
+  console.log(squares);
+  console.log(trackBoard);
   return squares;
 }
 
@@ -108,8 +109,13 @@ const App = () => {
     };
   }
 
+  // Clear the board.
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares()); // Resets board.
+    setWinner(''); // Reset winner.
+    for (let i = 0; i < trackBoard.length; i++) { // Reset board tracker.
+      trackBoard[i] = '';
+    };
   }
 
   return (
