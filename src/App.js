@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
+import GameInfo from './components/GameInfo';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
@@ -106,11 +107,13 @@ const App = () => {
     setWinner("");
   }
 
+
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... {winner}</h2>
+        <GameInfo turn={turn} winner={winner} />
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
