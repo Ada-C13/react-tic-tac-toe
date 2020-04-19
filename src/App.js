@@ -90,11 +90,23 @@ const App = () => {
       const[x, y, z] = possibleCombos[i];
       if (trackBoard[x] && trackBoard[x] === trackBoard[y] && trackBoard[x] === trackBoard[z]) {
         setWinner(trackBoard[x]);
+        disableBoard();
       } else if (!trackBoard.includes('')) {
         setWinner('TIE');
       };
     };
-  };  
+  } 
+
+  // Disable the board after a winner is found.
+  const disableBoard = () => {
+    for (let squareRow of squares) {
+      for (let square of squareRow) {
+        if (square.disabled === false) {
+          square.disabled = true;
+        }
+      };
+    };
+  }
 
   const resetGame = () => {
     // Complete in Wave 4
