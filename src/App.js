@@ -113,7 +113,9 @@ const App = () => {
     // check row -
     // Complete in Wave 3
     if (checkRow(turn === PLAYER_1)) {
-      console.log(turn);
+      return turn;
+    } else if (checkRow(turn === PLAYER_2)) {
+      return turn;
     }
     checkDiagonals();
   };
