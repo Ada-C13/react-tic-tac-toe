@@ -25,9 +25,14 @@ const generateSquares = () => {
   return squares;
 }
 
+
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+
+  const changeSquare = () => {
+
+  }
 
   // Wave 2
   // You will need to create a method to change the square 
