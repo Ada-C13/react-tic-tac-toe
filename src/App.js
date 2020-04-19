@@ -5,7 +5,7 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
-const winningScenarios = [
+const WINNING_SCENARIOS = [
   // horizontal
   [0, 1, 2],
   [3, 4, 5],
@@ -45,6 +45,7 @@ const App = () => {
   const [winner, setWinner] = useState(null);
 
   const updateSquares = (id) => {
+    if (winner !== null) return; // stop game after winner declared
     let newSquares = [...squares]; // copy squares array
     // look for the clicked Square, then update it's value
     for (let row = 0; row < 3; row += 1) {
@@ -73,18 +74,20 @@ const App = () => {
       for (let col = 0; col < 3; col += 1) {
         squareValues.push(squares[row][col].value);
       };
-    };
+    }; // updates correctly
 
-    // check against winningScenarios
-    for (let line of winningScenarios) {
+    // check against WINNING_SCENARIOS
+    for (let line of WINNING_SCENARIOS) {
       // cleaner way to code this?
       if (squareValues[line[0]] === squareValues[line[1]] && squareValues[line[0]] === squareValues[line[2]] && squareValues[line[0]] !== '') {
-        // console.log(squareValues[line[0]]);
+        console.log(squareValues[line[0]]);
         return squareValues[line[0]];
-      }    
+      }  
     }
-    // TO DO: if there is a winner, update header
-    // tie handling: if no winning scenario matched, and all 9 squares are filled, nothing happens?
+    // TO DO: tie handling: if winner === null, and all 9 squares are filled, nothing happens?
+    // (squareValues.includes("") === false) to identify tie? Or iterate and add to a counter var until it == 9? 
+    // Then what? Update header?
+    return null; 
   }
 
   const resetGame = () => {
@@ -95,7 +98,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>{winner === null ? `` : `The winner is ${ winner }` } </h2>
         <button>Reset Game</button>
       </header>
       <main>
