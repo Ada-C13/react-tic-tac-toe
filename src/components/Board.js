@@ -7,10 +7,11 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
 
   const squareComponentArray = []; 
-  // Iterate through an array of arrays of 3 objects each
+
+  // iterate through an array of arrays of 3 objects each
   squares.forEach ( (row) => {
     row.forEach ( (square) => {
-      squareComponentArray.push(< Square id={square.id} value={square.value} />);
+      squareComponentArray.push(< Square id={square.id} value={square.value} onClickCallback={onClickCallback} key={square.id}/>);
     })
   });
   
@@ -19,7 +20,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+  //console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>
