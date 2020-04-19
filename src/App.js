@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Board from "./components/Board";
@@ -29,17 +29,23 @@ const generateSquares = () => {
 const App = () => {
   // useState(generateSquares) becomes the variable squares
   // useState is setting the initial state of the App component
-  // this is a 2D array of objects
-  // setSquares() is a function to update squares - use setSquares to reset game
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
-  // console.log(squares);
+  const [winner, setWinner] = useState();
+
   let newSquares = [];
   const onClickCallback = (id) => {
+    if (winner) {
+      return;
+    }
     for (let row = 0; row < squares.length; row++) {
       newSquares.push([]);
       for (let column = 0; column < squares.length; column++) {
         let currentSquare = squares[row][column];
+        // find square by id
+        // update square value if square is empty
+        // set sqares to new squares
+        //  use State to keep track of 'turns' and update square accordingly
         if (currentSquare.id === id && currentSquare.value === "") {
           currentSquare.value = turn;
           if (turn === PLAYER_2) {
@@ -52,86 +58,116 @@ const App = () => {
       }
     }
 
-    // find square by id
-    // update value to Player 1
-    // set sqares to new updated squares
-
-    // define 2D array to represent the new game state
-    // this is an example but it's not 'right' line 40
-    // do not worry about taking turns just yet.
-    // set this up using Player 1 first. every click is Player 1.
-    // const newSquares = [];
     setSquares(newSquares);
-    console.log("clicking", id);
   };
 
   // const onClickCallback = (event) => {
   //     setSquares(event.target.value);
   //   };
 
-  // Wave 2
-  // You will need to create a method to change the square
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  // const checkRow = () => {
+  //   console.log("this is inside checkRow")
+  //   for (let row = 0; row < squares.length; row++) {
+  //     let counter = 0;
+  //     for (let column = 0; column < squares.length; column++) {
+  //       if (squares[row][column].value === turn) {
+  //         counter++;
+  //       }
+  //     }
+  //     if (counter === 3) {
+  //       return true;
+  //     };
+  //   };
+  // };
+  const checkForWinner = () => {
+    // Complete in Wave 3
+    checkRowsandColumns();
+    checkDiagonals();
+    checkForTie();
+  };
 
-  const checkRow = () => {
-    for (let row = 0; row < squares.length; row++) {
-      let counter = 0;
-      for (let column = 0; column < squares.length; column++) {
-        if (squares[row][column].value === turn) {
-          counter++;
+  useEffect(() => {
+    checkForWinner();
+  });
+
+  const checkForTie = () => {
+    if (winner) {
+      return;
+    }
+    for (let i = 0; i < squares.length; i++) {
+      for (let j = 0; j < squares.length; j++) {
+        if (squares[i][j].value === "") {
+          return;
         }
-        console.log("Row");
-        console.log(squares[row][column]);
-      }
-      if (counter === 3) {
-        return true;
       }
     }
+    setWinner("...There is no winner! It's a Tie!");
   };
 
   const checkDiagonals = () => {
-    const winnerL = squares[0][0].value;
-    const winnerR = squares[0][2].value;
     if (
       squares[0][0].value === squares[1][1].value &&
       squares[0][0].value === squares[2][2].value &&
-      squares[0][0].value !== " "
+      squares[0][0].value !== ""
     ) {
-      return winnerL;
+      setWinner(squares[0][0].value);
     } else if (
       squares[0][2].value === squares[1][1].value &&
-      squares[0][2].value === squares[2][2].value &&
-      squares[0][2] !== ""
+      squares[0][2].value === squares[2][0].value &&
+      squares[0][2].value !== ""
     ) {
-      return winnerR;
+      setWinner(squares[0][2].value);
     }
   };
 
-  const checkForWinner = () => {
-    // pass in a ->"turn" on line  77
-    // check row -
-    // Complete in Wave 3
-    if (checkRow(turn === PLAYER_1)) {
-      return turn;
-    } else if (checkRow(turn === PLAYER_2)) {
-      return turn;
+  const checkRowsandColumns = () => {
+    for (let i = 0; i < squares.length; i++) {
+      for (let j = 0; j < squares.length; j++) {
+        if (
+          squares[i][0].value === squares[i][1].value &&
+          squares[i][0].value === squares[i][2].value &&
+          squares[i][0].value !== ""
+        ) {
+          setWinner(squares[i][0].value);
+        } else if (
+          squares[0][j].value === squares[1][j].value &&
+          squares[0][j].value === squares[2][j].value &&
+          squares[0][j].value !== ""
+        )
+          setWinner(squares[0][j].value);
+      }
     }
-    checkDiagonals();
   };
-  checkForWinner();
+
+  // const checkColumn = () => {
+  //   for(let row = 0; row < squares.length; row++) {
+  //     let counter = 0;
+  //     for( let column = 0; column < squares.length; column++) {
+  //       if(squares[column][row].value === turn) {
+  //         counter++;
+  //       }
+  //     }
+  //     if (counter === 3) {
+  //       return true;
+  //     }
+  //   }
+  // };
+
+  // let winner = checkforWinner();
 
   const resetGame = () => {
     // Complete in Wave 4
+    setSquares(generateSquares());
+    setTurn();
+    setWinner();
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        {/* this button needs an onClick */}
-        <button>Reset Game</button>
+        {winner ? <h2>{`The winner is ${winner}`}</h2> : null}
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
