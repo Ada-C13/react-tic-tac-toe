@@ -89,7 +89,7 @@ const App = () => {
     for (let i = 0; i < possibleCombos.length; i++) {
       const[x, y, z] = possibleCombos[i];
       if (trackBoard[x] && trackBoard[x] === trackBoard[y] && trackBoard[x] === trackBoard[z]) {
-        setWinner(trackBoard[x]);
+        setWinner(trackBoard[x] === PLAYER_1 ? "PLAYER 1 (X)" : "PLAYER 2 (O)");
         disableBoard();
       } else if (!trackBoard.includes('')) {
         setWinner('TIE');
@@ -101,8 +101,8 @@ const App = () => {
   const disableBoard = () => {
     for (let squareRow of squares) {
       for (let square of squareRow) {
-        if (square.disabled === false) {
-          square.disabled = true;
+        if (square.disabled === false) { // If a square has not already been marked,
+          square.disabled = true;        // it will now be disabled.
         }
       };
     };
@@ -116,8 +116,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ...{winner}</h2>
-        <button>Reset Game</button>
+        <h2>The winner is ... {winner}</h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquare} />

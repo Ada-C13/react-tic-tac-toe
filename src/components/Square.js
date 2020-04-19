@@ -38,4 +38,4 @@ Square.propTypes = {
   disabled: PropTypes.bool.isRequired
 };
 
-export default Square
+export default Square;
