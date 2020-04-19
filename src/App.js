@@ -30,6 +30,7 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [player1Turn, setplayer1Turn] = useState(true);
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -43,20 +44,32 @@ const App = () => {
   // use setSquares to change the board
   // need to switch back and forth between two players
   // display whose turn it is
-  const updateSquare = (updatedSquare) => {
-    // holds new copy of squares
+  console.log(squares);
+  const updateSquare = (id) => {
+    // holds new copy of squares using spread "..." operator
+    const squaresNew = [...squares];
 
-    console.log("Callback function test")
-    const squaresNew = [];
+    // need to iterate through 2D array
+    // 2 loops, first go through rows
+    // then within each row go through each column
 
-    squares.forEach ( (square) => {
-      if (square.id === updatedSquare.id) {
-        squaresNew.push(updatedSquare);
-      } else {
-        squaresNew.push(square);
+    for (let i = 0; i < 3; i++){
+      for (var j = 0; j < 3; j++){
+        let currentSquare = squaresNew[i][j];  
+        if (currentSquare.id === id) {
+          console.log(currentSquare);
+
+          // square already filled in, exit loop
+          if (currentSquare.value !== '') return;
+
+          currentSquare.value = player1Turn? PLAYER_1: PLAYER_2;
+
+          setplayer1Turn(!player1Turn);
+        }
       }
-    });
+    }
 
+    // update board
     setSquares(squaresNew);
   }
 
