@@ -5,6 +5,16 @@ import Board from './components/Board';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
+const WINNING_COMBOS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
 const generateSquares = () => {
   const squares = [];
@@ -53,7 +63,21 @@ const App = () => {
 
 
   const checkForWinner = () => {
-    // Complete in Wave 3
+    
+    let squareValues = []
+    squares.forEach(row => {
+      squareValues.push(row[0].value, row[1].value, row[2].value)
+    });
+
+    WINNING_COMBOS.forEach(row=> {
+        // console.log(row)
+        if(squareValues[row[0]] === squareValues[row[1]] && squareValues[row[1]] === squareValues[row[2]]){
+          // console.log(`Winner is ${squareValues[row[0]].value}`)
+        }
+      });
+  
+    
+    // console.log(squareValues)
 
   }
 
@@ -65,7 +89,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is ... {checkForWinner()}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
