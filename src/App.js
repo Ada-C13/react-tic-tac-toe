@@ -30,8 +30,9 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [player, setPlayer] = useState(true);
 
-  const onClickCallback = (event) => {
+  const onClickCallback = (event) => { // Event Handler
     let updatedGrid = [];
+    // resource : R.Quin zoom chat
     for(let i = 0; i < squares.length; i++) {
       for(let j = 0; j < squares.length; j++) {
         if (event === squares[i][j].id) {
@@ -54,7 +55,7 @@ const App = () => {
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
   }
 
   return (
@@ -62,7 +63,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback}/>
