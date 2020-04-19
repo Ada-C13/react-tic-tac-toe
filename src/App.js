@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './App.css';
 import Board from './components/Board';
 
+// Declare constants used for game status
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 const NOPLAYER = '' ;
 const GAMETIED = '#';
 
+// Generates an empty set of squares to start the game
 const generateSquares = () => {
   const initialSquares = [];
   let currentId = 0;
@@ -30,11 +32,10 @@ const generateSquares = () => {
 // App component
 const App = () => {
 
-  // State
+  // Declare and initialize state
   const [squares, setSquares] = useState(generateSquares());
   const [player, setPlayer]   = useState(PLAYER_1);
   const [winner, setWinner]   = useState(NOPLAYER);
-
 
   // Callback function for square click
   const onClickCallback = (id) => {
@@ -55,6 +56,7 @@ const App = () => {
 
   }
 
+  // Check if a set of squares is a winner
   const checkForThree = (row1, col1, row2, col2, row3, col3) => {
     if (squares[row1][col1].value === squares[row2][col2].value &&
         squares[row1][col1].value === squares[row3][col3].value &&
@@ -64,6 +66,7 @@ const App = () => {
     }
   }
 
+  // Check if all squares are taken and there is no winner
   const checkForTie = () => {
 
     if (winner === NOPLAYER) {
@@ -84,6 +87,7 @@ const App = () => {
 
   }
 
+  // Checks all eight possible winning combinations, plus ties
   const checkForWinner = () => {
     for (let i = 0; i < 3; i++) {
       checkForThree(i, 0, i, 1, i, 2);
@@ -94,15 +98,19 @@ const App = () => {
     checkForTie();
   }
 
+  // Reset state for a new game
   const resetGame = () => {
     setSquares(generateSquares());
     setPlayer(PLAYER_1);
     setWinner(NOPLAYER);
   }
 
+  // Check if one of the players won
   checkForWinner();
 
-  const message = winner === NOPLAYER ? `Player is ${player}` : winner === GAMETIED ? `Game is tied` : `Winner is ${winner}`;
+  // Creates the right message to show at the top
+  const message = winner === NOPLAYER ? `Player is ${player}` :
+                  winner === GAMETIED ? `Game is tied` : `Winner is ${winner}`;
 
   return (
     <div className="App">

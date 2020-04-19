@@ -3,7 +3,7 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-// Function to generate nine squares
+// Function to generate nine square components
 const generateSquareComponents = (squares, onClickCallback) => {
   
   const allRows = [];
@@ -28,7 +28,6 @@ const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
   return <div className="grid" >{squareList}</div>
 }
-
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(
