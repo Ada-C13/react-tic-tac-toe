@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -29,6 +28,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [player, setPlayer] = useState(true);
+  const [winner, setWinner] = useState();
 
   const onClickCallback = (event) => { // Event Handler
     let updatedGrid = [];
@@ -42,6 +42,7 @@ const App = () => {
       updatedGrid.push(squares[i]);
     }
     setSquares(updatedGrid);
+    checkForWinner();
   }
 
   function swapPlayers() {
@@ -50,26 +51,61 @@ const App = () => {
   };
 
   const checkForWinner = () => {
-    // Complete in Wave 3
+    // resource: https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/
+    const winnerCombination = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
 
-  }
+    // Iterate and check if there is a winning combination or tie
+    let arraySquares = squares.flat();
 
+    for (let i = 0; i < winnerCombination.length; i++) {
+
+      const [a, b, c] = winnerCombination[i];
+
+      if (arraySquares[a].value && arraySquares[a].value === 
+          arraySquares[b].value && arraySquares[a].value === 
+          arraySquares[c].value) {
+
+        setWinner(`${arraySquares[a].value}`);
+
+        return;
+      };
+    };
+
+    let noMoreSquares = 0;
+    for (let square of arraySquares) {
+      if (square.value === '') {
+        (noMoreSquares ++)
+      };
+    };
+
+    if (noMoreSquares === 0) {setWinner('tie')}
+  };    
+  
   const resetGame = () => {
     setSquares(generateSquares());
-  }
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is ... {winner} </h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback}/>
+        <Board squares={squares} onClickCallback={onClickCallback} winner={winner}/>
       </main>
     </div>
   );
-}
+};
 
 export default App;

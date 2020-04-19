@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   
-  // resource:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+  // resource: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
   const lineSquares = [].concat(...squares);
   return lineSquares.map((square) => {
     return <Square
@@ -16,7 +16,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
       onClickCallback={onClickCallback}
     />
   });
-}
+};
 
 const Board = ({ squares, onClickCallback }) => {
 
@@ -24,7 +24,7 @@ const Board = ({ squares, onClickCallback }) => {
   return <div className="grid" >
     {squareList}
   </div>
-}
+};
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(
