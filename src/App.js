@@ -68,12 +68,14 @@ const App = () => {
 
   const checkForWinner = () => {
     // get values of each square in order
-    const squareValues = []; 
-    for (let row = 0; row < 3; row += 1) {
-      for (let col = 0; col < 3; col += 1) {
-        squareValues.push(squares[row][col].value);
-      }
-    }
+    const squareValues = [];
+    
+    squares.map(row => 
+      row.map(square => ( 
+        squareValues.push(square.value)
+        )
+      )
+    )
 
     // check against WINNING_SCENARIOS
     for (let line of WINNING_SCENARIOS) {
