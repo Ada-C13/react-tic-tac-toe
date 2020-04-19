@@ -100,19 +100,24 @@ const App = () => {
     let winner = null
 //TODO Add tie logic
     WINNING_LINES.forEach(combination => {
-      if(combination.every(e => returnOIndexes(newBoard).includes(e))){
+      if(combination.every(num => returnOIndexes(newBoard).includes(num))){
         winner = PLAYER_2;
         playerTwoCount++;
       }
-      else if(combination.every(e => returnXIndexes(newBoard).includes(e))){
+      else if(combination.every(num => returnXIndexes(newBoard).includes(num))){
         winner = PLAYER_1;
         playerOneCount++;
+      }
+      else {
+        winner = "TIE";
       };
     });
     return winner;
   }
 
-  
+  const endGame = () => {
+    
+  }
   //Event handler
   const resetGame = () => {
     // Complete in Wave 4
