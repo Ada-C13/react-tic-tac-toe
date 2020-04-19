@@ -22,7 +22,7 @@ const generateSquares = () => {
 };
 
 // const useState = (defaultValue) => {
-//   let result = defaultValue;  // [ [{}, {id: 5}, {}], [{}, {value: }, {}], [{}, {}, {}]]
+//   let result = defaultValue;  // [ [{id: , value:}, {id: 5, value:}, {}], [{}, {value: }, {}], [{}, {}, {}]]
 
 //   const changeValue = (newValue) => {
 //     result = newValue
@@ -33,6 +33,7 @@ const generateSquares = () => {
 
 const App = () => {
   const [squares, setSquares] = useState(generateSquares()); // useState prevents this from being run every render
+  const [isPlayerOne, setIsPlayerOne] = useState(true);
   // setSquares allows us to change the value of squares without manipulating it directly
 
   // Wave 2
@@ -40,16 +41,22 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
-  const onClickCallback = () => {
-    const newSquares = [...squares];
-    newSquares[0][1]["value"] = "X";
-
+  const onClickCallback = (id) => {
+    const newSquares = [...squares]; //clone of squares
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (newSquares[i][j].id === id) {
+          newSquares[i][j].value = PLAYER_1;
+        }
+      }
+    }
     setSquares(newSquares);
   };
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
-  };
+  //checkRows
+  //checkColumns
+  //checkDiagonals
+  const checkForWinner = () => {};
 
   const resetGame = () => {
     // Complete in Wave 4
@@ -63,7 +70,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={onClickCallback} />
       </main>
     </div>
   );

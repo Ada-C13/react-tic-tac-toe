@@ -7,14 +7,22 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
   return squares.map((row) => {
     return row.map((square) => {
-      return <Square id={square.id} value={square.value} />;
+      return (
+        <Square
+          id={square.id}
+          value={square.value}
+          onClickCallback={onClickCallback}
+        />
+      );
     });
   });
 };
 
 const Board = ({ squares, onClickCallback }) => {
-  console.log("SQUARES: ", squares);
+  // destructuring props/keys into variables to use in the component.
+
   const squareList = generateSquareComponents(squares, onClickCallback);
+  console.log(squareList);
   return <div className="grid">{squareList}</div>;
 };
 
@@ -31,3 +39,23 @@ Board.propTypes = {
 };
 
 export default Board;
+
+// const person = {
+//   name: "Sara",
+//   address: {
+//     city: "Seattle, WA",
+//     zip: "98133"
+//   },
+//   hairColor: "black"
+// }
+
+// person.name
+// person.address.city
+
+// const first_name = person.name;
+// const hairColor = person.hairColor;
+// const address = person.address;
+
+// const { name, hairColor, address } = person;
+
+// const { city, zip } = person.address;
