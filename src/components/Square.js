@@ -5,13 +5,13 @@ import './Square.css'
 
 const Square = (props) => {
 
-  const onSquareClick = () => {
-    const updatedSquare = {
-      id: props.id,
-      value: props.value,
-    }
-    props.onUpdatedSquare(updatedSquare);
-  }
+  // const onSquareClick = () => {
+  //   const updatedSquare = {
+  //     id: props.id,
+  //     value: props.value,
+  //   }
+  //   props.onUpdatedSquare(updatedSquare);
+  // }
 
   return <button
     className="square"

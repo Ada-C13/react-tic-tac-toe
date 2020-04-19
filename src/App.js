@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Board from "./components/Board";
@@ -30,10 +30,12 @@ const App = () => {
   // useState(generateSquares) becomes the variable squares
   // useState is setting the initial state of the App component
   const [squares, setSquares] = useState(generateSquares());
+  // player 1 starts first and is an 'x'
   const [turn, setTurn] = useState(PLAYER_1);
-  console.log(squares);
+  const [winner, setWinner] = useState();
   let newSquares = [];
   const onClickCallback = (id) => {
+    if(winner) { return };
     for (let row = 0; row < squares.length; row++) {
       newSquares.push([]);
       for (let column = 0; column < squares.length; column++) {
@@ -55,7 +57,6 @@ const App = () => {
     }
 
     setSquares(newSquares);
-    console.log("clicking", id);
   };
 
   // const onClickCallback = (event) => {
@@ -63,57 +64,92 @@ const App = () => {
   //   };
 
 
-  const checkRow = () => {
-    console.log("this is inside checkRow")
-    for (let row = 0; row < squares.length; row++) {
-      let counter = 0;
-      for (let column = 0; column < squares.length; column++) {
-        if (squares[row][column].value === turn) {
-          counter++;
-        }
-      }
-      if (counter === 3) {
-        return true;
-      };
-    };
-  };
-
-  const checkDiagonals = () => {
-    const winnerL = squares[0][0].value;
-    const winnerR = squares[0][2].value;
-    if(squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== ' ') {
-      return winnerL;
-      
-    }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][2].value && squares[0][2] !== '' ) {
-      return winnerR;
-
-    };
-  };
-
-  const checkColumn = () => {
-    for(let row = 0; row < squares.length; row++) {
-      let counter = 0;
-      for( let column = 0; column < squares.length; column++) {
-        if(squares[column][row].value === turn) {
-          counter++;
-        }
-      }
-      if (counter === 3) {
-        return true;
-      }
-    }
-  };
-
+  // const checkRow = () => {
+  //   console.log("this is inside checkRow")
+  //   for (let row = 0; row < squares.length; row++) {
+  //     let counter = 0;
+  //     for (let column = 0; column < squares.length; column++) {
+  //       if (squares[row][column].value === turn) {
+  //         counter++;
+  //       }
+  //     }
+  //     if (counter === 3) {
+  //       return true;
+  //     };
+  //   };
+  // };
   const checkForWinner = () => {
     // pass in a ->"turn" on line  77
     // check row -
     // Complete in Wave 3
-    if (checkRow(turn === PLAYER_1)) {
-      return turn;
-    };
+    checkRowsandColumns();
     checkDiagonals();
+    checkForTie();
   };
-  console.log(checkForWinner());
+
+
+  // if(checkRow(turn === PLAYER_1 || turn === PLAYER_2)) {
+  //     console.log(turn);
+  //   }
+  
+    useEffect(() => {
+      checkForWinner();
+    });
+
+    const checkForTie = () => {
+      if(winner) { return };
+      for(let i = 0; i < squares.length; i++){
+        for(let j = 0; j < squares.length; j++){ 
+          if(squares[i][j].value === '') {
+            return;
+          };
+        };
+      };
+      setWinner('Tie');
+    }; 
+
+
+  const checkDiagonals = () => {
+    if(squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '') 
+    {
+      setWinner(squares[0][0].value);
+      
+    }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== '') 
+    {
+      setWinner(squares[0][2].value);
+    };
+  };
+
+
+  const checkRowsandColumns  = () =>  {
+    for(let i = 0; i < squares.length; i++){
+      for(let j = 0; j < squares.length; j++){
+        if(squares[i][0].value === squares[i][1].value && squares[i][0].value === squares[i][2].value && squares[i][0].value !== '' )
+        { 
+          setWinner(squares[i][0].value);
+        }else if(squares[0][j].value === squares[1][j].value && squares[0][j].value === squares[2][j].value && squares[0][j].value !== '')
+          setWinner(squares[0][j].value);
+      };
+    };
+  };
+
+  // const checkColumn = () => {
+  //   for(let row = 0; row < squares.length; row++) {
+  //     let counter = 0;
+  //     for( let column = 0; column < squares.length; column++) {
+  //       if(squares[column][row].value === turn) {
+  //         counter++;
+  //       }
+  //     }
+  //     if (counter === 3) {
+  //       return true;
+  //     }
+  //   }
+  // };
+
+ 
+
+  // let winner = checkforWinner();
 
 
   // const resetGame = () => {
@@ -126,7 +162,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        {winner ? <h2>{`The winner is ${winner}`}</h2>: null}
           {/* this button needs an onClick   */}
         <button>Reset Game</button>
       </header>
