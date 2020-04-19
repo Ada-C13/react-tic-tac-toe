@@ -3,6 +3,10 @@ import './App.css';
 
 import Board from './components/Board';
 
+//next steps: 
+//Set up so a square can only be clicked on once
+//Show whick players turn it is 
+
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 const WINNING_COMBOS = [
@@ -45,7 +49,11 @@ const App = () => {
   const onClickCallBack = (id) => {
 
     setFilledSquareCount(filledSquareCount + 1);
-    // set it to stop when winner detected 
+
+    if (winner !== null){
+      return;
+    }
+
     const newSquares = [];
     squares.forEach(row => {
       const newRow = []
