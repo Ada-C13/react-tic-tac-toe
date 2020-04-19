@@ -1,6 +1,6 @@
+//collab with Charlotte Adams
 import React, { useState, useEffect } from "react";
 import "./App.css";
-
 import Board from "./components/Board";
 
 const PLAYER_1 = "X";
@@ -94,9 +94,9 @@ const App = () => {
     if (winner) {
       return;
     }
-    for (let i = 0; i < squares.length; i++) {
-      for (let j = 0; j < squares.length; j++) {
-        if (squares[i][j].value === "") {
+    for (let row = 0; row < squares.length; row++) {
+      for (let column = 0; column < squares.length; column++) {
+        if (squares[row][column].value === "") {
           return;
         }
       }
@@ -121,44 +121,28 @@ const App = () => {
   };
 
   const checkRowsandColumns = () => {
-    for (let i = 0; i < squares.length; i++) {
-      for (let j = 0; j < squares.length; j++) {
+    for (let row = 0; row < squares.length; row++) {
+      for (let column = 0; column < squares.length; column++) {
         if (
-          squares[i][0].value === squares[i][1].value &&
-          squares[i][0].value === squares[i][2].value &&
-          squares[i][0].value !== ""
+          squares[row][0].value === squares[row][1].value &&
+          squares[row][0].value === squares[row][2].value &&
+          squares[row][0].value !== ""
         ) {
-          setWinner(squares[i][0].value);
+          setWinner(squares[row][0].value);
         } else if (
-          squares[0][j].value === squares[1][j].value &&
-          squares[0][j].value === squares[2][j].value &&
-          squares[0][j].value !== ""
+          squares[0][column].value === squares[1][column].value &&
+          squares[0][column].value === squares[2][column].value &&
+          squares[0][column].value !== ""
         )
-          setWinner(squares[0][j].value);
+          setWinner(squares[0][column].value);
       }
     }
   };
 
-  // const checkColumn = () => {
-  //   for(let row = 0; row < squares.length; row++) {
-  //     let counter = 0;
-  //     for( let column = 0; column < squares.length; column++) {
-  //       if(squares[column][row].value === turn) {
-  //         counter++;
-  //       }
-  //     }
-  //     if (counter === 3) {
-  //       return true;
-  //     }
-  //   }
-  // };
-
-  // let winner = checkforWinner();
-
   const resetGame = () => {
     // Complete in Wave 4
     setSquares(generateSquares());
-    setTurn();
+    setTurn(PLAYER_1);
     setWinner();
   };
 
