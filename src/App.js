@@ -29,6 +29,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [isXTurn, setXTurn] = useState(true);
+  const [winner, setWinner] = useState(null);
  
   // Wave 2
   // You will need to create a method to change the square 
@@ -50,39 +51,67 @@ const App = () => {
   }) 
 
 
-  const checkForWinner = (newSquares) => {
+  const checkForWinner = () => {
     // Complete in Wave 3
     // if rows, cols, diagonal has no same pattern => no winner
     // else the square.value ( PLAYER1 or PLAYER2 ) is the winner
-    const winningPatterns = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ];
-    
-    for(let pattern of winningPatterns) {
-      console.log("testing print" + newSquares[pattern[0]].value);
-      console.log(newSquares);
-      // if (newSquares[pattern[0]]["value"] &&
-      //     newSquares[pattern[0]["value"]] === newSquares[pattern[2]["value"]] &&
-      //     newSquares[pattern[1]["value"]] === newSquares[pattern[2]["value"]]
-      //   ) {
-      //     console.log('got a winner')
-      //     return newSquares[pattern[0]];
-      //   }
-      }  
-    console.log('no winner');
-    return null;
+    for(let row = 0; row < squares.length; row++) {
+      // for every row:
+      // first check if everything in that row is equal
+      let r = squares[row];
+      if(r[0]["value"] !== '' &&
+         r[0]["value"] === r[1]["value"] &&
+         r[1]["value"] === r[2]["value"]
+         ) {
+        setWinner(r[0]["value"]) 
+        console.log(r[0]["value"]);
+        return r[0]["value"] ; // if we return early here after finding a winner, then stop searching for a winner
+      }
+    }
 
-    }  
+      // check cols
+    for(let col = 0; col < squares.length; col++ ) {
+      let row1 = squares[0];
+      let row2 = squares[1];
+      let row3 = squares[2];
+      
+      if(row1[col]["value"] !== '' &&
+        row1[col]["value"] === row2[col]["value"] &&
+        row2[col]["value"] === row3[col]["value"]
+        ) {
+        setWinner(row1[col]["value"]);
+        console.log(row1[col]["value"]);
+        return row1[col]["value"];
+      }
+    }
+
+    // left diagonal
+    if(squares[0][0]["value"] !== '' &&
+      squares[0][0]["value"] === squares[1][1]["value"] &&
+      squares[1][1]["value"] === squares[2][2]["value"]
+      ) {
+      setWinner(squares[0][0]["value"]);
+      console.log(squares[0][0]["value"]);
+      return squares[0][0]["value"]; 
+    }
+    
+    // right diag
+    if(squares[0][2]["value"] !== '' &&
+      squares[0][2]["value"] === squares[1][1]["value"] &&
+      squares[1][1]["value"] === squares[2][0]["value"] 
+      ) {
+      setWinner(squares[0][2]["value"]);
+      console.log(squares[0][2]["value"]);
+      return squares[0][2]["value"]; 
+    }
+
+    console.log(winner);
+    return winner;
+  }  
 
   const resetGame = () => {
     // Complete in Wave 4
+
   }
 
   return (
