@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
   
   const allRows = [];
-  for (let row = 0; row < 3; row += 1) {
+  for (let row = 0; row < 3; row ++) {
 
-    for (let col = 0; col < 3; col += 1) {
+    for (let col = 0; col < 3; col ++) {
       const currentSquare = squares[row][col];
       allRows.push(
           <Square key={currentSquare.id}

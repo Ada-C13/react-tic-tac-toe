@@ -13,15 +13,15 @@ const generateSquares = () => {
   const initialSquares = [];
   let currentId = 0;
 
-  for (let row = 0; row < 3; row += 1) {
+  for (let row = 0; row < 3; row ++) {
 
     initialSquares.push([]);
-    for (let col = 0; col < 3; col += 1) {
+    for (let col = 0; col < 3; col ++) {
       initialSquares[row].push({
         id: currentId,
         value: NOPLAYER,
       });
-      currentId += 1;
+      currentId ++;
     }
 
   }
@@ -71,13 +71,12 @@ const App = () => {
 
     if (winner === NOPLAYER) {
       let filledSquares = 0;
-      for (let row = 0; row < 3; row += 1) {
-        for (let col = 0; col < 3; col += 1) {
+      for (let row = 0; row < 3; row ++) {
+        for (let col = 0; col < 3; col ++) {
           if (squares[row][col].value !== NOPLAYER) {
             filledSquares += 1;
           }
         }
-    
       }
 
       if (filledSquares === 9) {
