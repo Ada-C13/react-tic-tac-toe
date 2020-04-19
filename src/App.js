@@ -34,19 +34,16 @@ const generateSquares = () => {
 const App = () => {
   const [squares, setSquares] = useState(generateSquares()); // useState prevents this from being run every render
   const [isPlayerOne, setIsPlayerOne] = useState(true);
+  const [isGameOver, setGameOver] = useState(false);
   // setSquares allows us to change the value of squares without manipulating it directly
-
-  // Wave 2
-  // You will need to create a method to change the square
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
 
   const onClickCallback = (id) => {
     const newSquares = [...squares]; //clone of squares
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (newSquares[i][j].id === id) {
-          newSquares[i][j].value = PLAYER_1;
+          newSquares[i][j].value = isPlayerOne ? PLAYER_1 : PLAYER_2;
+          setIsPlayerOne(!isPlayerOne);
         }
       }
     }
@@ -56,6 +53,9 @@ const App = () => {
   //checkRows
   //checkColumns
   //checkDiagonals
+
+  const checkRows = () => {};
+  //const checkColumns
   const checkForWinner = () => {};
 
   const resetGame = () => {
