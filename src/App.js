@@ -33,7 +33,7 @@ const App = () => {
   // setSquares() is a function to update squares - use setSquares to reset game
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
-  console.log(squares);
+  // console.log(squares);
   let newSquares = [];
   const onClickCallback = (id) => {
     for (let row = 0; row < squares.length; row++) {
@@ -81,6 +81,8 @@ const App = () => {
         if (squares[row][column].value === turn) {
           counter++;
         }
+        console.log("Row");
+        console.log(squares[row][column]);
       }
       if (counter === 3) {
         return true;
@@ -88,14 +90,34 @@ const App = () => {
     }
   };
 
+  const checkDiagonals = () => {
+    const winnerL = squares[0][0].value;
+    const winnerR = squares[0][2].value;
+    if (
+      squares[0][0].value === squares[1][1].value &&
+      squares[0][0].value === squares[2][2].value &&
+      squares[0][0].value !== " "
+    ) {
+      return winnerL;
+    } else if (
+      squares[0][2].value === squares[1][1].value &&
+      squares[0][2].value === squares[2][2].value &&
+      squares[0][2] !== ""
+    ) {
+      return winnerR;
+    }
+  };
+
   const checkForWinner = () => {
     // pass in a ->"turn" on line  77
     // check row -
     // Complete in Wave 3
-    if (checkRow()) {
-      return true;
+    if (checkRow(turn === PLAYER_1)) {
+      console.log(turn);
     }
+    checkDiagonals();
   };
+  checkForWinner();
 
   const resetGame = () => {
     // Complete in Wave 4
