@@ -26,4 +26,9 @@ const GameInfo = ({turn, winner}) => {
   )
 }
 
+GameInfo.propTypes = {
+  turn: PropTypes.number.isRequired,
+  winner: PropTypes.string.isRequired
+};
+
 export default GameInfo;

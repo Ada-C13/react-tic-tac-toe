@@ -10,18 +10,13 @@ const Square = (props) => {
   const onSquareClick = () => {
     if (props.value === "" && props.winner === ""){
       let value = ""
-      if (props.turn % 2 === 1) {
-        value = "X";
-      } else {
-        value = "O";
-      }
+      value = props.turn % 2 === 1 ? "X" : "O";
   
       const clickedSquare = {
         id: props.id,
         value: value
       };
   
-      console.log("clicked!");
       props.onClickCallback(clickedSquare);
     }
   }
@@ -37,6 +32,8 @@ Square.propTypes = {
   value: PropTypes.string.isRequired,
   onClickCallback: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  turn: PropTypes.number.isRequired,
+  winner: PropTypes.string.isRequired
 };
 
-export default Square
+export default Square;

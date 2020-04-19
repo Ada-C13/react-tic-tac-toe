@@ -47,13 +47,9 @@ const App = () => {
       }
     }
 
-    console.log(updatedSquares);
     setSquares(updatedSquares);
-    
-
     checkForWinner();
     setTurn(turn + 1);
-
   };
 
 
@@ -101,13 +97,10 @@ const App = () => {
   }
 
   const resetGame = () => {
-    console.log("Resetting the game...");
     setSquares(generateSquares);
     setTurn(1);
     setWinner("");
   }
-
-
 
   return (
     <div className="App">

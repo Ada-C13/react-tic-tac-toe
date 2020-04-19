@@ -27,7 +27,6 @@ const generateSquareComponents = (squares, onClickCallback, turn, winner) => {
 
 const Board = ({ squares, onClickCallback, turn, winner }) => {
   const squareList = generateSquareComponents(squares, onClickCallback, turn, winner);
-  console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>
@@ -43,6 +42,8 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
+  turn: PropTypes.number.isRequired,
+  winner: PropTypes.string.isRequired
 };
 
 export default Board;
