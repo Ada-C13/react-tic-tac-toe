@@ -30,9 +30,9 @@ const App = () => {
   // useState(generateSquares) becomes the variable squares
   // useState is setting the initial state of the App component
   const [squares, setSquares] = useState(generateSquares());
-  // player 1 starts first and is an 'x'
   const [turn, setTurn] = useState(PLAYER_1);
   const [winner, setWinner] = useState();
+
   let newSquares = [];
   const onClickCallback = (id) => {
     if(winner) { return };
@@ -79,18 +79,11 @@ const App = () => {
   //   };
   // };
   const checkForWinner = () => {
-    // pass in a ->"turn" on line  77
-    // check row -
     // Complete in Wave 3
     checkRowsandColumns();
     checkDiagonals();
     checkForTie();
   };
-
-
-  // if(checkRow(turn === PLAYER_1 || turn === PLAYER_2)) {
-  //     console.log(turn);
-  //   }
   
     useEffect(() => {
       checkForWinner();
@@ -105,7 +98,7 @@ const App = () => {
           };
         };
       };
-      setWinner('Tie');
+      setWinner('...There is no winner! It\'s a Tie!');
     }; 
 
 
@@ -125,7 +118,7 @@ const App = () => {
     for(let i = 0; i < squares.length; i++){
       for(let j = 0; j < squares.length; j++){
         if(squares[i][0].value === squares[i][1].value && squares[i][0].value === squares[i][2].value && squares[i][0].value !== '' )
-        { 
+        {
           setWinner(squares[i][0].value);
         }else if(squares[0][j].value === squares[1][j].value && squares[0][j].value === squares[2][j].value && squares[0][j].value !== '')
           setWinner(squares[0][j].value);
@@ -152,19 +145,19 @@ const App = () => {
   // let winner = checkforWinner();
 
 
-  // const resetGame = () => {
-  //   // Complete in Wave 4
-  //   // setSquares() is a function to update squares - use setSquares to reset game
-
-  // };
+  const resetGame = () => {
+    // Complete in Wave 4
+    setSquares(generateSquares());
+    setTurn();
+    setWinner();
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         {winner ? <h2>{`The winner is ${winner}`}</h2>: null}
-          {/* this button needs an onClick   */}
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
