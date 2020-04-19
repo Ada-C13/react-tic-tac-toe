@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // we de-structured here, so using squares.whatever instead of props.whatever
 const SquareComponents = ( {squares, onClickCallback}) => {
 
-  const squareComponents = squares.flat().map((square) => {
+  const generateSquareComponents = squares.flat().map((square) => {
 
     return (
         <Square
@@ -21,7 +21,7 @@ const SquareComponents = ( {squares, onClickCallback}) => {
     
     );
   });
-  return squareComponents;
+  return generateSquareComponents;
 };
 
 
