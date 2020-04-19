@@ -30,6 +30,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [isXTurn, setXTurn] = useState(true);
   const [winner, setWinner] = useState(null);
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
  
   // Wave 2
   // You will need to create a method to change the square 
@@ -46,10 +47,11 @@ const App = () => {
        if (square.id === squareId && square.value === '') {
           square.value = isXTurn ? PLAYER_1 : PLAYER_2;
           setXTurn(!isXTurn);
-          
+          isXTurn ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1)
         } 
       }
     }
+    
     setSquares(copiedSquares);
     checkForWinner(copiedSquares);
   }) 
@@ -124,7 +126,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-  <h2>The winner is {winner}</h2>
+      { winner === null ?  <h2>Current Player {currentPlayer} </h2> : <h2>The winner is {winner}</h2>}
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
