@@ -5,6 +5,7 @@ import Board from './components/Board';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
+let xTurn = true; 
 
 const generateSquares = () => {
   const squares = [];
@@ -29,6 +30,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
 
+  
 
   const updateSquare = (squareId) => {
 
@@ -37,10 +39,19 @@ const App = () => {
     squares.forEach ( (row) => {
       for (const square in row){
         if(row[square].id === squareId){
-          row[square].value = "?"
+          //row[square].value = "?"
           // TODO: finish wave 2
 
-
+          // if value at square is empty, it could be either x or o's turn
+          if(row[square].value === ""){
+            if(xTurn){
+              row[square].value = PLAYER_1;
+              xTurn = false;
+            } else {
+              row[square].value = PLAYER_2;
+              xTurn = true;
+            }
+          }
         }
       }
       updatedSquares.push(row);
