@@ -87,7 +87,7 @@ const App = () => {
       };
     };
 
-    if (noMoreSquares === 0) {setWinner('tie')}
+    if (noMoreSquares === 0) {setWinner('Tie - No one')}
   };    
   
   const resetGame = () => {
@@ -97,9 +97,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... {winner} </h2>
-        <button className="button" onClick={resetGame}>Reset Game</button>
+        <h1>Tic Tac Toe with React</h1>
+        <h2>{winner} WINS </h2>
+        <button className="button" onClick={resetGame}>. RESET GAME .</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} winner={winner}/>
