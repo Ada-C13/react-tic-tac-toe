@@ -36,6 +36,10 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const onClickCallback = ( (squareId) => {
+
+    // will not continue the game if there is a winner
+    if (winner) return;
+
     let copiedSquares = [...squares];
     for(let row of copiedSquares) {
       for(let square of row) {
@@ -111,15 +115,17 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
-
+    setSquares(generateSquares());
+    setXTurn(true);
+    setWinner(null);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+  <h2>The winner is {winner}</h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback}/>
