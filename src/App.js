@@ -56,10 +56,13 @@ const App = () => {
       squareList.push([]);
       row.forEach((square) => {
         if (square.id === squareClickedId.id && square.value === "") {
+          // set the state to determine when is player1 or player2
           squareClickedId.value = itsPlayer1Turn ? PLAYER_1 : PLAYER_2;
+          // Pass the turn to player2. 
           setPlayer1Turn(!itsPlayer1Turn);
           squareList[i].push(squareClickedId)
         } else {
+          // Return a copy with clean square. 
           squareList[i].push({...square})
         }
       });
@@ -70,7 +73,7 @@ const App = () => {
   // It returns an array with the current clicked values. 
   const extractValuesFromSquares = ((setSquares) => {
     const values = [];
-    
+
     setSquares.forEach((row) => {
       row.forEach((square) => {
         console.log(row)
@@ -102,8 +105,8 @@ const App = () => {
   // setPlaying(checkForWinner(squares));
   console.log(winner);
 
-  const resetGame = () => {
-    // Complete in Wave 4
+  const resetGame = () => { // TOD
+    // Complete in Wave 4 
   }
 
   return (

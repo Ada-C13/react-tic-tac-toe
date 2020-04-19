@@ -4,9 +4,10 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
+// It returs and array with Square components with prop. 
 const generateSquareComponents = (squares, onClickCallback) => {
   const squaresArray = [];
-
+  // Iteraring over the 2D array from the parent App. 
   squares.forEach((row) => {
     row.forEach((square)=> {
 
@@ -21,9 +22,8 @@ const generateSquareComponents = (squares, onClickCallback) => {
     })
   });
 
-  // console.log(squaresArray);
+  // An array with square components. 
   return squaresArray;
-
 }
 
 
