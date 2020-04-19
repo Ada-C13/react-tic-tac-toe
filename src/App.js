@@ -33,25 +33,23 @@ const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
  
   // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+
   const onClickCallback = ( (squareId) => {
 
-    // will not continue the game if there is a winner
+    // will not continue the game if there is already a winner
     if (winner) return;
 
     let copiedSquares = [...squares];
     for(let row of copiedSquares) {
       for(let square of row) {
        if (square.id === squareId && square.value === '') {
+          // assign square.value base on the current valuse of isXTurn
           square.value = isXTurn ? PLAYER_1 : PLAYER_2;
           setXTurn(!isXTurn);
-          isXTurn ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1)
+          isXTurn ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1);
         } 
       }
     }
-    
     setSquares(copiedSquares);
     checkForWinner(copiedSquares);
   }) 
@@ -59,19 +57,15 @@ const App = () => {
 
   const checkForWinner = () => {
     // Complete in Wave 3
-    // if rows, cols, diagonal has no same pattern => no winner
-    // else the square.value ( PLAYER1 or PLAYER2 ) is the winner
+    // check rows
     for(let row = 0; row < squares.length; row++) {
-      // for every row:
-      // first check if everything in that row is equal
       let r = squares[row];
       if(r[0]["value"] !== '' &&
          r[0]["value"] === r[1]["value"] &&
          r[1]["value"] === r[2]["value"]
          ) {
-        setWinner(r[0]["value"]) 
-        console.log(r[0]["value"]);
-        return r[0]["value"] ; // if we return early here after finding a winner, then stop searching for a winner
+        setWinner(r[0]["value"]);
+        return r[0]["value"] ;
       }
     }
 
@@ -86,7 +80,6 @@ const App = () => {
         row2[col]["value"] === row3[col]["value"]
         ) {
         setWinner(row1[col]["value"]);
-        console.log(row1[col]["value"]);
         return row1[col]["value"];
       }
     }
@@ -97,7 +90,6 @@ const App = () => {
       squares[1][1]["value"] === squares[2][2]["value"]
       ) {
       setWinner(squares[0][0]["value"]);
-      console.log(squares[0][0]["value"]);
       return squares[0][0]["value"]; 
     }
     
@@ -107,11 +99,9 @@ const App = () => {
       squares[1][1]["value"] === squares[2][0]["value"] 
       ) {
       setWinner(squares[0][2]["value"]);
-      console.log(squares[0][2]["value"]);
       return squares[0][2]["value"]; 
     }
 
-    console.log(winner);
     return winner;
   }  
 
@@ -120,6 +110,7 @@ const App = () => {
     setSquares(generateSquares());
     setXTurn(true);
     setWinner(null);
+    setCurrentPlayer(PLAYER_1);
   }
 
   return (
