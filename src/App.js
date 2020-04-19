@@ -44,7 +44,7 @@ const App = () => {
 
     squares[squareToUpdate.row][squareToUpdate.column] =  // Updates squares 2D array with the square which was clicked. 
     {                                                     // Uses row and columns attributes
-      ...squareToUpdate, // spread operator 
+      ...squareToUpdate, // spread operator  
       value: currentPlayer // updating the value with the current player
     };
 
@@ -57,8 +57,8 @@ const App = () => {
 
   const checkForWinner = () => {
     // Complete in Wave 3
-    const isPlayerWin = (values, player) => 
-      values.filter(value => value === player).length === values.length
+    const isPlayerWin = (valuesTriple, player) => 
+      valuesTriple.filter(value => value === player).length === valuesTriple.length
 
     const checkHorizontals = () => {
       for (let i = 0; i < 3; i++) {
