@@ -28,16 +28,18 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [player, setPlayer] = useState(PLAYER_1)
 
   const onClickCallBack = (id) => {
-    console.log(id)
-    // got help from Hala
+    // console.log(id)
       const newSquares = [];
       squares.forEach(row => {
         const newRow = []
         row.forEach(square => {
           if (square.id === id) {
-            square.value = "X"
+            square.value = player
+            setPlayer(player === PLAYER_1 ? PLAYER_2 : PLAYER_1)
+            //could eventually set it so it can only be changed once
           }
           newRow.push(square)
         })
