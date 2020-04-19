@@ -25,6 +25,8 @@ const generateSquares = () => {
   return squares;
 }
 
+
+
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
@@ -33,6 +35,30 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
+  // callback function that will update the squares that will be 
+  // passed to the board which will then be passed to squares
+
+
+  // add x and o on board
+  // use setSquares to change the board
+  // need to switch back and forth between two players
+  // display whose turn it is
+  const updateSquare = (updatedSquare) => {
+    // holds new copy of squares
+
+    console.log("Callback function test")
+    const squaresNew = [];
+
+    squares.forEach ( (square) => {
+      if (square.id === updatedSquare.id) {
+        squaresNew.push(updatedSquare);
+      } else {
+        squaresNew.push(square);
+      }
+    });
+
+    setSquares(squaresNew);
+  }
 
 
   const checkForWinner = () => {
@@ -52,7 +78,10 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board 
+          squares = {squares} 
+          onClickCallback = {updateSquare}
+        />
       </main>
     </div>
   );
