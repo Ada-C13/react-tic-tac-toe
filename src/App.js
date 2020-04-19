@@ -45,8 +45,9 @@ const App = () => {
     
     if (squares[row][col].value === NOPLAYER && winner === NOPLAYER) {
       // if square available, mark it for the player
-      squares[row][col].value = player;
-      setSquares(squares);
+      const updatedSquares = Array.from(squares);
+      updatedSquares[row][col].value = player;
+      setSquares(updatedSquares);
 
       // change to next player
       setPlayer(player === PLAYER_1 ? PLAYER_2 : PLAYER_1);
@@ -58,13 +59,13 @@ const App = () => {
     if (squares[row1][col1].value === squares[row2][col2].value &&
         squares[row1][col1].value === squares[row3][col3].value &&
         squares[row1][col1].value !== NOPLAYER &&
-        winner === NOPLAYER
-    ) {
-        setWinner(squares[row1][col1].value);
+        winner === NOPLAYER) {
+          setWinner(squares[row1][col1].value);
     }
   }
 
   const checkForTie = () => {
+
     if (winner === NOPLAYER) {
       let filledSquares = 0;
       for (let row = 0; row < 3; row += 1) {
@@ -74,7 +75,8 @@ const App = () => {
           }
         }
     
-      }   
+      }
+
       if (filledSquares === 9) {
         setWinner(GAMETIED);
       }
