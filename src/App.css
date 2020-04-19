@@ -14,9 +14,9 @@
   margin-bottom: 2em;
 }
 
-.Scorecard-section {
+.Scorecard-only {
   display: flex;
   flex-direction: row;
-  border: solid red;
+  padding: 5px 5px;
+  border: dashed white 5px;
 }
-

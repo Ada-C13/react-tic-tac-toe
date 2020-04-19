@@ -120,14 +120,22 @@ const App = () => {
     setWinner(null);
   }
 
+  const resetCount = () => {
+    playerOneCount = 0;
+    playerTwoCount = 0;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... {winner} </h2>
         <div className="Scorecard-section">
-          <Scorecard value="X" count={playerOneCount}/>
-          <Scorecard value="O" count={playerTwoCount}/>
+          <div className="Scorecard-only">
+            <Scorecard value="X" count={playerOneCount}/>
+            <Scorecard value="O" count={playerTwoCount}/>
+          </div>
+          <button className="resetCountButton" onClick={resetCount}>Reset Count</button>
         </div>
         <button onClick={resetGame}>Reset Game</button>
       </header>
