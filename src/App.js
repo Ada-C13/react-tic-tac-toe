@@ -74,31 +74,30 @@ const App = () => {
       for (let col = 0; col < 3; col += 1) {
         squareValues.push(squares[row][col].value);
       };
-    }; // updates correctly
+    };
 
     // check against WINNING_SCENARIOS
     for (let line of WINNING_SCENARIOS) {
       // cleaner way to code this?
       if (squareValues[line[0]] === squareValues[line[1]] && squareValues[line[0]] === squareValues[line[2]] && squareValues[line[0]] !== '') {
         console.log(squareValues[line[0]]);
-        return squareValues[line[0]];
+        return squareValues[line[0]]; // return winner
       }  
     }
-    // TO DO: tie handling: if winner === null, and all 9 squares are filled, nothing happens?
-    // (squareValues.includes("") === false) to identify tie? Or iterate and add to a counter var until it == 9? 
-    // Then what? Update header?
+    if (squareValues.includes("") === false) return "tied";
     return null; 
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    // Complete in Wave 4: reset the game and clear all the game squares
+    
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>{winner === null ? `` : `The winner is ${ winner }` } </h2>
+        <h2>{(winner === null) ? `` : `The winner is ${ winner }` } </h2>
         <button>Reset Game</button>
       </header>
       <main>
