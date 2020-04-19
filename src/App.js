@@ -63,11 +63,11 @@ const App = () => {
           } else {
             updatedSquareRow.push(square) 
           }
-        
         }else {
           updatedSquareRow.push(square)
         };
       });
+      
       updatedSquares.push(updatedSquareRow)
     });
    
@@ -79,22 +79,20 @@ const App = () => {
     // Complete in Wave 3
     for (let i = 0; i < 3; i++) {
       if (squares[i][0].value !== '' && squares[i][0].value === squares[i][1].value && squares[i][1].value === squares[i][2].value) {
-        console.log("Winner Detected")
         return squares[i][0].value;
       } else if (squares[0][i].value !== '' && squares[0][i].value === squares[1][i].value && squares[1][i].value === squares[2][i].value) {
-        console.log("Winner Detected")
         return squares[0][i].value;
       };
     };
+
     if (squares[1][1].value !== '' && squares[0][0].value === squares[1][1].value && squares[1][1].value === squares[2][2].value) {
-      console.log("Winner Detected")
       return squares[0][0].value;
     };
+
     if (squares[1][1].value !== '' && squares[0][2].value === squares[1][1].value && squares[1][1].value === squares[2][0].value) {
-      console.log("Winner Detected")
       return squares[0][2].value;
     };
-    console.log("NOOO Winner Detected")
+
     return null
   };
 
