@@ -44,6 +44,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [winner, setWinner] = useState(null);
+  const [tie, setTie] = useState(false);
 
   // Wave 2
   const updateSquare = (id) => {//Event handler
@@ -102,14 +103,13 @@ const App = () => {
     WINNING_LINES.forEach(combination => {
       if(combination.every(num => returnOIndexes(newBoard).includes(num))){
         winner = PLAYER_2;
-        playerTwoCount++;
+        setTie(true);
+        resetGame();
       }
       else if(combination.every(num => returnXIndexes(newBoard).includes(num))){
         winner = PLAYER_1;
-        playerOneCount++;
-      }
-      else {
-        winner = "TIE";
+        setTie(true);
+        resetGame();
       };
     });
     return winner;
@@ -134,7 +134,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... {winner} </h2>
+        <h2>In the lead ... {} </h2>
         <div className="Scorecard-section">
           <div className="Scorecard-only">
             <Scorecard value="X" count={playerOneCount}/>
