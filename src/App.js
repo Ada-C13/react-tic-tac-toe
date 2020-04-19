@@ -48,24 +48,25 @@ const App = () => {
 
     console.log(updatedSquares);
     setSquares(updatedSquares);
-    setTurn(turn + 1);
+    
 
     checkForWinner();
+    setTurn(turn + 1);
+
   };
 
 
   const checkForWinner = () => {
     // Complete in Wave 3
-   
     for (let row = 0; row < 3; row++) {
       let rowSum = "";
       for (let col = 0; col < 3; col++) {
         rowSum += squares[row][col].value;
       }
       if (rowSum === "OOO") {
-        setWinner("Player 2");
+        return setWinner("Player 2");
       } else if (rowSum === "XXX") {
-        setWinner("Player 1");
+        return setWinner("Player 1");
       }
     }
 
@@ -75,23 +76,27 @@ const App = () => {
         colSum += squares[row][col].value;
       }
       if (colSum === "OOO") {
-        setWinner("Player 2");
+        return setWinner("Player 2");
       } else if (colSum === "XXX") {
-        setWinner("Player 1");
+        return setWinner("Player 1");
       }
     }
 
     if (squares[0][0].value + squares[1][1].value + squares[2][2].value === "OOO") {
-      setWinner("Player 2");
+      return setWinner("Player 2");
     } else if (squares[0][0].value + squares[1][1].value + squares[2][2].value === "XXX") {
-      setWinner("Player 1");
+      return setWinner("Player 1");
     }
 
     if (squares[2][0].value + squares[1][1].value + squares[0][2].value === "OOO") {
-      setWinner("Player 2");
+      return setWinner("Player 2");
     } else if (squares[2][0].value + squares[1][1].value + squares[0][2].value === "XXX") {
-      setWinner("Player 1");
+      return setWinner("Player 1");
     }
+
+    if (turn === 9 && winner === "") {
+      setWinner("tie");
+    } 
   }
 
   const resetGame = () => {
