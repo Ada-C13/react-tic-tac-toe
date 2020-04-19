@@ -22,8 +22,7 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-  console.log(squares);
-  console.log(trackBoard);
+
   return squares;
 }
 
@@ -35,9 +34,9 @@ let trackBoard = [
 ];
 
 const App = () => {
-  const [itsXTurn, setXturn] = useState(true);
-  const [squares, setSquares] = useState(generateSquares());
-  const [winner, setWinner] = useState('');
+  const [itsXTurn, setXturn] = useState(true); // For tracking player turn.
+  const [squares, setSquares] = useState(generateSquares()); // For generating squares on board.
+  const [winner, setWinner] = useState(''); // For tracking winner.
   
   // Updates the correct square for new value.
   const updateSquare = (updatedSquare) => {
