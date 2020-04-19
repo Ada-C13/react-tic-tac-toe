@@ -21,7 +21,6 @@ const WINNING_SCENARIOS = [
 
 const generateSquares = () => {
   const squares = [];
-
   let currentId = 0;
 
   for (let row = 0; row < 3; row += 1) {
@@ -46,8 +45,9 @@ const App = () => {
 
   const updateSquares = (id) => {
     if (winner !== null) return; // stop game after winner declared
-    let newSquares = [...squares]; // copy squares array
-    // look for the clicked Square, then update it's value
+    let newSquares = [...squares];
+
+    // find clicked Square, then update it's value
     for (let row = 0; row < 3; row += 1) {
       for (let col = 0; col < 3; col += 1) {
         let selectedSquare = newSquares[row][col];
@@ -60,12 +60,11 @@ const App = () => {
       }
     }
     
-    setSquares(newSquares); // pass update which is an array of arrays
+    setSquares(newSquares);
     setWinner(checkForWinner(squares));
     // switch players
     currentPlayer === PLAYER_1 ? setCurrentPlayer(PLAYER_2) : setCurrentPlayer(PLAYER_1)
-  };
-
+  }
 
   const checkForWinner = () => {
     // get values of each square in order
@@ -73,23 +72,23 @@ const App = () => {
     for (let row = 0; row < 3; row += 1) {
       for (let col = 0; col < 3; col += 1) {
         squareValues.push(squares[row][col].value);
-      };
-    };
+      }
+    }
 
     // check against WINNING_SCENARIOS
     for (let line of WINNING_SCENARIOS) {
-      // cleaner way to code this?
+      // check for 3 of same value in a line
       if (squareValues[line[0]] === squareValues[line[1]] && squareValues[line[0]] === squareValues[line[2]] && squareValues[line[0]] !== '') {
         console.log(squareValues[line[0]]);
         return squareValues[line[0]]; // return winner
       }  
     }
-    if (squareValues.includes("") === false) return "tied";
+
+    if (!squareValues.includes("")) return "tied";
     return null; 
   }
 
   const resetGame = () => {
-    // Reset the game and clear all the game squares
     setSquares(generateSquares);
     setWinner(null);
     setCurrentPlayer(PLAYER_1);  
@@ -106,7 +105,8 @@ const App = () => {
         <Board squares={squares} onClickCallback={updateSquares}/>
       </main>
     </div>
-  );
+  )
+  
 }
 
 export default App;

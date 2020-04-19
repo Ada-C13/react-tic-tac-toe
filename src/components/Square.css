@@ -10,7 +10,3 @@
   align-items: center;
   margin: 2px;
 }
-
-.square:focus {
-  outline: none;
-}
