@@ -11,7 +11,8 @@ const generateSquareComponents = (squares, onClickCallback, turn, winner) => {
   let row = 0;
   while (row < 3) {
     squares[row].forEach((square) => {
-      let squareComponent = <Square 
+      let squareComponent = <Square
+        key={square.id} 
         value={square.value}
         id={square.id}
         onClickCallback={onClickCallback}
