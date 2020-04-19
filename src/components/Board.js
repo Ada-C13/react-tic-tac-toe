@@ -8,14 +8,12 @@ const generateSquareComponents = (squares, onClickCallback) => {
   const flatArray = squares.flat();     // flat() given to me from Shonda! We want to make a 2d array 1d
   const allSquares = flatArray.map((singleSquare, i) => {
     return (
-     
         <Square 
           id={singleSquare.id}
           key={singleSquare.id}
           value={singleSquare.value}
           onClickCallback={onClickCallback}
         />
-    
     );
   });
   return allSquares;
@@ -39,7 +37,6 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
-
 };
 
 export default Board;

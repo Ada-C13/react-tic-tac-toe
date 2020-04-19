@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -97,7 +96,7 @@ const App = () => {
       return (
         <div>
         <h2>Player 1 </h2>
-      </div>
+        </div>
       )
     }else if (
         (arrayEquals([list[0],list[1],list[2]], threeO)) ||
@@ -111,9 +110,9 @@ const App = () => {
     ) {
       winner = true
       return (
-      <div>
-        <h2>Player 2 </h2>
-      </div>
+        <div>
+          <h2>Player 2 </h2>
+        </div>
       )
     }else if (
       !list.includes("n")
@@ -122,7 +121,7 @@ const App = () => {
       return (
         <div>
         <h2>a tie</h2>
-      </div>
+        </div>
       )
     }else {
       return (

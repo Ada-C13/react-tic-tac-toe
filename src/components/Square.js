@@ -9,7 +9,6 @@ const Square = (props) => {
     const updatedSquare = {
       id: props.id,
       value: props.player,      
-
     }
     props.onClickCallback(updatedSquare);
   };
