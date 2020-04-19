@@ -99,15 +99,17 @@ const App = () => {
   const checkForWinner = (newBoard) => {
     // Complete in Wave 3
     let winner = null
-//TODO Add tie logic
+
     WINNING_LINES.forEach(combination => {
       if(combination.every(num => returnOIndexes(newBoard).includes(num))){
         winner = PLAYER_2;
+        playerTwoCount++;
         setTie(true);
         resetGame();
       }
       else if(combination.every(num => returnXIndexes(newBoard).includes(num))){
         winner = PLAYER_1;
+        playerOneCount++;
         setTie(true);
         resetGame();
       };
@@ -115,8 +117,19 @@ const App = () => {
     return winner;
   }
 
-  const endGame = () => {
-    
+  const inLead = () => {
+    if(playerOneCount > playerTwoCount){
+      return 'X'
+    }
+    else if(playerOneCount < playerTwoCount){
+      return 'O'
+    }
+    else if(playerOneCount === playerTwoCount && playerOneCount !== 0 && playerTwoCount !== 0){
+      return 'It\'s a tie'
+    }
+    else {
+      return " "
+    }
   }
   //Event handler
   const resetGame = () => {
@@ -128,13 +141,14 @@ const App = () => {
   const resetCount = () => {
     playerOneCount = 0;
     playerTwoCount = 0;
+    setWinner(null);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>In the lead ... {} </h2>
+        <h2>In the lead ... {inLead()} </h2>
         <div className="Scorecard-section">
           <div className="Scorecard-only">
             <Scorecard value="X" count={playerOneCount}/>
