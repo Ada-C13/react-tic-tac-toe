@@ -10,7 +10,7 @@ const generateSquares = () => {
   const squares = [];
 
   let currentId = 0;
-
+console.log("generate squares");
   for (let row = 0; row < 3; row += 1) {
     squares.push([]);
     for (let col = 0; col < 3; col += 1) {
@@ -23,6 +23,8 @@ const generateSquares = () => {
   }
   // returns 2D array of objects
   // an array of array of objects
+  console.log("squares");
+  console.log(squares);
   return squares;
 };
 
@@ -35,7 +37,7 @@ const App = () => {
 
   let newSquares = [];
   const onClickCallback = (id) => {
-    if(winner) { return };
+    if(winner) { return }
     for (let row = 0; row < squares.length; row++) {
       newSquares.push([]);
       for (let column = 0; column < squares.length; column++) {
@@ -55,29 +57,9 @@ const App = () => {
         newSquares[row].push(currentSquare);
       }
     }
-
     setSquares(newSquares);
   };
-
-  // const onClickCallback = (event) => {
-  //     setSquares(event.target.value);
-  //   };
-
-
-  // const checkRow = () => {
-  //   console.log("this is inside checkRow")
-  //   for (let row = 0; row < squares.length; row++) {
-  //     let counter = 0;
-  //     for (let column = 0; column < squares.length; column++) {
-  //       if (squares[row][column].value === turn) {
-  //         counter++;
-  //       }
-  //     }
-  //     if (counter === 3) {
-  //       return true;
-  //     };
-  //   };
-  // };
+  
   const checkForWinner = () => {
     // Complete in Wave 3
     checkRowsandColumns();
@@ -85,23 +67,22 @@ const App = () => {
     checkForTie();
   };
   
-    useEffect(() => {
-      checkForWinner();
-    });
+  useEffect(() => {
+    checkForWinner();
+  });
 
-    const checkForTie = () => {
-      if(winner) { return };
-      for(let i = 0; i < squares.length; i++){
-        for(let j = 0; j < squares.length; j++){ 
-          if(squares[i][j].value === '') {
-            return;
-          };
-        };
-      };
-      setWinner('...There is no winner! It\'s a Tie!');
-    }; 
-
-
+  const checkForTie = () => {
+    if(winner) { return }
+    for(let i = 0; i < squares.length; i++){
+      for(let j = 0; j < squares.length; j++){ 
+        if(squares[i][j].value === '') {
+          return;
+        }
+      }
+    }
+    setWinner('...There is no winner! It\'s a Tie!');
+  };
+    
   const checkDiagonals = () => {
     if(squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '') 
     {
@@ -110,10 +91,9 @@ const App = () => {
     }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== '') 
     {
       setWinner(squares[0][2].value);
-    };
+    }
   };
-
-
+  
   const checkRowsandColumns  = () =>  {
     for(let i = 0; i < squares.length; i++){
       for(let j = 0; j < squares.length; j++){
@@ -122,35 +102,17 @@ const App = () => {
           setWinner(squares[i][0].value);
         }else if(squares[0][j].value === squares[1][j].value && squares[0][j].value === squares[2][j].value && squares[0][j].value !== '')
           setWinner(squares[0][j].value);
-      };
-    };
+      }
+    }
   };
-
-  // const checkColumn = () => {
-  //   for(let row = 0; row < squares.length; row++) {
-  //     let counter = 0;
-  //     for( let column = 0; column < squares.length; column++) {
-  //       if(squares[column][row].value === turn) {
-  //         counter++;
-  //       }
-  //     }
-  //     if (counter === 3) {
-  //       return true;
-  //     }
-  //   }
-  // };
-
- 
-
-  // let winner = checkforWinner();
-
-
+  
   const resetGame = () => {
     // Complete in Wave 4
     setSquares(generateSquares());
-    setTurn();
+    setTurn(PLAYER_1);
     setWinner();
   };
+
 
   return (
     <div className="App">
