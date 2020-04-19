@@ -57,7 +57,7 @@ const App = () => {
           squareList[i].push(squareClickedId)
           // squareList.push(squareClickedId)
         } else {
-          
+
           squareList[i].push({...square})
         }
       });
@@ -65,15 +65,42 @@ const App = () => {
     console.log(squareList);
     setSquares(squareList);
   }
-  
-  console.log("Rendering");
 
   const checkForWinner = (setSquares) => {
     // Complete in Wave 3
 
+    const winningOptions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
 
+    const values = [];
 
+    setSquares.forEach((row) => {
+      row.forEach((square) => {
+        console.log(row)
+        values.push(square.value)
+      });
+    });
+
+    for (let i in winningOptions) {
+      const [a, b, c] = winningOptions[i];
+      if (values[a] && values[a] === values[b] && values[a] === values[c]) {
+          return values[a];
+        }
+      }
+      return null;
   }
+
+  const winner = checkForWinner(squares);
+
+  console.log(winner);
 
   const resetGame = () => {
     // Complete in Wave 4
