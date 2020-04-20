@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -47,7 +46,7 @@ const App = () => {
   // display whose turn it is
   const updateSquare = (id) => {
     // holds new copy of squares using spread "..." operator
-    if (winner) return;
+    if (winner !== null) return;
     const squaresNew = [...squares];
 
     // need to iterate through 2D array
@@ -63,7 +62,7 @@ const App = () => {
           if (currentSquare.value !== '') return;
           
           currentSquare.value = player1Turn? PLAYER_1: PLAYER_2;
-          
+
           setplayer1Turn(!player1Turn);
         }
       }
@@ -81,7 +80,7 @@ const App = () => {
     const winningSolutions = [
       [squares[0][0].value, squares[0][1].value, squares[0][2].value],
       [squares[1][0].value, squares[1][1].value, squares[1][2].value],
-      [squares[2][0].value, squares[2][1].value, squares[2][0].value],
+      [squares[2][0].value, squares[2][1].value, squares[2][2].value],
       [squares[0][0].value, squares[1][0].value, squares[2][0].value],
       [squares[0][1].value, squares[1][1].value, squares[2][1].value],
       [squares[0][2].value, squares[1][2].value, squares[2][2].value],
@@ -93,11 +92,21 @@ const App = () => {
       // destructuring each winning solution
       const [first, second, third] = winningSolutions[i];
       if (first && first === second && first === third) {
-        return first;
+        // return first;
+        let player = "";
+        first === 'X'? player = 'Player 1' : player = 'Player 2';
+        return player;
       }
     }
 
-    return null;
+    for (let i = 0; i < 3; i ++) {
+      const [first, second, third] = winningSolutions[i];
+      if (first === "" || second === "" || third === "") {
+        return null;
+      }
+    }
+
+    return 'no one, it\'s a tie';
   }
 
   const resetGame = () => {
@@ -110,8 +119,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-
-        <h2>{winner? `The winner is ${ winner === 'X'? 'Player 1' : 'Player 2' }!` : player1Turn? 'Player 1 - X': 'Player 2 - O'}</h2>
+        <h2>{winner? `The winner is ${ winner }!` : player1Turn? 'Player 1 - X': 'Player 2 - O'}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
