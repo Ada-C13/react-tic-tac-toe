@@ -3,16 +3,30 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
+// Generate each square of each row into the table.
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
+  const boardSquares = [];
 
+  for (let squareRow of squares) {
+    for (let square of squareRow) {
+      boardSquares.push(
+        <Square
+          id={square.id}
+          value={square.value}
+          disabled={square.disabled}
+          onClickCallback={onClickCallback}
+          key={square.id}
+        />
+      );
+    };
+  };
+
+  return boardSquares;
 }
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
-  return <div className="grid" >
+  return <div className="grid">
     {squareList}
   </div>
 }

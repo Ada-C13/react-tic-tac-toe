@@ -1,24 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import './Square.css'
+import { tsPropertySignature } from '@babel/types';
 
 const Square = (props) => {
-  // For Wave 1 enable this 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
+  // Changes value of square on click.
+  const onTileClick = () => {
+    const updatedSquare = {
+      id: props.id,
+      value: props.value,
+      disabled: props.disabled
+    };
 
-  return <button
-    className="square"
-  >
-    {props.value}
-  </button>
+    // Prevents further updates to tile after first marking.
+    if (updatedSquare.disabled === true) {
+      return;
+    } else {
+      updatedSquare.disabled = true;
+      props.onClickCallback(updatedSquare);
+    };
+  };
+
+  return (
+    <button
+      className="square"
+      onClick={onTileClick}
+    >
+      {props.value}
+    </button>
+  );
 }
 
 Square.propTypes = {
   value: PropTypes.string.isRequired,
   onClickCallback: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired
 };
 
-export default Square
+export default Square;
