@@ -29,11 +29,13 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [userTurn, setTurn] = useState(PLAYER_1)
+  const [winner, setWinner] = useState("Game is currently in progress...")
 
   const onClickCallback = (event) => {
 
     if (checkForWinner(squares)) {
       console.log(checkForWinner(squares))
+      setWinner(checkForWinner(squares))
     } else {
       const newSquares = squares.map(row =>
         row.map(square =>
@@ -56,7 +58,7 @@ const App = () => {
   const checkForWinner = (newSquares) => {
 
     const currentScoreX = {}
-    const currentScoreO = []
+    const currentScoreO = {}
 
     for (let row in newSquares) {
       for (let square in newSquares[row]) {
@@ -97,6 +99,10 @@ const App = () => {
       }
     }
 
+    if (Object.keys(currentScoreX).length + Object.keys(currentScoreO).length === 8) {
+      return "Game Over - Tie"
+    }
+
   }
 
   const resetGame = () => {
@@ -107,7 +113,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>{winner}</h2>
         <button>Reset Game</button>
       </header>
       <main>
