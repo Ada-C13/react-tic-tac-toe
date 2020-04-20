@@ -24,8 +24,6 @@ const App = () => {
   const [numSquaresFilled, setNumSquaresFilled] = useState(0);
 
   const changeSquare = (i) => {
-    console.log(`CLICKED: Square #${i}, value of ${squares[i].value}`);
-
     if (squares[i].value || winner) return; //do nothing if square is already filled
 
     setNumSquaresFilled(numSquaresFilled + 1);
@@ -35,7 +33,6 @@ const App = () => {
     setSquares(updatedSquares);
 
     if (numSquaresFilled > 3) {
-      console.log(`Placed ${numSquaresFilled} moves... checking for winner...`);
       checkForWinner(i);
     };
   }
