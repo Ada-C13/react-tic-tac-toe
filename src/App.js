@@ -33,9 +33,12 @@ const App = () => {
   //  changes the square when it is clicked on.
   //  Then pass it into the squares as a callback
   const onClickCallback = (squareId) => {
+    console.log('clicked');
+    console.log (winner);
     if (winner !== null) {
       return;
     }
+   console.log("no winner");
 
     let gameValue = "";
     if (player === "player_1") {
@@ -78,7 +81,7 @@ const App = () => {
   const checkForWinner = (squares) => {
     const winningRows = [
       [squares[0][0], squares[0][1], squares[0][2]],
-      [squares[1][0], squares[1][1], squares[1][1]],
+      [squares[1][0], squares[1][1], squares[1][2]],
       [squares[2][0], squares[2][1], squares[2][2]],
       [squares[0][0], squares[1][0], squares[2][0]],
       [squares[0][1], squares[1][1], squares[2][1]],
