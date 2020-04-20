@@ -1,5 +1,6 @@
 .square
 {
+  background-color:lightgray;
   border: 4px solid #2c3e50;
   border-radius: 2px;
   font-family: Helvetica;
