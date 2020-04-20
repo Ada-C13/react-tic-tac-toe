@@ -45,16 +45,56 @@ const App = () => {
       newSquares
     )
 
+    // TODO Need to make sure only runs if the square is actually changing
     setTurn(
       userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1
     )
 
+    checkForWinner()
   }
 
-
   const checkForWinner = () => {
-    // Complete in Wave 3
 
+    const currentScoreX = {}
+    const currentScoreO = []
+    // console.log(squares)
+
+    for (let row in squares) {
+      for (let square in squares[row]) {
+        if (squares[row][square].value === 'X') {
+          currentScoreX[squares[row][square].id] = true
+        } else if (squares[row][square].value === 'O'){
+          currentScoreO.push(squares[row][square].id)
+        }
+      }
+    }
+
+    const winCombo = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6]
+    ]
+
+    for (let set in winCombo) {
+      if (currentScoreX[winCombo[set][0]] && 
+        currentScoreX[winCombo[set][1]] && 
+        currentScoreX[winCombo[set][2]]) {
+          console.log("Winner is here!")
+      }
+    }
+
+
+    // console.log(currentScoreX)
+    // console.log(currentScoreO)
+
+    return (
+      squares
+    )
   }
 
   const resetGame = () => {
@@ -69,7 +109,10 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback}/>
+        <Board 
+          squares={squares} 
+          onClickCallback={onClickCallback} 
+        />
       </main>
     </div>
   );
