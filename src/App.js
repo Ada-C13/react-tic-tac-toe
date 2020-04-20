@@ -19,22 +19,21 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
+  const [winner, setWinner] = useState(null);
   const [squares, setSquares] = useState(generateSquares());
   const [numSquaresFilled, setNumSquaresFilled] = useState(1);
-  const [winner, setWinner] = useState(null);
 
   const changeSquare = (i) => {
-    console.log(`CLICKED: Square #${i}, value of ${squares[i].value}`);
-    if (squares[i].value || winner) {
-      console.log(`winner is ${winner}`);
-      return; //do nothing to filled squares or when winner exists
-    };
-    
+    console.log(`CLICKED: Square #${i}, value of ${squares[i].value}, winning is ${squares[i].winning}`);
+
+    if (squares[i].value || winner) return; //do nothing if square is already filled
+
     setNumSquaresFilled(numSquaresFilled + 1);
+
     let updatedSquares = [...squares];
     numSquaresFilled % 2 === 0 ? updatedSquares[i].value = PLAYER_1 : updatedSquares[i].value = PLAYER_2
     setSquares(updatedSquares);
+
     if (numSquaresFilled > 4) {
       console.log(`Placed ${numSquaresFilled} moves... checking for winner...`);
       checkForWinner(i);
@@ -43,7 +42,7 @@ const App = () => {
 
   const checkForWinner = (i) => {
 
-    const winConditions = [ //for input i, these are the corresponding indexes that must be filled
+    const winConditions = [ //for any given input square, these are the corresponding indexes that must be filled
       [ [1, 2], [4, 8], [3, 6] ],
       [ [1, 3], [4, 7] ],
       [ [0, 1], [4, 6], [5, 8] ],
@@ -55,11 +54,15 @@ const App = () => {
       [ [0, 4], [6, 7], [2, 5 ] ],
     ]
 
-    winConditions[i].forEach(condition => {
-      const [a, b] = condition
-      if ( squares[a].value === squares[b].value && squares[a].value === squares[i].value ) setWinner(squares[a].value);
-    });
+    for (let x = 0; x < winConditions[i].length; x++) {
+      const [a, b] = winConditions[i][x];
+      if ( squares[a].value === squares[b].value && squares[a].value === squares[i].value ) { 
+        setWinner(squares[a].value);
+      }
+    }
   }
+
+
 
   const resetGame = () => {
     // Complete in Wave 4
@@ -69,7 +72,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is ... {winner} </h2>
         <button>Reset Game</button>
       </header>
       <main>

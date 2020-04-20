@@ -14,6 +14,7 @@ Square.propTypes = {
   value: PropTypes.string,
   onClickCallback: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  winning: PropTypes.bool.isRequired,
 };
 
 export default Square
