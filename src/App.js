@@ -89,7 +89,7 @@ const App = () => {
             return "PLAYER_1"
           } else {
             return "PLAYER_2"
-          }
+          };
         }; 
 
         if (flatSquare[i].value !== "" &&
@@ -109,28 +109,6 @@ const App = () => {
         return "no one. It's a tie!"
       }; 
     };
-    
-    
-    // else {
-    //   while(i < flatSquare.length) {
-    //     if (flatSquare[i].value !== "" &&
-    //       flatSquare[i].value === flatSquare[i + 1].value &&
-    //       flatSquare[i].value === flatSquare[i + 2].value){
-    //       if(flatSquare[i].value === 'X') {
-    //         return "PLAYER_1"
-    //       } else {
-    //         return "PLAYER_2"
-    //       }
-    //     }
-    //     i += 3
-    //   }
-    // } 
-
-
-    
-    
-    
-
   }
 
   const resetGame = () => {
