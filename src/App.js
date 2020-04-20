@@ -31,6 +31,12 @@ const App = () => {
   const [userTurn, setTurn] = useState(PLAYER_1)
   const [winner, setWinner] = useState("In progress!")
 
+  const winCombo = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ]
+
   const onClickCallback = (event) => {
     if (winner === "In progress!") {
       const newSquares = squares.map(row =>
@@ -66,33 +72,28 @@ const App = () => {
       }
     }
 
-    const winCombo = [
-      [0,1,2],[3,4,5],[6,7,8],
-      [0,3,6],[1,4,7],[2,5,8],
-      [0,4,8],[2,4,6]
-    ]
-
-    for (let set in winCombo) {
-      if (currentScoreX[winCombo[set][0]] && 
-        currentScoreX[winCombo[set][1]] && 
-        currentScoreX[winCombo[set][2]]) {
-          return "Congrats! Winner is Player 1"
-      }
+    if (isWinner(currentScoreX, "Player 1")) {
+      return isWinner(currentScoreX, "Player 1")
     }
 
-    for (let set in winCombo) {
-      if (currentScoreO[winCombo[set][0]] && 
-        currentScoreO[winCombo[set][1]] && 
-        currentScoreO[winCombo[set][2]]) {
-          return "Congrats! Winner is Player 2"
-      }
+    if (isWinner(currentScoreO, "Player 2")) {
+      return isWinner(currentScoreO, "Player 2")
     }
 
-    // TODO Double check tie logic
     if (Object.keys(currentScoreX).length + Object.keys(currentScoreO).length === 9) {
       return "Game Over - Tie"
     }
 
+  }
+
+  const isWinner = (currentScore, player) => {
+    for (let set in winCombo) {
+      if (currentScore[winCombo[set][0]] && 
+        currentScore[winCombo[set][1]] && 
+        currentScore[winCombo[set][2]]) {
+          return `Congrats! Winner is ${player}`
+      }
+    }
   }
 
   const resetGame = () => {
