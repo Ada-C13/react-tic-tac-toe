@@ -21,7 +21,7 @@ const generateSquares = () => {
 const App = () => {
   const [winner, setWinner] = useState(null);
   const [squares, setSquares] = useState(generateSquares());
-  const [numSquaresFilled, setNumSquaresFilled] = useState(1);
+  const [numSquaresFilled, setNumSquaresFilled] = useState(0);
 
   const changeSquare = (i) => {
     console.log(`CLICKED: Square #${i}, value of ${squares[i].value}, winning is ${squares[i].winning}`);
@@ -34,7 +34,7 @@ const App = () => {
     numSquaresFilled % 2 === 0 ? updatedSquares[i].value = PLAYER_1 : updatedSquares[i].value = PLAYER_2
     setSquares(updatedSquares);
 
-    if (numSquaresFilled > 4) {
+    if (numSquaresFilled > 3) {
       console.log(`Placed ${numSquaresFilled} moves... checking for winner...`);
       checkForWinner(i);
     };
@@ -72,7 +72,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... {winner} </h2>
+        <h2>{winner ? `Hooray, ${winner} won!` : `Player ${numSquaresFilled % 2 === 0 ? 'X' : 'O'} is up!`}</h2>
+       
         <button>Reset Game</button>
       </header>
       <main>
