@@ -65,7 +65,9 @@ const App = () => {
 
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setWinner(null);
+    setSquares(generateSquares());
+    setNumSquaresFilled(0);
   }
 
   return (
@@ -74,7 +76,7 @@ const App = () => {
         <h1>React Tic Tac Toe</h1>
         <h2>{winner ? `Hooray, ${winner} won!` : `Player ${numSquaresFilled % 2 === 0 ? 'X' : 'O'} is up!`}</h2>
        
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={changeSquare} />
