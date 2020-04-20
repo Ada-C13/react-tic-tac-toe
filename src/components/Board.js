@@ -16,11 +16,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
     )
   )
   
-  return (
-    <div>
-        {allSquares}
-    </div>
-  )
+  return allSquares
 }
 
 const Board = ({ squares, onClickCallback }) => {
