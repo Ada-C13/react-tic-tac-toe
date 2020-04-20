@@ -34,7 +34,7 @@ const App = () => {
 
     const newSquares = squares.map(row =>
       row.map(square =>
-        square.id == [event.target.id] ? 
+        square.id == [event.target.id] && square.value === '' ? 
           {id: square.id, value: userTurn} : 
           {id: square.id, value: square.value}
 
