@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-import Board from './components/Board';
+import Board from "./components/Board";
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = "X";
+const PLAYER_2 = "O";
 
 const generateSquares = () => {
   const squares = [];
@@ -16,90 +16,117 @@ const generateSquares = () => {
     for (let col = 0; col < 3; col += 1) {
       squares[row].push({
         id: currentId,
-        value: '',
+        value: "",
       });
       currentId += 1;
     }
   }
-
   return squares;
-}
+};
 
 const App = () => {
-
-  const [player, setPlayer] = useState('player_1')
-  // // After the player moves.
-  // setPlayer(nextPlayer)
- 
+  const [player, setPlayer] = useState("player_1");
   const [squares, setSquares] = useState(generateSquares());
+  const [winner, setWinner] = useState(null);
 
-  // Wave 2  
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  // wave 2
+  //  changes the square when it is clicked on.
+  //  Then pass it into the squares as a callback
   const onClickCallback = (squareId) => {
-    //console.log("something")
-    let gameValue = ""; 
-    if (player === 'player_1') {
-      gameValue = 'x'
-    } else if (player === 'player_2') {
-      gameValue = 'O'
+    if (winner !== null) {
+      return;
+    }
+
+    let gameValue = "";
+    if (player === "player_1") {
+      gameValue = PLAYER_1;
+    } else if (player === "player_2") {
+      gameValue = PLAYER_2;
     }
 
     const newSquares = [];
-    squares.forEach(row => {
+    squares.forEach((row) => {
       const newRow = [];
-      row.forEach(square => {
+      row.forEach((square) => {
         if (square.id === squareId) {
-          //update the square
+          //updates the square
           const newSquare = {
             id: square.id,
-            value: gameValue
-          }
-          newRow.push(newSquare)
-
+            value: gameValue,
+          };
+          newRow.push(newSquare);
         } else {
-          newRow.push(square)
+          newRow.push(square);
         }
-        // ...
       });
       newSquares.push(newRow);
     });
-    setSquares(newSquares)
+
+    checkForWinner(newSquares);
+    setSquares(newSquares);
 
     let nextPlayer = "";
-    if (player === 'player_1') {
-      nextPlayer = 'player_2'
-    }
-    else if (player === 'player_2') {
-      nextPlayer = 'player_1'
+    if (player === "player_1") {
+      nextPlayer = "player_2";
+    } else if (player === "player_2") {
+      nextPlayer = "player_1";
     }
     setPlayer(nextPlayer);
-    
-  }
+  };
 
-    const checkForWinner = () => {
-    // Complete in Wave 3
-    
+  // wave 3
+  const checkForWinner = (squares) => {
+    const winningRows = [
+      [squares[0][0], squares[0][1], squares[0][2]],
+      [squares[1][0], squares[1][1], squares[1][1]],
+      [squares[2][0], squares[2][1], squares[2][2]],
+      [squares[0][0], squares[1][0], squares[2][0]],
+      [squares[0][1], squares[1][1], squares[2][1]],
+      [squares[0][2], squares[1][2], squares[2][2]],
+      [squares[0][0], squares[1][1], squares[2][2]],
+      [squares[0][2], squares[1][1], squares[2][0]],
+    ];
 
-  }
+    for (let i = 0; i < winningRows.length; i++) {
+      const [a, b, c] = winningRows[i];
+      console.log(a.value);
+      if (a.value && a.value === b.value && a.value === c.value) {
+        //return a.value;
+        if (a.value === PLAYER_1)  {
+          setWinner("player_1");
 
+        } else if (a.value === PLAYER_2) {
+          setWinner("Player_2");
+        // if (a.value === "o") setWinner("Player_2");
+        }
+      }
+    } // otherwise
+    return null;
+  };
+
+  // wave 4
   const resetGame = () => {
-    // Complete in Wave 4
-  }
+    setPlayer("player_1");
+    setSquares(generateSquares());
+    setWinner(null);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>The winner is {winner} </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback} player={player}/>
+        <Board
+          squares={squares}
+          onClickCallback={onClickCallback}
+          player={player}
+        />
       </main>
     </div>
   );
-}
+};
 
 export default App;
