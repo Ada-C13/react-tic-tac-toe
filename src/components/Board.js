@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
@@ -8,18 +8,17 @@ const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
 
   const oneDimSquares = squares.flat()
-
-  oneDimSquares.map((square) => {
-    return(
+  const allSquares = oneDimSquares.map((square) => {
+    return (
       <Square
-        id={square.id}
-        value={square.value}
-        onClickCallback={onClickCallback}
-        key={square.id}
+      id={square.id}
+      value={square.value}
+      onClickCallback={onClickCallback}
+      key={square.id}
       />
-    )
+    );
   })
-
+  return allSquares
 }
 
 const Board = ({ squares, onClickCallback }) => {
