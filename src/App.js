@@ -32,20 +32,20 @@ const App = () => {
 
   const onClickCallback = (event) => {
 
-    const newSquares = squares.map(row =>
-      row.map(square =>
-        square.id == [event.target.id] && square.value === '' ? 
-          {id: square.id, value: userTurn} : 
-          {id: square.id, value: square.value}
-
+    if (checkForWinner(squares)) {
+      console.log(checkForWinner(squares))
+    } else {
+      const newSquares = squares.map(row =>
+        row.map(square =>
+          square.id == [event.target.id] && square.value === '' ? 
+            {id: square.id, value: userTurn} : 
+            {id: square.id, value: square.value}
+        )
       )
-    )
 
-    setSquares(
-      newSquares
-    )
-
-    checkForWinner(newSquares)
+      setSquares(newSquares)
+    }
+    
 
     // TODO Need to make sure only runs if the square is actually changing
     setTurn(
@@ -84,6 +84,7 @@ const App = () => {
         currentScoreX[winCombo[set][1]] && 
         currentScoreX[winCombo[set][2]]) {
           console.log("Winner is Player 1!")
+          return "Game Over - Winner is Player 1"
       }
     }
 
@@ -92,6 +93,7 @@ const App = () => {
         currentScoreO[winCombo[set][1]] && 
         currentScoreO[winCombo[set][2]]) {
           console.log("Winner is Player 2!")
+          return "Game Over - Winner is Player 2"
       }
     }
 
