@@ -3,9 +3,6 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
-
 const generateSquares = () => {
   const squares = [];
 
@@ -17,6 +14,7 @@ const generateSquares = () => {
       squares[row].push({
         id: currentId,
         value: '',
+        
       });
       currentId += 1;
     }
@@ -28,31 +26,103 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [xTurn, setXTurn] = useState(true);
+  const [winner, setWinner] = useState(false);
+  const [whoWins, setWhoWins] = useState()
+  const [boardFull, setBoardFull] = useState(false);
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const whosUp = (xTurn ? "X" : "O");
 
+  const onClickCallback = (id) => {
+    if (winner) {
+      return;
+    }
+    
+    let newSquares = [];
+    
+    squares.forEach((row) => {
+      let newRow = [];
+      row.forEach((square) => {
+        if ((square.id === id) && (square.value === '')) {
+          square = {
+            id: id,
+            value: whosUp
+          }
+          newRow.push(square);
+          setXTurn(!xTurn);
+        } else {
+          newRow.push(square);
+        }
+      })
+      newSquares.push(newRow);
+    });
+  
+    setSquares(newSquares);
+    checkForWinner(newSquares);
+    checkBoardFull(newSquares);
+  } 
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
+  const checkForWinner = (squares) => { 
+    for(let i = 0; i < squares.length; i++) {
+      // if any rows are the same
+      if ((squares[i][0].value === squares[i][1].value ) && (squares[i][1].value === squares[i][2].value ) && squares[i][0].value !== '') {
+        setTheWinner();
 
+      // if any columns are the same
+      } else if ((squares[0][i].value ===squares[1][i].value) && (squares[0][i].value===squares[2][i].value) && squares[0][i].value !== '') {
+        setTheWinner();
+
+      // any diagonals  
+      } else if ((squares[0][0].value===squares[1][1].value) && (squares[1][1].value===squares[2][2].value) && squares[0][0].value !== ''){
+        setTheWinner();
+      } else if ((squares[0][2].value===squares[1][1].value) && (squares[1][1].value===squares[2][0].value) && squares[0][2].value !== '') {
+        setTheWinner();
+      }
+    }
+  }
+
+  const checkBoardFull = (squares) => {
+    let allSquaresFull = true
+    
+    squares.flat().forEach((square)  => {
+      if (square.value === '') {
+        allSquaresFull = false;
+      }
+    }) 
+
+    if (allSquaresFull) {
+      setWhoWins('THERE IS NO WINNER...*meow*');
+      setBoardFull(true);
+    }
+  }
+
+  const setTheWinner = () => {
+    setWinner(true);
+      if (whosUp === 'X') {
+        setWhoWins("PLAYER 1");
+      } else {
+        setWhoWins("PLAYER 2");
+      }
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setXTurn('X');
+    setWhoWins();
+    setWinner(false);
+    setBoardFull(false);
+    setSquares(generateSquares());
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h1 className='title'>React Tic Tac Toe</h1>
+        {/* could conditionally class name this h2 for css purposes */}
+        <h2 className='winner'>{(winner || boardFull) ? `The winner is...${whoWins}` : `${whosUp}, it's your turn!`}</h2>
+        <button className='reset' onClick={resetGame}>Reset Game</button>
       </header>
-      <main>
-        <Board squares={squares} />
+      <main className='main'>
+        <Board squares={squares} onClickCallback={onClickCallback} />
       </main>
     </div>
   );

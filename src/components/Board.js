@@ -5,13 +5,29 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-
+  
+  const allSquares = []
+  
+  squares.forEach((row) => {
+    row.forEach((square) => {
+        allSquares.push(
+          <Square 
+          key={square.id}
+          id={square.id} 
+          value={square.value} 
+          onClickCallback={onClickCallback}/>
+        );
+    });
+  });
+  
+  return allSquares;
 }
+// you can destructure this parameter to: {squares, onClickCallback}
+// and then in generateSquareComponents you can just have (squares, onClickCallback)
+const Board = (props) => {
 
-const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+  const squareList = generateSquareComponents(props.squares, props.onClickCallback);
+
   return <div className="grid" >
     {squareList}
   </div>
