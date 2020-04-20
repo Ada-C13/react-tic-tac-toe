@@ -60,12 +60,17 @@ const App = () => {
   const checkForWinner = () => {
     // get all possible combos of winning solutions
     const winningSolutions = [
+      // rows
       [squares[0][0].value, squares[0][1].value, squares[0][2].value],
       [squares[1][0].value, squares[1][1].value, squares[1][2].value],
       [squares[2][0].value, squares[2][1].value, squares[2][2].value],
+
+      // columns
       [squares[0][0].value, squares[1][0].value, squares[2][0].value],
       [squares[0][1].value, squares[1][1].value, squares[2][1].value],
       [squares[0][2].value, squares[1][2].value, squares[2][2].value],
+
+      // diagonal
       [squares[0][0].value, squares[1][1].value, squares[2][2].value],
       [squares[0][2].value, squares[1][1].value, squares[2][0].value]
     ]
