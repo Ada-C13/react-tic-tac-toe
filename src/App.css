@@ -1,3 +1,16 @@
+h1 {
+  margin-bottom: 0;
+}
+
+button {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #282c34;
+  text-transform: uppercase;
+}
+
 .App {
   text-align: center;
 }

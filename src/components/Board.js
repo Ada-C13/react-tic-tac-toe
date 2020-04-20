@@ -4,14 +4,30 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
-const generateSquareComponents = (squares, onClickCallback) => {
+const generateSquareComponents = (squares, onClickCallback, turn, winner) => {
   // Complete this for Wave 1
-
+  const renderedSquares = [];
+  
+  let row = 0;
+  while (row < 3) {
+    squares[row].forEach((square) => {
+      let squareComponent = <Square
+        key={square.id} 
+        value={square.value}
+        id={square.id}
+        onClickCallback={onClickCallback}
+        turn={turn}
+        winner={winner}
+      />;
+      renderedSquares.push(squareComponent);
+    })
+    row += 1;
+  }
+  return renderedSquares;
 }
 
-const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
+const Board = ({ squares, onClickCallback, turn, winner }) => {
+  const squareList = generateSquareComponents(squares, onClickCallback, turn, winner);
   return <div className="grid" >
     {squareList}
   </div>
@@ -27,6 +43,8 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
+  turn: PropTypes.number.isRequired,
+  winner: PropTypes.string.isRequired
 };
 
 export default Board;
