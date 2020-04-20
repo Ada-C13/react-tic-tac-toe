@@ -46,22 +46,22 @@ const App = () => {
     if (numSquaresFilled > 3) {
       checkForWinner(i);
     };
-
     setSquares(updatedSquares);
   }
 
   const checkForWinner = (i) => {
+    let found = false;
     for (let x = 0; x < WIN_CONDITIONS[i].length; x++) {
       const [a, b] = WIN_CONDITIONS[i][x];
       if ( squares[a].value === squares[b].value && squares[a].value === squares[i].value ) { 
         setWinner(squares[a].value);
-        let winningSquares = [...WIN_CONDITIONS[i][x], i]
-        winningSquares.forEach( index => {
+        found = true;
+        [...WIN_CONDITIONS[i][x], i].forEach( index => {
           squares[index].isWinner = true;
         });
-      }
+      } 
     }
-    if (numSquaresFilled === 8 && !(winner)) setWinner("nobody");
+    if (numSquaresFilled === 8 && !found ) setWinner("nobody");
   }
 
   const resetGame = () => {
