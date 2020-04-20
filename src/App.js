@@ -46,7 +46,14 @@ const App = () => {
       )
 
       setSquares(newSquares)
+
+      if (checkForWinner(newSquares)) {
+        console.log(checkForWinner(newSquares))
+        setWinner(checkForWinner(newSquares))
+      }
     }
+
+    
     
 
     // TODO Need to make sure only runs if the square is actually changing
