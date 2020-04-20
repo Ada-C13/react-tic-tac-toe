@@ -5,8 +5,18 @@ import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-
+  const flatArray = squares.flat();     // flat() given to me from Shonda! We want to make a 2d array 1d
+  const allSquares = flatArray.map((singleSquare, i) => {
+    return (
+        <Square 
+          id={singleSquare.id}
+          key={singleSquare.id}
+          value={singleSquare.value}
+          onClickCallback={onClickCallback}
+        />
+    );
+  });
+  return allSquares;
 }
 
 const Board = ({ squares, onClickCallback }) => {
