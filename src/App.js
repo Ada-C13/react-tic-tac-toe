@@ -4,6 +4,7 @@ import './App.css';
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
+
 const PLAYER_2 = 'O';
 
 const generateSquares = () => {
@@ -21,38 +22,85 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
   return squares;
 }
 
+
+
 const App = () => {
 
-  const [squares, setSquares] = useState(generateSquares());
+  const [squares, setSquares] = useState(generateSquares()); 
+  const [current, changeCurrent] = useState(true);
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
-
+  const onClickCallback = (event) => {  //event handler
+    let newSquares =[];
+    for(let i = 0; i < squares.length; i++){
+      for(let j = 0; j < squares.length; j++){
+        if(event === squares[i][j].id){
+          squares[i][j]["value"] = (switchPlayer() ? PLAYER_2 : PLAYER_1);
+        }
+      }
+      newSquares.push(squares[i]);
+    }
+    setSquares(newSquares);
+  }
+  
+  //toggle back a forth for player turn
+  function switchPlayer() {
+    changeCurrent(!current);
+    return current;
+  };
 
   const checkForWinner = () => {
-    // Complete in Wave 3
-
+    //checks diagonals
+    if(squares[0][0].value === squares[1][1].value  && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '' ){
+      return squares[0][0].value;
+    }else if(squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== ''){
+      return squares[0][2].value;
+    }else{
+      //checks rows and columns 
+      for(let i = 0; i < squares.length; i++){
+        for(let j = 0; j < squares.length; j++){
+          if(squares[i][0].value === squares[i][1].value && squares[i][0].value === squares[i][2].value && squares[i][0].value !== '' ){
+            return squares[i][0].value
+          }else if(squares[0][j].value === squares[1][j].value && squares[0][j].value === squares[2][j].value && squares[0][j].value !== ''){
+            return squares[0][j].value;
+          }
+        }
+      }
+    }
+    return -1;
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
+  }
+
+  let winner = checkForWinner();
+  if(winner !== -1){
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>React Tic Tac Toe</h1>
+          <h2>The winner is  {winner}</h2>
+          <button onClick={resetGame}>Reset Game</button>
+        </header>
+        <main>
+            <p> YAY! </p>
+        </main>
+      </div>
+    );
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2> Still playing...  </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={onClickCallback} />
       </main>
     </div>
   );
