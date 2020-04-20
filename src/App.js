@@ -21,9 +21,6 @@ const generateSquares = () => {
   return squares;
 };
 
-// const useState = (defaultValue) => {
-//   let result = defaultValue;  // [ [{id:0, value:}, {id:1, value:2}, {}], [{}, {value: }, {}], [{}, {}, {}]]
-
 const App = () => {
   const [squares, setSquares] = useState(generateSquares()); // useState prevents this from being run every render
   const [isPlayerOne, setIsPlayerOne] = useState(true);

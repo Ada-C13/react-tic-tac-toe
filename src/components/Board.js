@@ -4,7 +4,6 @@ import Square from "./Square";
 import PropTypes from "prop-types";
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
   return squares.map((row) => {
     return row.map((square) => {
       return (
