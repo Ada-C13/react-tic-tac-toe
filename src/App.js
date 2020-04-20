@@ -13,6 +13,7 @@ const generateSquares = () => {
     squares.push({
       id: i,
       value: null,
+      isWinner: false,
     })
   }
   return squares;
@@ -24,20 +25,23 @@ const App = () => {
   const [numSquaresFilled, setNumSquaresFilled] = useState(0);
 
   const changeSquare = (i) => {
+    console.log(`Square: ${squares[i].id}, winning: ${squares[i].isWinner}`)
     if (squares[i].value || winner) return; //do nothing if square is already filled
 
     setNumSquaresFilled(numSquaresFilled + 1);
 
     let updatedSquares = [...squares];
     numSquaresFilled % 2 === 0 ? updatedSquares[i].value = PLAYER_1 : updatedSquares[i].value = PLAYER_2
-    setSquares(updatedSquares);
 
     if (numSquaresFilled > 3) {
       checkForWinner(i);
     };
+
+    setSquares(updatedSquares);
   }
 
   const checkForWinner = (i) => {
+    
 
     const winConditions = [ //for any given input square, these are the corresponding indexes that must be filled
       [ [1, 2], [4, 8], [3, 6] ],
@@ -55,8 +59,13 @@ const App = () => {
       const [a, b] = winConditions[i][x];
       if ( squares[a].value === squares[b].value && squares[a].value === squares[i].value ) { 
         setWinner(squares[a].value);
+        let victory = [...winConditions[i][x], i]
+        victory.forEach( index => {
+          squares[index].isWinner = true;
+        });
       }
     }
+    if (numSquaresFilled === 8 && !(winner)) setWinner("nobody");
   }
 
   const resetGame = () => {
