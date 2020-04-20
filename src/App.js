@@ -28,7 +28,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares()); // useState prevents this from being run every render
   const [isPlayerOne, setIsPlayerOne] = useState(true);
   const [filledSquares, setFilledSquares] = useState(0);
-  const [isWinner, setWinner] = useState(false);
+  const [isWinner, setWinner] = useState();
 
   // setSquares allows us to change the value of squares without manipulating it directly
 
@@ -40,20 +40,17 @@ const App = () => {
 
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (
-          newSquares[i][j].id === id &&
-          newSquares[i][j].value === ""
-        ) {
+        if (newSquares[i][j].id === id && newSquares[i][j].value === "") {
           // square clicked should be empty and there is no winner
-
-          setFilledSquares(filledSquares + 1);
           newSquares[i][j].value = isPlayerOne ? PLAYER_1 : PLAYER_2;
           setIsPlayerOne(!isPlayerOne);
-          // I need to check for a winner
+          setFilledSquares(filledSquares + 1);
+          setSquares(newSquares);
+          checkForWinner(squares);
+          return;
         }
       }
     }
-    setSquares(newSquares);
   };
 
   const allMySquaresValues = () => {
@@ -82,52 +79,37 @@ const App = () => {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]; //destructuring the array! a, b, c representes the variables I am assigning each element of the array of lines.
+
       if (values[a] && values[a] === values[b] && values[b] === values[c]) {
-        setWinner(true)
+        setWinner(values[a]);
         return;
       }
-      return null;
     }
   };
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setWinner();
+    setIsPlayerOne(true);
+    setSquares(generateSquares());
+    setFilledSquares(0);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>{isWinner ? `The winner is ${isWinner}` : "No winner"}</h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback} />
-        <h3>{if(isWinner) }</h3>
+        <Board
+          squares={squares}
+          onClickCallback={onClickCallback}
+          isWinner={isWinner}
+        />
       </main>
     </div>
   );
 };
 
 export default App;
-
-//complicated solution
-
-// const checkRows = (rows) => {
-//   rows.forEach((row) => {
-//     let xPoints = 0;
-//     let oPoints = 0;
-
-//     for (let i = 0; i < 3; i++) {
-//       if (row[i].value === PLAYER_1) {
-//         xPoints += 1;
-//       } else if (row[i].value === PLAYER_2) {
-//         oPoints += 1;
-//       }
-//     }
-//     if (xPoints === 3) {
-//       //return true, return the player that won?
-//     } else if (oPoints === 3) {
-//     }
-//   });
-// };

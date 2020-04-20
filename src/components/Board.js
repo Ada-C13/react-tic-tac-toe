@@ -19,12 +19,13 @@ const generateSquareComponents = (squares, onClickCallback) => {
   });
 };
 
-const Board = ({ squares, onClickCallback }) => {
+const Board = ({ squares, onClickCallback, isWinner }) => {
   // destructuring props/keys into variables to use in the component.
 
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
-  return <div className="grid">{squareList}</div>;
+  return (
+    <div className={`grid ${isWinner && "grid--winner"}`}>{squareList}</div>
+  );
 };
 
 Board.propTypes = {
@@ -37,26 +38,7 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
+  isWinner: PropTypes.bool,
 };
 
 export default Board;
-
-// const person = {
-//   name: "Sara",
-//   address: {
-//     city: "Seattle, WA",
-//     zip: "98133"
-//   },
-//   hairColor: "black"
-// }
-
-// person.name
-// person.address.city
-
-// const first_name = person.name;
-// const hairColor = person.hairColor;
-// const address = person.address;
-
-// const { name, hairColor, address } = person;
-
-// const { city, zip } = person.address;
