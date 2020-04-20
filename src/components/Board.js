@@ -9,6 +9,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
     key={square.id} 
     id={square.id}
     value={square.value}
+    isWinner ={square.isWinner}
     onClickCallback={onClickCallback}/> )
 
   return squareComponents;

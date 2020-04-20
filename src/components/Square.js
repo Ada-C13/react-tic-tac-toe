@@ -5,7 +5,7 @@ import './Square.css'
 
 const Square = (props) => {
 
-  return <button className="square" onClick={ () => {props.onClickCallback(props.id)}}>
+  return <button className={`square ${props.isWinner ? "winner" : ""}`} onClick={ () => {props.onClickCallback(props.id)}}>
     {props.value}
     </button>
 }
