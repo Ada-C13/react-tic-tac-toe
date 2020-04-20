@@ -1,16 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap');
+
 .App {
+  background-color: #252424;
   text-align: center;
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: 'Walter Turncoat', cursive;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #e7e247;
   margin-bottom: 2em;
 }
 
+h1 {
+  background-color: #ef2d55;
+  border-radius: 10px;
+  padding: 0.5em 1.25em;
+}
+
+button.reset {
+  background-color: #252424;
+  border: 1px solid #ef2d55;
+  border-radius: 5px;
+  color: #ef2d55;
+  padding: 0.5em;
+  margin: 1em;
+  text-align: center;
+  font-size: calc(1px + 2vmin);
+}
+
+button.reset:hover {
+  background-color: #ef2d55;
+  color: #252424;
+}

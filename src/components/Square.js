@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 import './Square.css'
 
-const Square = (props) => {
-  // For Wave 1 enable this 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
-
+const Square = (props) => {  
   return <button
-    className="square"
+    className="square" 
+    key={props.id} 
+    onClick={() => {
+      if (props.value === '') props.onClickCallback(props.id); // will not overwrite if square already has 'X' or 'O'
+    }} 
   >
     {props.value}
   </button>
-}
+};
 
 Square.propTypes = {
   value: PropTypes.string.isRequired,
