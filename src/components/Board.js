@@ -4,8 +4,6 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
-
   const allSquares = squares.map (row =>
     row.map (square =>
       <Square 
@@ -21,7 +19,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  // console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>

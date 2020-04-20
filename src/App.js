@@ -29,12 +29,11 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [userTurn, setTurn] = useState(PLAYER_1)
-  const [winner, setWinner] = useState("Game is currently in progress...")
+  const [winner, setWinner] = useState("Game is currently in progress!")
 
   const onClickCallback = (event) => {
 
     if (checkForWinner(squares)) {
-      console.log(checkForWinner(squares))
       setWinner(checkForWinner(squares))
     } else {
       const newSquares = squares.map(row =>
@@ -48,7 +47,6 @@ const App = () => {
       setSquares(newSquares)
 
       if (checkForWinner(newSquares)) {
-        console.log(checkForWinner(newSquares))
         setWinner(checkForWinner(newSquares))
       }
     }
@@ -88,8 +86,7 @@ const App = () => {
       if (currentScoreX[winCombo[set][0]] && 
         currentScoreX[winCombo[set][1]] && 
         currentScoreX[winCombo[set][2]]) {
-          console.log("Winner is Player 1!")
-          return "Game Over - Winner is Player 1"
+          return "Congrats! Winner is Player 1"
       }
     }
 
@@ -97,8 +94,7 @@ const App = () => {
       if (currentScoreO[winCombo[set][0]] && 
         currentScoreO[winCombo[set][1]] && 
         currentScoreO[winCombo[set][2]]) {
-          console.log("Winner is Player 2!")
-          return "Game Over - Winner is Player 2"
+          return "Congrats! Winner is Player 2"
       }
     }
 
@@ -110,7 +106,6 @@ const App = () => {
   }
 
   const resetGame = () => {
-    console.log("Here I am!")
     setSquares(generateSquares())
     setTurn(PLAYER_1)
     setWinner("Game is currently in progress...")
