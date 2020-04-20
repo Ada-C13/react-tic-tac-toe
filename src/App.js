@@ -25,21 +25,31 @@ const generateSquares = () => {
   return squares;
 }
 
-const App = (prop) => {
+const App = () => {
 
-  const [present, setPresent] = useState(prop.present);
+  // const [present, setPresent] = useState();
   const [squares, setSquares] = useState(generateSquares());
 
-  const onClickCallback = () => {
-    console.log("Here");
-    setPresent("X")
-    console.log(setPresent)
-  }
+  const onClickCallback = (event) => {
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+    // console.log(squares)
+
+    const newSquares = squares.map(row =>
+      row.map(square =>
+        square.id == [event.target.id] ? 
+          {id: square.id, value: "X"} : 
+          {id: square.id, value: square.value}
+
+      )
+    )
+
+    // console.log(newSquares)
+
+    setSquares(
+      newSquares
+    )
+
+  }
 
 
   const checkForWinner = () => {
