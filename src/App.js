@@ -29,13 +29,10 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [userTurn, setTurn] = useState(PLAYER_1)
-  const [winner, setWinner] = useState("Game is currently in progress!")
+  const [winner, setWinner] = useState("In progress!")
 
   const onClickCallback = (event) => {
-
-    if (checkForWinner(squares)) {
-      setWinner(checkForWinner(squares))
-    } else {
+    if (winner === "In progress!") {
       const newSquares = squares.map(row =>
         row.map(square =>
           square.id == [event.target.id] && square.value === '' ? 
@@ -51,9 +48,7 @@ const App = () => {
       }
     }
 
-    setTurn(
-      userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1
-    )
+    setTurn(userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1)
   }
 
   const checkForWinner = (newSquares) => {
@@ -72,14 +67,9 @@ const App = () => {
     }
 
     const winCombo = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
     ]
 
     for (let set in winCombo) {
@@ -108,7 +98,7 @@ const App = () => {
   const resetGame = () => {
     setSquares(generateSquares())
     setTurn(PLAYER_1)
-    setWinner("Game is currently in progress...")
+    setWinner("In progress!")
   }
 
   return (
