@@ -28,8 +28,8 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
-  const [userTurn, setTurn] = useState(PLAYER_1)
-  const [winner, setWinner] = useState("In progress!")
+  const [userTurn, setTurn] = useState(PLAYER_1);
+  const [winner, setWinner] = useState("In progress!");
 
   const winCombo = [
     [0,1,2],[3,4,5],[6,7,8],
@@ -47,41 +47,41 @@ const App = () => {
         )
       )
 
-      setSquares(newSquares)
+      setSquares(newSquares);
 
       if (checkForWinner(newSquares)) {
-        setWinner(checkForWinner(newSquares))
+        setWinner(checkForWinner(newSquares));
       }
     }
 
-    setTurn(userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1)
+    setTurn(userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1);
   }
 
   const checkForWinner = (newSquares) => {
 
-    const currentScoreX = {}
-    const currentScoreO = {}
+    const currentScoreX = {};
+    const currentScoreO = {};
 
     for (let row in newSquares) {
       for (let square in newSquares[row]) {
         if (newSquares[row][square].value === 'X') {
-          currentScoreX[newSquares[row][square].id] = true
+          currentScoreX[newSquares[row][square].id] = true;
         } else if (newSquares[row][square].value === 'O'){
-          currentScoreO[newSquares[row][square].id] = true
+          currentScoreO[newSquares[row][square].id] = true;
         }
       }
     }
 
     if (isWinner(currentScoreX, "Player 1")) {
-      return isWinner(currentScoreX, "Player 1")
+      return isWinner(currentScoreX, "Player 1");
     }
 
     if (isWinner(currentScoreO, "Player 2")) {
-      return isWinner(currentScoreO, "Player 2")
+      return isWinner(currentScoreO, "Player 2");
     }
 
     if (Object.keys(currentScoreX).length + Object.keys(currentScoreO).length === 9) {
-      return "Game Over - Tie"
+      return "Game Over - Tie";
     }
 
   }
@@ -91,15 +91,15 @@ const App = () => {
       if (currentScore[winCombo[set][0]] && 
         currentScore[winCombo[set][1]] && 
         currentScore[winCombo[set][2]]) {
-          return `Congrats! Winner is ${player}`
+          return `Congrats! Winner is ${player}`;
       }
     }
   }
 
   const resetGame = () => {
-    setSquares(generateSquares())
-    setTurn(PLAYER_1)
-    setWinner("In progress!")
+    setSquares(generateSquares());
+    setTurn(PLAYER_1);
+    setWinner("In progress!");
   }
 
   return (

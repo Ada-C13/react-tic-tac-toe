@@ -14,7 +14,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
     )
   )
   
-  return allSquares
+  return allSquares;
 }
 
 const Board = ({ squares, onClickCallback }) => {
