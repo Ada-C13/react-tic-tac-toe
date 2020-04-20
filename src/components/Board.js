@@ -27,7 +27,8 @@ Board.propTypes = {
   squares: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        value: PropTypes.string
+        value: PropTypes.string,
+        isWinner: PropTypes.bool.isRequired,
       })
   ),
   onClickCallback: PropTypes.func.isRequired,
