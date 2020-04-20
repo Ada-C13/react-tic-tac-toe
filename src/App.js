@@ -42,8 +42,7 @@ const App = () => {
       for (let j = 0; j < 3; j++) {
         if (
           newSquares[i][j].id === id &&
-          newSquares[i][j].value === "" &&
-          isWinner === false
+          newSquares[i][j].value === ""
         ) {
           // square clicked should be empty and there is no winner
 
@@ -57,11 +56,40 @@ const App = () => {
     setSquares(newSquares);
   };
 
-  const checkForWinner = () => {
-    const newSquares = [...squares];
+  const allMySquaresValues = () => {
+    //each square value(x or o) will be in the index of its ID.
+    const values = [];
+    squares.forEach((square) => {
+      values.push(square[0].value, square[1].value, square[2].value);
+    });
+    return values;
   };
 
-  checkForWinner();
+  const checkForWinner = () => {
+    //check for winner wave 3 inspired on this website: https://github.com/kelanwu/react-tic-tac-toe
+    const values = allMySquaresValues();
+
+    const lines = [
+      //those are the combinations for checking if there is a winner (rows, columns and diagonal)
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i]; //destructuring the array! a, b, c representes the variables I am assigning each element of the array of lines.
+      if (values[a] && values[a] === values[b] && values[b] === values[c]) {
+        setWinner(true)
+        return;
+      }
+      return null;
+    }
+  };
+
   const resetGame = () => {
     // Complete in Wave 4
   };
@@ -75,12 +103,15 @@ const App = () => {
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
+        <h3>{if(isWinner) }</h3>
       </main>
     </div>
   );
 };
 
 export default App;
+
+//complicated solution
 
 // const checkRows = (rows) => {
 //   rows.forEach((row) => {
