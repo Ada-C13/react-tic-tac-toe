@@ -26,7 +26,10 @@ const App = () => {
 
   const changeSquare = (i) => {
     console.log(`CLICKED: Square #${i}, value of ${squares[i].value}`);
-    if (squares[i].value || winner) return; //do nothing to filled squares or when winner exists
+    if (squares[i].value || winner) {
+      console.log(`winner is ${winner}`);
+      return; //do nothing to filled squares or when winner exists
+    };
     
     setNumSquaresFilled(numSquaresFilled + 1);
     let updatedSquares = [...squares];
