@@ -50,7 +50,9 @@ const App = () => {
       for (let col of row) {
         const newCol = {...col}
         if (newCol.id === id) {
-          if (newCol.value !== "") {
+          if (newCol.value !== "" || 
+            winner === "Player 1" ||
+            winner === "Player 2") {
             return;
           }
           newCol.value = player
@@ -106,6 +108,8 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    window.location.reload();
+    // found this on upmostly.com
   }
 
   return (
@@ -113,7 +117,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is {winner} </h2>
-        <button /*onClick={}*/>Reset Game</button>
+        <button  onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
