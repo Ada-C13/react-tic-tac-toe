@@ -40,7 +40,7 @@ const App = () => {
     let currentBoard = []
     for(let start = 0; start < squares.length; start++) {
       for(let end = 0; end <squares.length; end++) {
-        if (click === squares[start][end].id) {
+        if (click.id === squares[start][end].id) {
           squares[start][end]["value"] = (opponentTurn() ? PLAYER_2 : PLAYER_1);
         }
       }
