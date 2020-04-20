@@ -3,7 +3,6 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
 const generateSquareComponents = (squares, onClickCallback) => {
 
   const squareComponents = squares.map(square => <Square
@@ -26,12 +25,10 @@ const Board = ({ squares, onClickCallback }) => {
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(
-    PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string
       })
-    )
   ),
   onClickCallback: PropTypes.func.isRequired,
 };

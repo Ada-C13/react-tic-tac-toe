@@ -24,7 +24,7 @@ const App = () => {
   const [numSquaresFilled, setNumSquaresFilled] = useState(0);
 
   const changeSquare = (i) => {
-    console.log(`CLICKED: Square #${i}, value of ${squares[i].value}, winning is ${squares[i].winning}`);
+    console.log(`CLICKED: Square #${i}, value of ${squares[i].value}`);
 
     if (squares[i].value || winner) return; //do nothing if square is already filled
 
@@ -44,7 +44,7 @@ const App = () => {
 
     const winConditions = [ //for any given input square, these are the corresponding indexes that must be filled
       [ [1, 2], [4, 8], [3, 6] ],
-      [ [1, 3], [4, 7] ],
+      [ [0, 2], [4, 7] ],
       [ [0, 1], [4, 6], [5, 8] ],
       [ [0, 6], [4, 5] ],
       [ [0, 8], [1, 7], [2, 6], [3, 5] ],
@@ -61,8 +61,6 @@ const App = () => {
       }
     }
   }
-
-
 
   const resetGame = () => {
     setWinner(null);
