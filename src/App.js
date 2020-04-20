@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -28,34 +27,85 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [player, setPlayer] = useState(true);
+  const [winner, setWinner] = useState();
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const onClickCallback = (event) => { // Event Handler
+    let updatedGrid = [];
+    // resource : R.Quin zoom chat
+    for(let i = 0; i < squares.length; i++) {
+      for(let j = 0; j < squares.length; j++) {
+        if (event === squares[i][j].id) {
+          squares[i][j]["value"] = (swapPlayers() ? PLAYER_2 : PLAYER_1);
+        }
+      }
+      updatedGrid.push(squares[i]);
+    }
+    setSquares(updatedGrid);
+    checkForWinner();
+  }
 
+  function swapPlayers() {
+    setPlayer(!player);
+    return player;
+  };
 
   const checkForWinner = () => {
-    // Complete in Wave 3
+    // resource: https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/
+    const winnerCombination = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
 
-  }
+    // Iterate and check if there is a winning combination or tie
+    let arraySquares = squares.flat();
 
+    for (let i = 0; i < winnerCombination.length; i++) {
+
+      const [a, b, c] = winnerCombination[i];
+
+      if (arraySquares[a].value && arraySquares[a].value === 
+          arraySquares[b].value && arraySquares[a].value === 
+          arraySquares[c].value) {
+
+        setWinner(`${arraySquares[a].value}`);
+
+        return;
+      };
+    };
+
+    let noMoreSquares = 0;
+    for (let square of arraySquares) {
+      if (square.value === '') {
+        (noMoreSquares ++)
+      };
+    };
+
+    if (noMoreSquares === 0) {setWinner('Tie - No one')}
+  };    
+  
   const resetGame = () => {
-    // Complete in Wave 4
-  }
+    setSquares(generateSquares());
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h1>Tic Tac Toe with React</h1>
+        <h2>{winner} WINS </h2>
+        <button className="button" onClick={resetGame}>. RESET GAME .</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={onClickCallback} winner={winner}/>
       </main>
     </div>
   );
-}
+};
 
 export default App;
