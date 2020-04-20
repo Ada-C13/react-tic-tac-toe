@@ -11,7 +11,7 @@ const Square = (props) => {
 }
 
 Square.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onClickCallback: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
 };

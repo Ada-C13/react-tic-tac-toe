@@ -12,32 +12,50 @@ const generateSquares = () => {
   for (let i = 0; i < 9; i++) {
     squares.push({
       id: i,
-      value: 'cat',
+      value: null,
     })
   }
-
   return squares;
 }
-
 
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [numSquaresFilled, setNumSquaresFilled] = useState(1);
+  const [winner, setWinner] = useState(null);
 
   const changeSquare = (i) => {
-    let num = i;
     console.log(`CLICKED: Square #${i}, value of ${squares[i].value}`);
+    if (squares[i].value || winner) return; //do nothing to filled squares or when winner exists
+    
+    setNumSquaresFilled(numSquaresFilled + 1);
+    let updatedSquares = [...squares];
+    numSquaresFilled % 2 === 0 ? updatedSquares[i].value = PLAYER_1 : updatedSquares[i].value = PLAYER_2
+    setSquares(updatedSquares);
+    if (numSquaresFilled > 4) {
+      console.log(`Placed ${numSquaresFilled} moves... checking for winner...`);
+      checkForWinner(i);
+    };
   }
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const checkForWinner = (i) => {
 
+    const winConditions = [ //for input i, these are the corresponding indexes that must be filled
+      [ [1, 2], [4, 8], [3, 6] ],
+      [ [1, 3], [4, 7] ],
+      [ [0, 1], [4, 6], [5, 8] ],
+      [ [0, 6], [4, 5] ],
+      [ [0, 8], [1, 7], [2, 6], [3, 5] ],
+      [ [3, 4], [2, 8] ],
+      [ [0, 3], [2, 4], [7, 8] ],
+      [ [6, 8], [1, 4] ],
+      [ [0, 4], [6, 7], [2, 5 ] ],
+    ]
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
-
+    winConditions[i].forEach(condition => {
+      const [a, b] = condition
+      if ( squares[a].value === squares[b].value && squares[a].value === squares[i].value ) setWinner(squares[a].value);
+    });
   }
 
   const resetGame = () => {
