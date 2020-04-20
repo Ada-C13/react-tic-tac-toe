@@ -103,7 +103,7 @@ const App = () => {
     }
 
     // TODO Double check tie logic
-    if (Object.keys(currentScoreX).length + Object.keys(currentScoreO).length === 8) {
+    if (Object.keys(currentScoreX).length + Object.keys(currentScoreO).length === 9) {
       return "Game Over - Tie"
     }
 
