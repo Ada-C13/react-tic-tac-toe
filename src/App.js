@@ -45,26 +45,25 @@ const App = () => {
       newSquares
     )
 
+    checkForWinner(newSquares)
+
     // TODO Need to make sure only runs if the square is actually changing
     setTurn(
       userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1
     )
-
-    checkForWinner()
   }
 
-  const checkForWinner = () => {
+  const checkForWinner = (newSquares) => {
 
     const currentScoreX = {}
     const currentScoreO = []
-    // console.log(squares)
 
-    for (let row in squares) {
-      for (let square in squares[row]) {
-        if (squares[row][square].value === 'X') {
-          currentScoreX[squares[row][square].id] = true
-        } else if (squares[row][square].value === 'O'){
-          currentScoreO.push(squares[row][square].id)
+    for (let row in newSquares) {
+      for (let square in newSquares[row]) {
+        if (newSquares[row][square].value === 'X') {
+          currentScoreX[newSquares[row][square].id] = true
+        } else if (newSquares[row][square].value === 'O'){
+          currentScoreO[newSquares[row][square].id] = true
         }
       }
     }
@@ -84,17 +83,18 @@ const App = () => {
       if (currentScoreX[winCombo[set][0]] && 
         currentScoreX[winCombo[set][1]] && 
         currentScoreX[winCombo[set][2]]) {
-          console.log("Winner is here!")
+          console.log("Winner is Player 1!")
       }
     }
 
+    for (let set in winCombo) {
+      if (currentScoreO[winCombo[set][0]] && 
+        currentScoreO[winCombo[set][1]] && 
+        currentScoreO[winCombo[set][2]]) {
+          console.log("Winner is Player 2!")
+      }
+    }
 
-    // console.log(currentScoreX)
-    // console.log(currentScoreO)
-
-    return (
-      squares
-    )
   }
 
   const resetGame = () => {
