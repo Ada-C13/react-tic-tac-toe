@@ -8,8 +8,7 @@ import _ from 'lodash';
 const generateSquareComponents = (squares, onClickCallback) => {
   // generate array of square components
   // flatten 2D array to 1D
-  // methods to flatten a 2D array to 1D array: https://stackoverflow.com/questions/14824283/convert-a-2d-javascript-array-to-a-1d-array
-  // then can iterate over each square with Square component
+
   const squares1DArray = _.flatten(squares);
   return squares1DArray.map((square) => {
     return <Square
@@ -20,8 +19,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
     />
   });
 }
-
-// const Board = (props) => -- same as line below
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);

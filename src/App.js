@@ -32,26 +32,9 @@ const App = () => {
   const [player1Turn, setplayer1Turn] = useState(true);
   const [winner, setWinner] = useState(null);
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
-  // callback function that will update the squares that will be 
-  // passed to the board which will then be passed to squares
-
-
-  // add x and o on board
-  // use setSquares to change the board
-  // need to switch back and forth between two players
-  // display whose turn it is
   const updateSquare = (id) => {
-    // holds new copy of squares using spread "..." operator
     if (winner !== null) return;
     const squaresNew = [...squares];
-
-    // need to iterate through 2D array
-    // 2 loops, first go through rows
-    // then within each row go through each column
 
     for (let i = 0; i < 3; i++){
       for (var j = 0; j < 3; j++){
@@ -61,14 +44,13 @@ const App = () => {
           // if square already filled in, exit loop
           if (currentSquare.value !== '') return;
           
-          currentSquare.value = player1Turn? PLAYER_1: PLAYER_2;
+          currentSquare.value = player1Turn? PLAYER_1 : PLAYER_2;
 
           setplayer1Turn(!player1Turn);
         }
       }
     }
 
-    // update board
     console.log(checkForWinner());
     setWinner(checkForWinner());
     setSquares(squaresNew);
@@ -91,14 +73,16 @@ const App = () => {
     for (let i = 0; i < 8; i++) {
       // destructuring each winning solution
       const [first, second, third] = winningSolutions[i];
+      
       if (first && first === second && first === third) {
-        // return first;
+        // assignment of winner based off X or O
         let player = "";
         first === 'X'? player = 'Player 1' : player = 'Player 2';
         return player;
       }
     }
 
+    // handling continuing the game
     for (let i = 0; i < 3; i ++) {
       const [first, second, third] = winningSolutions[i];
       if (first === "" || second === "" || third === "") {
@@ -106,6 +90,7 @@ const App = () => {
       }
     }
 
+    // when all squares are filled
     return 'no one, it\'s a tie';
   }
 
