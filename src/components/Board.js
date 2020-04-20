@@ -3,10 +3,16 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
-
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
 
+  const squareComponents = squares.map(square => <Square
+    key={square.id} 
+    id={square.id}
+    value={square.value}
+    isWinner ={square.isWinner}
+    onClickCallback={onClickCallback}/> )
+
+  return squareComponents;
 }
 
 const Board = ({ squares, onClickCallback }) => {
@@ -19,12 +25,11 @@ const Board = ({ squares, onClickCallback }) => {
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(
-    PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string,
+        isWinner: PropTypes.bool.isRequired,
       })
-    )
   ),
   onClickCallback: PropTypes.func.isRequired,
 };
