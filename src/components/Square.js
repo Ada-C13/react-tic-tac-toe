@@ -4,6 +4,8 @@ import './Square.css'
 
 const Square = (props) => {
 
+  //This function will be called when the event in this case hen we click above of square.
+  //Event Hendeler
   const onSquareClick = () => {
     props.onClickCallback(props.id);
   };
