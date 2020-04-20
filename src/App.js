@@ -31,6 +31,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [player1Turn, setplayer1Turn] = useState(true);
+  const [winner, setWinner] = useState(null);
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -44,7 +45,6 @@ const App = () => {
   // use setSquares to change the board
   // need to switch back and forth between two players
   // display whose turn it is
-  console.log(squares);
   const updateSquare = (id) => {
     // holds new copy of squares using spread "..." operator
     const squaresNew = [...squares];
@@ -57,38 +57,62 @@ const App = () => {
       for (var j = 0; j < 3; j++){
         let currentSquare = squaresNew[i][j];  
         if (currentSquare.id === id) {
+          
+          // if square already filled in, exit loop
           console.log(currentSquare);
-
-          // square already filled in, exit loop
+          console.log(currentSquare.value);
           if (currentSquare.value !== '') return;
-
+          
           currentSquare.value = player1Turn? PLAYER_1: PLAYER_2;
-
+          
           setplayer1Turn(!player1Turn);
         }
       }
     }
 
     // update board
+    console.log(checkForWinner());
+    setWinner(checkForWinner());
     setSquares(squaresNew);
   }
 
 
   const checkForWinner = () => {
-    // Complete in Wave 3
+    // get all possible combos of winning solutions
+    const winningSolutions = [
+      [squares[0][0].value, squares[0][1].value, squares[0][2].value],
+      [squares[1][0].value, squares[1][1].value, squares[1][2].value],
+      [squares[2][0].value, squares[2][1].value, squares[2][0].value],
+      [squares[0][0].value, squares[1][0].value, squares[2][0].value],
+      [squares[0][1].value, squares[1][1].value, squares[2][1].value],
+      [squares[0][2].value, squares[1][2].value, squares[2][2].value],
+      [squares[0][0].value, squares[1][1].value, squares[2][2].value],
+      [squares[0][2].value, squares[1][1].value, squares[2][0].value]
+    ]
 
+    for (let i = 0; i < 8; i++) {
+      // destructuring each winning solution
+      const [first, second, third] = winningSolutions[i];
+      if (squares[first] && (squares[first] === squares[second]) && (squares[first] === squares[third])) {
+        return squares[first];
+      }
+    }
+    return null;
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
+    setplayer1Turn(true);
+    setWinner(null);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>Current player: {player1Turn? 'Player 1 - X': 'Player 2 - O'}</h2>
+        <h2>The winner is {`${ winner }`} -- Fill in for wave 3 </h2>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board 
