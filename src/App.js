@@ -47,6 +47,7 @@ const App = () => {
   // display whose turn it is
   const updateSquare = (id) => {
     // holds new copy of squares using spread "..." operator
+    if (winner) return;
     const squaresNew = [...squares];
 
     // need to iterate through 2D array
@@ -59,8 +60,6 @@ const App = () => {
         if (currentSquare.id === id) {
           
           // if square already filled in, exit loop
-          console.log(currentSquare);
-          console.log(currentSquare.value);
           if (currentSquare.value !== '') return;
           
           currentSquare.value = player1Turn? PLAYER_1: PLAYER_2;
@@ -93,10 +92,11 @@ const App = () => {
     for (let i = 0; i < 8; i++) {
       // destructuring each winning solution
       const [first, second, third] = winningSolutions[i];
-      if (squares[first] && (squares[first] === squares[second]) && (squares[first] === squares[third])) {
-        return squares[first];
+      if (first && first === second && first === third) {
+        return first;
       }
     }
+
     return null;
   }
 
@@ -110,8 +110,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>Current player: {player1Turn? 'Player 1 - X': 'Player 2 - O'}</h2>
-        <h2>The winner is {`${ winner }`} -- Fill in for wave 3 </h2>
+
+        <h2>{winner? `The winner is ${ winner === 'X'? 'Player 1' : 'Player 2' }!` : player1Turn? 'Player 1 - X': 'Player 2 - O'}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
