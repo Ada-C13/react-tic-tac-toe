@@ -10,7 +10,6 @@ const generateSquares = () => {
   const squares = [];
 
   let currentId = 0;
-console.log("generate squares");
   for (let row = 0; row < 3; row += 1) {
     squares.push([]);
     for (let col = 0; col < 3; col += 1) {
@@ -21,16 +20,10 @@ console.log("generate squares");
       currentId += 1;
     }
   }
-  // returns 2D array of objects
-  // an array of array of objects
-  console.log("squares");
-  console.log(squares);
   return squares;
 };
 
 const App = () => {
-  // useState(generateSquares) becomes the variable squares
-  // useState is setting the initial state of the App component
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
   const [winner, setWinner] = useState();
@@ -42,10 +35,6 @@ const App = () => {
       newSquares.push([]);
       for (let column = 0; column < squares.length; column++) {
         let currentSquare = squares[row][column];
-        // find square by id
-        // update square value if square is empty
-        // set sqares to new squares
-        //  use State to keep track of 'turns' and update square accordingly
         if (currentSquare.id === id && currentSquare.value === "") {
           currentSquare.value = turn;
           if (turn === PLAYER_2) {
@@ -66,7 +55,10 @@ const App = () => {
     checkDiagonals();
     checkForTie();
   };
-  
+  // https://reactjs.org/docs/hooks-effect.html
+  // JavaScript was completing b/4 React could update the DOM.
+  // Implementing useEffect allows the program to
+  // perform our effects after React has updated the DOM.
   useEffect(() => {
     checkForWinner();
   });

@@ -4,7 +4,7 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
-// we de-structured here, so using squares.whatever instead of props.whatever
+// We de-structured here, so using squares.whatever instead of props.whatever
 const SquareComponents = ( {squares, onClickCallback}) => {
 
   const generateSquareComponents = squares.flat().map((square) => {
@@ -15,17 +15,14 @@ const SquareComponents = ( {squares, onClickCallback}) => {
           value={square.value} 
           key={square.id}
           onClickCallback={onClickCallback}
-
-        />
           
-    
+        />
     );
   });
   return generateSquareComponents;
 };
 
-
-// this is destructoring - takes the place of props (props.whatever)
+// This is destructoring - takes the place of props.whatever
 const Board = ({ squares, onClickCallback }) => {
   return <div className="grid">
     <SquareComponents squares={squares} onClickCallback={onClickCallback} />
