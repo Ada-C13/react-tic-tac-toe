@@ -38,10 +38,6 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const onClickCallback = (id) => {
-    // console.log(id) 
-    
-    // find the square with id 
-    // put player on value 
     const newSquares = [];
 
     for (let row of squares) {
@@ -61,13 +57,9 @@ const App = () => {
       };
     };
     
-    // render new squares
     setSquares(newSquares);
-
-    // see if anyone has one
     checkForWinner(newSquares);
 
-    // set player again
     const newPlayer = (player === PLAYER_1) ? PLAYER_2 : PLAYER_1
     setPlayer(newPlayer);
   }
@@ -75,7 +67,7 @@ const App = () => {
   const checkForWinner = (squares) => {
     // Complete in Wave 3
     const values = squares.flat().map((square) => square.value);
-    // console.log(values);
+
     const threeX = ['X','X','X'];
     const threeO = ['O','O','O'];
 
@@ -121,7 +113,6 @@ const App = () => {
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} />
-        {/* {console.log(generateSquares())} */}
       </main>
     </div>
   );
