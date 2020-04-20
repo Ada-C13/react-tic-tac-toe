@@ -27,26 +27,26 @@ const generateSquares = () => {
 
 const App = () => {
 
-  // const [present, setPresent] = useState();
   const [squares, setSquares] = useState(generateSquares());
+  const [userTurn, setTurn] = useState(PLAYER_1)
 
   const onClickCallback = (event) => {
-
-    // console.log(squares)
 
     const newSquares = squares.map(row =>
       row.map(square =>
         square.id == [event.target.id] ? 
-          {id: square.id, value: "X"} : 
+          {id: square.id, value: userTurn} : 
           {id: square.id, value: square.value}
 
       )
     )
 
-    // console.log(newSquares)
-
     setSquares(
       newSquares
+    )
+
+    setTurn(
+      userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1
     )
 
   }
