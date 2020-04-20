@@ -53,10 +53,6 @@ const App = () => {
       }
     }
 
-    
-    
-
-    // TODO Need to make sure only runs if the square is actually changing
     setTurn(
       userTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1
     )
@@ -106,6 +102,7 @@ const App = () => {
       }
     }
 
+    // TODO Double check tie logic
     if (Object.keys(currentScoreX).length + Object.keys(currentScoreO).length === 8) {
       return "Game Over - Tie"
     }
@@ -113,7 +110,10 @@ const App = () => {
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    console.log("Here I am!")
+    setSquares(generateSquares())
+    setTurn(PLAYER_1)
+    setWinner("Game is currently in progress...")
   }
 
   return (
@@ -121,7 +121,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>{winner}</h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board 
