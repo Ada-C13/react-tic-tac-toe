@@ -1,4 +1,3 @@
-//collab with Charlotte Adams
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Board from "./components/Board";
@@ -61,24 +60,6 @@ const App = () => {
     setSquares(newSquares);
   };
 
-  // const onClickCallback = (event) => {
-  //     setSquares(event.target.value);
-  //   };
-
-  // const checkRow = () => {
-  //   console.log("this is inside checkRow")
-  //   for (let row = 0; row < squares.length; row++) {
-  //     let counter = 0;
-  //     for (let column = 0; column < squares.length; column++) {
-  //       if (squares[row][column].value === turn) {
-  //         counter++;
-  //       }
-  //     }
-  //     if (counter === 3) {
-  //       return true;
-  //     };
-  //   };
-  // };
   const checkForWinner = () => {
     // Complete in Wave 3
     checkRowsandColumns();
