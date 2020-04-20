@@ -41,7 +41,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [itsPlayer1Turn, setPlayer1Turn] = useState(true);
-  // const [winner, setWinner] = useState(undefined);
+  // const [winner, setWinner] = useState(null);
  
   // Wave 2
   // You will need to create a method to change the square 
@@ -49,17 +49,19 @@ const App = () => {
   // Then pass it into the squares as a callback
 
   const updateValue = (squareClickedId) => {
-    
+
     const squareList = [];
 
     squares.forEach((row, i) => {
       squareList.push([]);
       row.forEach((square) => {
-        if (square.id === squareClickedId.id && square.value === "") {
+        if (square.id === squareClickedId.id && square.value === "" && winner === null) {
           // set the state to determine when is player1 or player2
           squareClickedId.value = itsPlayer1Turn ? PLAYER_1 : PLAYER_2;
+          
           // Pass the turn to player2. 
           setPlayer1Turn(!itsPlayer1Turn);
+         
           squareList[i].push(squareClickedId)
         } else {
           // Return a copy with clean square. 
@@ -70,13 +72,12 @@ const App = () => {
     setSquares(squareList);
   }
 
-  // It returns an array with the current clicked values. 
+  // It returns a flat array with the current clicked values. 
   const extractValuesFromSquares = ((setSquares) => {
     const values = [];
 
     setSquares.forEach((row) => {
       row.forEach((square) => {
-        console.log(row)
         values.push(square.value)
       });
     });
@@ -94,27 +95,31 @@ const App = () => {
       const [a, b, c] = WINNINGOPTIONS[i];
       // Return the value of the winner
       if (values[a] && values[a] === values[b] && values[a] === values[c]) {
-          return values[a];
-        }
+        // Return the value of the winner player. 
+        return values[a];
+      } else if (!values.includes('')) {
+        // Return false is there is tie.
+        return false;
       }
-      // If there is a tie return null.
-      return null;
+    }
+    // The game is runnig! 
+    return null;
   }
-
+  
   const winner = checkForWinner(squares);
-  // setPlaying(checkForWinner(squares));
-  console.log(winner);
 
-  const resetGame = () => { // TOD
+  const resetGame = () => {
     // Complete in Wave 4 
+    setSquares(generateSquares());
+    setPlayer1Turn(true);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        { winner === false ?  <h2>Tere is a tie </h2> : <h2>The winner is Player {winner}</h2>}
+        <button onClick={resetGame} >Reset Game </button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateValue}/>
