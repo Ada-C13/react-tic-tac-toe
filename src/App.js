@@ -9,17 +9,11 @@ const PLAYER_2 = 'O';
 const generateSquares = () => {
   const squares = [];
 
-  let currentId = 0;
-
-  for (let row = 0; row < 3; row += 1) {
-    squares.push([]);
-    for (let col = 0; col < 3; col += 1) {
-      squares[row].push({
-        id: currentId,
-        value: '',
-      });
-      currentId += 1;
-    }
+  for (let i = 0; i < 9; i++) {
+    squares.push({
+      id: i,
+      value: 'cat',
+    })
   }
 
   return squares;
@@ -30,8 +24,9 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
 
-  const changeSquare = () => {
-
+  const changeSquare = (i) => {
+    let num = i;
+    console.log(`CLICKED: Square #${i}, value of ${squares[i].value}`);
   }
 
   // Wave 2
@@ -57,7 +52,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={changeSquare} />
       </main>
     </div>
   );
