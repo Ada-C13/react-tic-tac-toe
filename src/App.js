@@ -5,6 +5,17 @@ import Board from './components/Board';
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
+const WIN_CONDITIONS = [ 
+  [ [1, 2], [4, 8], [3, 6] ],
+  [ [0, 2], [4, 7] ],
+  [ [0, 1], [4, 6], [5, 8] ],
+  [ [0, 6], [4, 5] ],
+  [ [0, 8], [1, 7], [2, 6], [3, 5] ],
+  [ [3, 4], [2, 8] ],
+  [ [0, 3], [2, 4], [7, 8] ],
+  [ [6, 8], [1, 4] ],
+  [ [0, 4], [6, 7], [2, 5 ] ],
+]
 
 const generateSquares = () => {
   const squares = [];
@@ -40,24 +51,11 @@ const App = () => {
   }
 
   const checkForWinner = (i) => {
-    
-    const winConditions = [ //for any given input square, these are the corresponding indexes that must be filled
-      [ [1, 2], [4, 8], [3, 6] ],
-      [ [0, 2], [4, 7] ],
-      [ [0, 1], [4, 6], [5, 8] ],
-      [ [0, 6], [4, 5] ],
-      [ [0, 8], [1, 7], [2, 6], [3, 5] ],
-      [ [3, 4], [2, 8] ],
-      [ [0, 3], [2, 4], [7, 8] ],
-      [ [6, 8], [1, 4] ],
-      [ [0, 4], [6, 7], [2, 5 ] ],
-    ]
-
-    for (let x = 0; x < winConditions[i].length; x++) {
-      const [a, b] = winConditions[i][x];
+    for (let x = 0; x < WIN_CONDITIONS[i].length; x++) {
+      const [a, b] = WIN_CONDITIONS[i][x];
       if ( squares[a].value === squares[b].value && squares[a].value === squares[i].value ) { 
         setWinner(squares[a].value);
-        let winningSquares = [...winConditions[i][x], i]
+        let winningSquares = [...WIN_CONDITIONS[i][x], i]
         winningSquares.forEach( index => {
           squares[index].isWinner = true;
         });
