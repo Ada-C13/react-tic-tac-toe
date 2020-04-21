@@ -23,6 +23,7 @@ const Square = (props) => {
       className="square"
       onClick={props.onClickCallback} // or is it props.id? 
       // should on click be an anonymous function?
+      // only work if there's no value?
     >
       {props.value}
     </button>
