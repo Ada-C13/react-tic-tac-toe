@@ -12,5 +12,77 @@
   font-size: calc(10px + 2vmin);
   color: white;
   margin-bottom: 2em;
+  padding-bottom: 20px;
 }
 
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+/* Button design reference: https://codepen.io/Katiae/pen/wdXpOY */
+.purple-button {
+  background-image: linear-gradient(to right, #895cf2 0%, #ffabf4 50%, #895cf2 100%);
+}
+
+.blue-button {
+  background-image: linear-gradient(to right, #0b86b7 0%, #cde7f2 50%, #0b86b7 100%);
+}
+
+.button {
+  width: 150px;
+  color: #fff;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: 0px;
+  margin: 8px;
+  padding: 1em;
+  background-size: 200% auto;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.purple-button:hover, .blue-button:hover {
+  background-position: right center;
+}
+
+.header-container {
+  display: flex;
+}
+
+.score-chart {
+  color: rgb(184, 184, 184);
+  position: fixed;
+  right: 0;
+  border: 5px solid rgb(224, 222, 222);
+  padding: 5px; 
+  border-radius: 8px;
+  margin: 50px 20px 50px 100px;
+}
+
+
+h3 {
+  margin: 10px;
+}
+
+h4, h5, .score-number {
+  margin: 10px;
+}
+
+/* responsive design */
+@media screen and (max-width: 1000px) {
+  .header-container {
+    flex-direction: column;
+  }
+
+  .score-chart {
+    position: relative;
+    margin: 10px;
+  }
+}
