@@ -14,11 +14,18 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
   // loop through array of squares
 
-  return(
-    // square component
-      // id set to props
-      // value set to props
-  )
+  return squares.flat().map( props =>
+      <Square   // square component
+        id={props.id} // id set to props
+        value={props.value} // value set to props
+        onClickCallback={onClickCallback}  // onClickCallback
+      />
+    );
+  
+      
+      
+     
+  
  
   // Update the Board component to render the grid of squares. You will need to complete the generateSquareComponents function in the Board component.
 
