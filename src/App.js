@@ -57,7 +57,7 @@ const App = () => {
 
   const checkForWinner = () => {
     // Complete in Wave 3
-    // check if XXX or OOO
+    // check if XXX or OOO in each column / row
     // if a yes, player has won
       // display winner
     // if no AND all squares filled

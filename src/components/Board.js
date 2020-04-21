@@ -25,11 +25,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
         onClickCallback={onClickCallback}  // onClickCallback
       />
     );
-  
-      
-      
-     
-  
  
   // Update the Board component to render the grid of squares. You will need to complete the generateSquareComponents function in the Board component.
 
