@@ -3,6 +3,11 @@ import './App.css';
 
 import Board from './components/Board';
 
+// css groups
+  // .App
+  // .App-header
+
+
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 

@@ -3,6 +3,9 @@ import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
+// css groups
+  // div.grid
+
 
 // This component will take a callback function, onClickCallback and a list of 2D array of JavaScript objects with ids, and values and will render Square components each with ids, values and the callback function passed in as props.
 

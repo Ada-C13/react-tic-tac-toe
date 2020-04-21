@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import './Square.css'
 
+// css groups
+  // .square
+
 // This component represents one square in a tic-tac-toe board. It will take in props representing the value to show on the board (x, o, or ''), an id, and a callback function called onClickCallback.
 
 // Each Square component should take 2 props at this stage.
