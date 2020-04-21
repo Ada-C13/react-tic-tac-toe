@@ -4,8 +4,14 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
+// This component will take a callback function, onClickCallback and a list of 2D array of JavaScript objects with ids, and values and will render Square components each with ids, values and the callback function passed in as props.
+
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
+
+  // Update the Board component to render the grid of squares. You will need to complete the generateSquareComponents function in the Board component.
+
+  // App should pass to Board a 2D array of JavaScript objects and Board should use that to render an array of Square components.
 
 }
 

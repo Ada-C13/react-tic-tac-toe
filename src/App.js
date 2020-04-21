@@ -6,6 +6,13 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
+// This component is the traditional outer component of the React App. The App component will manage the state for the application and track the status for the game including the winner.
+
+  // App should pass to Board a 2D array of JavaScript objects and Board should use that to render an array of Square components.
+
+
+// We have provided you a function generateSquares in App.js which generates a 2D array of JavaScript objects with Ids and values (blank strings). These should be used to provide data to Board and Square via props.
+
 const generateSquares = () => {
   const squares = [];
 
