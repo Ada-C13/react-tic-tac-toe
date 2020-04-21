@@ -12,10 +12,18 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
 
+  // flatten arrays into new array
+    const squaresArray = [].flat(squares);
+
+
   // loop through array of squares
 
-  return squares.flat().map( props =>
-      <Square   // square component
+  //   return squares.flat().map( props =>
+
+  return squaresArray.map((props) => {
+      return <Square   // square component
+        // Do we need a key? id would make a good key
+        key={props.id}
         id={props.id} // id set to props
         value={props.value} // value set to props
         onClickCallback={onClickCallback}  // onClickCallback
