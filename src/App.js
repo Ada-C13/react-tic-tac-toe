@@ -46,6 +46,13 @@ const App = () => {
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
 
+    // create onClickCallback fn to change square's value on click
+        // create new array with row/columns with the value of the selected ID
+          // change state onclick
+            // if player x, change to o
+            // if player o, change to x
+            // pass in new array 
+
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -64,7 +71,8 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} /> 
+        {/* add onClickCallback here */}
       </main>
     </div>
   );
