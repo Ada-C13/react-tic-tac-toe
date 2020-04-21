@@ -12,6 +12,14 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
 
+  // loop through array of squares
+
+  return(
+    // square component
+      // id set to props
+      // value set to props
+  )
+ 
   // Update the Board component to render the grid of squares. You will need to complete the generateSquareComponents function in the Board component.
 
   // App should pass to Board a 2D array of JavaScript objects and Board should use that to render an array of Square components.
@@ -36,6 +44,6 @@ Board.propTypes = {
     )
   ),
   onClickCallback: PropTypes.func.isRequired,
-};
+}
 
 export default Board;
