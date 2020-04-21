@@ -68,7 +68,6 @@ const App = () => {
   const resetGame = () => {
     // Complete in Wave 4
     // reset board - rerun generate squared?
-    // add reset button with onClick
   }
 
   return (
@@ -77,6 +76,7 @@ const App = () => {
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
         <button>Reset Game</button>
+        {/* Add onClick behavior to button to reset */}
       </header>
       <main>
         <Board squares={squares} /> 
