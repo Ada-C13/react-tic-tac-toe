@@ -1,7 +1,7 @@
 import React from 'react';
-import './Board.css';
-import Square from './Square';
 import PropTypes from 'prop-types';
+import Square from './Square';
+import './Board.css';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
@@ -20,7 +20,6 @@ const generateSquareComponents = (squares, onClickCallback) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  //console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>
