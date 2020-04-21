@@ -43,7 +43,8 @@ const App = () => {
 
   // Wave 2
   // You will need to create a method to change the square 
-  //   When it is clicked on.
+  //   When it is clicked on
+    // disable click if there's a value?
   //   Then pass it into the squares as a callback
 
     // create onClickCallback fn to change square's value on click
@@ -66,6 +67,8 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    // reset board - rerun generate squared?
+    // add reset button with onClick
   }
 
   return (
