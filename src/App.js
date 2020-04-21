@@ -26,36 +26,77 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
   const [squares, setSquares] = useState(generateSquares());
+  const [xTurn, setxTurn] = useState(PLAYER_1);
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on.
-  //   Then pass it into the squares as a callback
+  const onClickCallback = (id) => {
+    if (checkForWinner() !== null) return;
+    const updatedSquares = [...squares];
 
+    for (let i = 0; i < 3; i++){
+      for (let j = 0; j < 3; j++) {
+        let thisSquare = updatedSquares[i][j];  
+        if (thisSquare.id === id) {
+          if (thisSquare.value !== '') return;
+          thisSquare.value = xTurn? PLAYER_1 : PLAYER_2;
+          setxTurn(!xTurn);
+        }
+      }
+    }
+
+    console.log(checkForWinner());
+    setSquares(updatedSquares);
+  
+  }
 
   const checkForWinner = () => {
-    // Complete in Wave 3
+    let square = squares.flat().map(square => ({id:square.id, value:square.value }))
+    const winningBoards = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
 
+    for (let i = 0; i < winningBoards.length; i++) {
+      const [a, b, c] = winningBoards[i];
+      if (square[a].value && square[a].value === square[b].value && square[a].value === square[c].value) {
+        let player = "";
+        square[a].value === 'X' ? player = 'X\'s' : player = 'O"s';
+        return player;
+      }
+    }
+
+    if ( square.every((square) => square.value !== "")) {
+      return "CAT"
+    }
+    return null;
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
+    setxTurn(true);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <h2>The winner is {checkForWinner()}!</h2>
+        <button className="reset" onClick={resetGame} >Reset Game </button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares}
+        onClickCallback = {onClickCallback}
+        />
       </main>
     </div>
   );
+
 }
 
 export default App;
