@@ -21,9 +21,11 @@ const Square = (props) => {
   return (
     <button
       className="square"
-      onClick={props.onClickCallback} // or is it props.id? 
-      // should on click be an anonymous function?
-      // only work if there's no value?
+      onClick={() => {
+        // only click if there's no value
+        if (props.value === '') props.onClickCallback(props.id)
+        }
+      }
     >
       {props.value}
     </button>
