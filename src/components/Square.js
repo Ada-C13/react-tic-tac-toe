@@ -18,12 +18,15 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
-  return <button
-    className="square"
-    onClick={props.onClick}
-  >
-    {props.value}
-  </button>
+  return (
+    <button
+      className="square"
+      onClick={props.onClickCallback} // or is it props.id? 
+      // should on click be an anonymous function?
+    >
+      {props.value}
+    </button>
+  )
 }
 
 Square.propTypes = {

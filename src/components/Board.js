@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
+  // squares is array of arrays
 
   // can I refactor to flatten first and then map?
 
