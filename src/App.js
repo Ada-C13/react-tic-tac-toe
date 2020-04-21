@@ -4,8 +4,7 @@ import './App.css';
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
-let xTurn = true; 
+const PLAYER_2 = 'O'; 
 
 const generateSquares = () => {
   const squares = [];
@@ -29,8 +28,12 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [winner, setWinner] = useState(null);
+  const [xTurn, setXTurn] = useState(true);
 
   const updateSquare = (squareId) => {
+
+    if(winner !== null) return;
 
     const updatedSquares = [];
     
@@ -43,10 +46,10 @@ const App = () => {
             // update accordingly
             if(xTurn){
               row[square].value = PLAYER_1;
-              xTurn = false;
+              setXTurn(false);
             } else {
               row[square].value = PLAYER_2;
-              xTurn = true;
+              setXTurn(true);
             }
           }
         }
@@ -54,12 +57,11 @@ const App = () => {
       updatedSquares.push(row);
     });
 
+    setWinner(checkForWinner());
     setSquares(updatedSquares);
   }
 
-
-  const checkForWinner = () => {
-
+    const checkForWinner = () => {
     // set up
     const boardState = squares.flat();
     // winning possibilities 
@@ -74,9 +76,8 @@ const App = () => {
     const diag1 = boardState[0].value.concat(boardState[4].value).concat(boardState[8].value);
     const diag2 = boardState[2].value.concat(boardState[4].value).concat(boardState[6].value);
 
-    const xWin = "XXX"
-    const oWin = "OOO"
-  
+    const xWin = "XXX";
+    const oWin = "OOO";
   
     if( (row1 === xWin) || (row2 === xWin) || (row3 === xWin) || 
         (col1 === xWin) || (col2 === xWin) || (col3 === xWin) || 
@@ -85,22 +86,27 @@ const App = () => {
     }
     else if( (row1 === oWin) || (row2 === oWin) || (row3 === oWin) || 
              (col1 === oWin) || (col2 === oWin) || (col3 === oWin) || 
-             (diag1 === oWin) || (diag2 === oWin) ) {
+             (diag1 === oWin) || (diag2 === oWin) ) {   
       return "O"; 
     }
+    else return null;
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setWinner(null);
+    setSquares(generateSquares);
+    setXTurn(true);
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        
+      
         <h1>React Tic Tac Toe</h1>
+        <h2> Current Player: {xTurn? "X" : "O"}</h2>
         <h2>The winner is {checkForWinner()} </h2>
-        <button>Reset Game</button>
+        
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={updateSquare}/>
