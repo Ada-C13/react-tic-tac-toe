@@ -12,12 +12,15 @@ import PropTypes from 'prop-types';
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
 
+  // can I refactor to flatten first and then map?
+
   // loop through array of squares
 
-  return squares.flat().map( props =>
+  return squares.flat().map( square =>
       <Square   // square component
-        id={props.id} // id set to props
-        value={props.value} // value set to props
+        // do I need a key? ID makes a good key
+        id={square.id} // id set to props
+        value={square.value} // value set to props
         onClickCallback={onClickCallback}  // onClickCallback
       />
     );
