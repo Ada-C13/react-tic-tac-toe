@@ -27,32 +27,30 @@ const generateSquares = () => {
 
 const App = () => {
   const [squares, setSquares] = useState(generateSquares());
-  const [turn, setTurn] = useState(true);
-  const [winner, setWinner] = useState(null);
+  const [xTurn, setxTurn] = useState(PLAYER_1);
 
   const onClickCallback = (id) => {
-    if (winner !== null) return;
-    const newBoard = [...squares];
+    if (checkForWinner() !== null) return;
+    const updatedSquares = [...squares];
 
     for (let i = 0; i < 3; i++){
-      for (var j = 0; j < 3; j++){
-        let currentSquare = newBoard[i][j];  
-        if (currentSquare.id === id) {
-          if (currentSquare.value !== '') return;
-          currentSquare.value = setTurn? PLAYER_1 : PLAYER_2;
-
-          setTurn(!turn);
+      for (let j = 0; j < 3; j++) {
+        let thisSquare = updatedSquares[i][j];  
+        if (thisSquare.id === id) {
+          if (thisSquare.value !== '') return;
+          thisSquare.value = xTurn? PLAYER_1 : PLAYER_2;
+          setxTurn(!xTurn);
         }
       }
     }
 
     console.log(checkForWinner());
-    setWinner(checkForWinner());
-    setSquares(newBoard);
+    setSquares(updatedSquares);
   
   }
 
   const checkForWinner = () => {
+    let square = squares.flat().map(square => ({id:square.id, value:square.value }))
     const winningBoards = [
       [0, 1, 2],
       [3, 4, 5],
@@ -64,36 +62,31 @@ const App = () => {
       [2, 4, 6],
     ];
 
-    for (let i = 0; i < 3; i++) {
-      const [a, b, c] = winningBoards[i];
-      if (a === "" || b === "" || c === "") {
-        return null;
-      } 
-    }
-
     for (let i = 0; i < winningBoards.length; i++) {
       const [a, b, c] = winningBoards[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      if (square[a].value && square[a].value === square[b].value && square[a].value === square[c].value) {
         let player = "";
-        squares[a] === 'X' ? player = 'X"s' : player = 'O"s';
+        square[a].value === 'X' ? player = 'X\'s' : player = 'O"s';
         return player;
       }
     }
 
-    return 'No one!';
+    if ( square.every((square) => square.value !== "")) {
+      return "CAT"
+    }
+    return null;
   }
 
   const resetGame = () => {
     setSquares(generateSquares());
-    setTurn(true);
-    setWinner(null);
+    setxTurn(true);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        {winner ? <h2>{`The winner is ${winner}`}</h2> : null}
+        <h2>The winner is {checkForWinner()}!</h2>
         <button className="reset" onClick={resetGame} >Reset Game </button>
       </header>
       <main>
