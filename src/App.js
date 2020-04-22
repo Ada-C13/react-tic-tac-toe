@@ -42,7 +42,7 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [activePlayer, setActivePlayer] = useState(PLAYER_1); 
-  const [winner, setWinner] = useState(nil);
+  const [winner, setWinner] = useState(null);
 
   // Wave 2
 
@@ -50,6 +50,8 @@ const App = () => {
     // TODO check if squares full?
 
   const takeTurn = (id) => { // create fn to change square's value on click
+    
+    // TODO can click square with value and it will change - should not
     const copySquares = Array.from(squares); // create copy (not just reference) of squares
 
     const row = Math.floor(id / 3);  
