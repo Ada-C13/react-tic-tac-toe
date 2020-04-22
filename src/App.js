@@ -42,12 +42,12 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [activePlayer, setActivePlayer] = useState(PLAYER_1); 
+  const [winner, setWinner] = useState(nil);
 
   // Wave 2
 
     // TODO check if won?
     // TODO check if squares full?
-  //   Then pass it into the squares as a callback
 
   const takeTurn = (id) => { // create fn to change square's value on click
     const copySquares = Array.from(squares); // create copy (not just reference) of squares
