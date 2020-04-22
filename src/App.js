@@ -42,16 +42,11 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [activePlayer, setActivePlayer] = useState(PLAYER_1); 
-  const [squaresPlayed, setSquaresPlayed] = useState(0);
-  const [winner, setWinner] = useState(''); // should it be null?
-
-  // Wave 2
-
-    // TODO check if won?
-    // TODO check if squares full?
+  // const [squaresPlayed, setSquaresPlayed] = useState(0); // TODO use to declare tie if is === 8 and winner === '' NOTE: Ada example doesn't do this: https://adagold.github.io/react-tic-tac-toe/
+  const [winner, setWinner] = useState('');
 
   const takeTurn = (id) => { // create fn to change square's value on click
-   // if (winner !== 'null') return;  
+    if (winner !== '') return;     // TODO check if won?
 
     const copySquares = Array.from(squares); // create copy (not just reference) of squares
     
@@ -60,26 +55,48 @@ const App = () => {
     const row = Math.floor(id / 3);  
     const col = id % 3;             
     copySquares[row][col].value = activePlayer; // set value to activePlayer (X or O)
-    setSquares(copySquares); // pass in new array 
-    (activePlayer === PLAYER_1) ? setActivePlayer(PLAYER_2) : setActivePlayer(PLAYER_1); // Change active player, if x, change to o, and if o, change to x    
-    checkForWinner(squares);  //setWinner(checkForWinner());   
+    setSquares(copySquares); // pass in new array   
+     // setSquaresPlayed(squaresPlayed +1);
+    checkForWinner(copySquares);   
+    (activePlayer === PLAYER_1) ? setActivePlayer(PLAYER_2) : setActivePlayer(PLAYER_1); // Change active player, if x, change to o, and if o, change to x  
   };
 
 
-  const checkForWinner = () => {
-    // Complete in Wave 3
+  // const checkForWinner = () => {
+  function checkForWinner(boxes) {
     // check if XXX or OOO in each column / row / diagonal
     // if a yes, player has won
       // display winner
+    // ! ADA example doesn't do the following
     // if no AND all squares played
       // declare tie
 
-  }
+    // code adapted from tic-tac-toe tutorial at https://medium.com/@shifrb/how-to-build-tic-tac-toe-with-react-hooks-ca37f6040022  
+      const possibleLines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+      // go over all possibly winning lines and check if they consist of only X's/only O's
+      for (let i = 0; i < possibleLines.length; i++) {
+        const [a, b, c] = possibleLines[i];
+        if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
+        // return boxes[a];
+        return setWinner(activePlayer);
+        }
+      }
+      return '';
+    }
 
   const resetGame = () => {
     setSquares(generateSquares()); // reset board
-    setActivePlayer(PLAYER_1); // ? do I need to give it a value?
-    setSquaresPlayed(0);
+    setActivePlayer(PLAYER_1);
+    // setSquaresPlayed(0);
     setWinner();
     }
 
@@ -87,15 +104,14 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>{winner ? `The winner is ${winner}` : `Make your move, ${activePlayer}!`}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board 
           squares={squares}
           onClickCallback={takeTurn} 
-          /> 
-        {/* add onClickCallback here */}
+          />
       </main>
     </div>
   );
