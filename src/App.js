@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Board from './components/Board';
+import { act } from '@testing-library/react';
 
 // css groups
   // .App
@@ -40,19 +41,22 @@ const generateSquares = () => {
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [activePlayer, setActivePlayer] = useState(PLAYER_1); 
 
   // Wave 2
-  // You will need to create a method to change the square 
-  //   When it is clicked on
-    // disable click if there's a value?
+
+    // check if won?
   //   Then pass it into the squares as a callback
 
-    // create onClickCallback fn to change square's value on click
-        // create new array with row/columns with the value of the selected ID
-          // change state onclick
-            // if player x, change to o
-            // if player o, change to x
-            // pass in new array 
+  const takeTurn = (id) => { // create fn to change square's value on click
+    const copySquares = Array.from(squares); // create copy (not just reference) of squares
+
+    const row = Math.floor(id / 3);  
+    const col = id % 3;             
+    copySquares[row][col].value = activePlayer; // set value to activePlayer (X or O)
+    setSquares(copySquares); // pass in new array 
+    (activePlayer === PLAYER_1) ? setActivePlayer(PLAYER_2) : setActivePlayer(PLAYER_1); // Change active player, if x, change to o, and if o, change to x         
+  };
 
 
   const checkForWinner = () => {
@@ -67,7 +71,7 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
-    // reset board - rerun generate squared?
+    // reset board - rerun generate squares?
   }
 
   return (
@@ -76,10 +80,13 @@ const App = () => {
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
         <button>Reset Game</button>
-        {/* Add onClick behavior to button to reset */}
+        {/* W4 - Add onClick behavior to button to reset */}
       </header>
       <main>
-        <Board squares={squares} /> 
+        <Board 
+          squares={squares}
+          onClickCallback={takeTurn} 
+          /> 
         {/* add onClickCallback here */}
       </main>
     </div>
