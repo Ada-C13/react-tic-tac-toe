@@ -68,29 +68,27 @@ const App = () => {
 
   const checkForWinner = () => {
     // Complete in Wave 3
-    // check if XXX or OOO in each column / row
+    // check if XXX or OOO in each column / row / diagonal
     // if a yes, player has won
       // display winner
-    // if no AND all squares filled
+    // if no AND all squares played
       // declare tie
 
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
-    // reset board - rerun generate squares?
-    // set player
-    // set squaresplayed
-    // set winner
-  }
+    setSquares(generateSquares()); // reset board
+    setActivePlayer(PLAYER_1); // ? do I need to give it a value?
+    setSquaresPlayed(0);
+    setWinner();
+    }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
-        {/* W4 - Add onClick behavior to button to reset */}
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board 
