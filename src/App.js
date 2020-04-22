@@ -42,7 +42,8 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [activePlayer, setActivePlayer] = useState(PLAYER_1); 
-  const [winner, setWinner] = useState(null);
+  const [squaresPlayed, setSquaresPlayed] = useState(0);
+  const [winner, setWinner] = useState(''); // should it be null?
 
   // Wave 2
 
@@ -50,7 +51,8 @@ const App = () => {
     // TODO check if squares full?
 
   const takeTurn = (id) => { // create fn to change square's value on click
-    
+   // if (winner !== 'null') return;  
+
     const copySquares = Array.from(squares); // create copy (not just reference) of squares
     
     // TODO can click square with value and it will change - should not
@@ -59,7 +61,8 @@ const App = () => {
     const col = id % 3;             
     copySquares[row][col].value = activePlayer; // set value to activePlayer (X or O)
     setSquares(copySquares); // pass in new array 
-    (activePlayer === PLAYER_1) ? setActivePlayer(PLAYER_2) : setActivePlayer(PLAYER_1); // Change active player, if x, change to o, and if o, change to x         
+    (activePlayer === PLAYER_1) ? setActivePlayer(PLAYER_2) : setActivePlayer(PLAYER_1); // Change active player, if x, change to o, and if o, change to x    
+    checkForWinner(squares);  //setWinner(checkForWinner());   
   };
 
 
@@ -76,6 +79,9 @@ const App = () => {
   const resetGame = () => {
     // Complete in Wave 4
     // reset board - rerun generate squares?
+    // set player
+    // set squaresplayed
+    // set winner
   }
 
   return (
