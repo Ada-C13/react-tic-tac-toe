@@ -3,7 +3,11 @@ import "./App.css";
 
 import Board from "./components/Board";
 
- 
+//sources and examples from:
+//https://www.udemy.com/course/reactjs-tic-tac-toe-game-in-30-minutes/ 
+//https://scrimba.com/c/cbqm3SM
+//https://reactjs.org/tutorial/tutorial.html
+
 const PLAYER_1 = "X";
 const PLAYER_2 = "O";
 
@@ -33,7 +37,6 @@ const generateSquares = () => {
       currentId += 1;
     }
   }
-
   return squares;
 }
 
