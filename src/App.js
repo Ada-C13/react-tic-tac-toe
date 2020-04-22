@@ -41,15 +41,15 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [itsPlayer1Turn, setPlayer1Turn] = useState(true);
-  // const [winner, setWinner] = useState(null);
  
   // Wave 2
   // You will need to create a method to change the square 
   // When it is clicked on.
   // Then pass it into the squares as a callback
+ 
 
-  const updateValue = (squareClickedId) => {
-
+  const updateValue = (squareClickedId) => { // event handler
+ 
     const squareList = [];
 
     squares.forEach((row, i) => {
@@ -108,7 +108,7 @@ const App = () => {
   
   const winner = checkForWinner(squares);
 
-  const resetGame = () => {
+  const resetGame = () => { // event handler
     // Complete in Wave 4 
     setSquares(generateSquares());
     setPlayer1Turn(true);
@@ -119,9 +119,11 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         { winner === false ?  <h2>Tere is a tie </h2> : <h2>The winner is Player {winner}</h2>}
-        <button className="reset" onClick={resetGame} >Reset Game </button>
+        {/* Event listener */}
+        <button className="reset" onClick={resetGame} >Reset Game </button> 
       </header>
       <main>
+         {/* Event listener onClickCallback */}
         <Board squares={squares} onClickCallback={updateValue}/>
       </main>
     </div>
