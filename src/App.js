@@ -52,6 +52,8 @@ const App = () => {
   const takeTurn = (id) => { // create fn to change square's value on click
     
     const copySquares = Array.from(squares); // create copy (not just reference) of squares
+    
+    // TODO can click square with value and it will change - should not
 
     const row = Math.floor(id / 3);  
     const col = id % 3;             
