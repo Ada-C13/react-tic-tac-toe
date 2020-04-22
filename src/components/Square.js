@@ -22,10 +22,7 @@ const Square = (props) => {
     <button
       className="square"
       onClick={() => {
-        // basic w/ no if statement: 
-        props.onClickCallback(props.id)
-        // only click if there's no value - does this work?
-        // if (props.value === '') props.onClickCallback(props.id)
+        if (props.value === '') props.onClickCallback(props.id) // only change if square has no value
         }
       }
     >
