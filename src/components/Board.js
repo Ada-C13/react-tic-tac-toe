@@ -1,17 +1,18 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import './Board.css';
 import Square from './Square';
 import PropTypes from 'prop-types';
 
 
 const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
 const boardSquares = squares.flat()
 return boardSquares.map((square) => {
   return(
     <Square 
       id={square.id} 
       value={square.value}
+      key={square.id}
+      onClickCallback={onClickCallback}
     />
   );
 })
@@ -19,7 +20,6 @@ return boardSquares.map((square) => {
 
 const Board = ({ squares, onClickCallback }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
   return <div className="grid" >
     {squareList}
   </div>
