@@ -70,7 +70,20 @@ const App = () => {
 
   // Complete in Wave 3
   const checkForWinner = () => {
-    
+    const newSquare = [];
+    squares.map(row => 
+      row.map(square => ( 
+        newSquare.push(square.value)
+        )
+      )
+    )
+
+    for (let line of winningCombinations) {
+      if (newSquare[line[0]] === newSquare[line[1]] && newSquare[line[0]] === newSquare[line[2]] && newSquare[line[0]] !== '') {
+        console.log(newSquare[line[0]]);
+        return newSquare[line[0]];
+      }  
+
     }
 
     if (!newSquare.includes("")) return "tied";
@@ -80,10 +93,7 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
-    setSquares(generateSquares());
-    setCurrentPlayer(PLAYER_1);
-    setCurrentWinner(null);
-    setCurrentCount(0); 
+  
   }
 
   return (
