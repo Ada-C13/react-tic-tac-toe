@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 
 import './Square.css'
 
-const Square = (props) => {
-  // For Wave 1 enable this 
-  //  Component to alert a parent 
-  //  component when it's clicked on.
+// This component represents one square in a tic-tac-toe board. It will take in props representing the value to show on the board (x, o, or ''), an id, and a callback function called onClickCallback.
 
-  return <button
-    className="square"
-  >
-    {props.value}
-  </button>
+const Square = (props) => {
+  
+  return (
+    <button
+      className="square"
+      onClick={() => {
+        if (props.value === '') props.onClickCallback(props.id) // only change if square has no value
+        }
+      }
+    >
+      {props.value}
+    </button>
+  )
 }
 
 Square.propTypes = {
