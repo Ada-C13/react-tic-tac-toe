@@ -4,20 +4,9 @@ import './App.css';
 import Board from './components/Board';
 import { act } from '@testing-library/react';
 
-// css groups
-  // .App
-  // .App-header
-
 
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
-
-// This component is the traditional outer component of the React App. The App component will manage the state for the application and track the status for the game including the winner.
-
-  // App should pass to Board a 2D array of JavaScript objects and Board should use that to render an array of Square components.
-
-
-// We have provided you a function generateSquares in App.js which generates a 2D array of JavaScript objects with Ids and values (blank strings). These should be used to provide data to Board and Square via props.
 
 const generateSquares = () => {
   const squares = [];
@@ -46,7 +35,7 @@ const App = () => {
   const [winner, setWinner] = useState('');
 
   const takeTurn = (id) => { // create fn to change square's value on click
-    if (winner !== '') return;     // TODO check if won?
+    if (winner !== '') return;     // No clicks after winner
 
     const copySquares = Array.from(squares); // create copy (not just reference) of squares
     
@@ -56,22 +45,23 @@ const App = () => {
     const col = id % 3;             
     copySquares[row][col].value = activePlayer; // set value to activePlayer (X or O)
     setSquares(copySquares); // pass in new array   
-     // setSquaresPlayed(squaresPlayed +1);
+     // setSquaresPlayed(squaresPlayed +1); // TODO optional refactor
     checkForWinner(copySquares);   
     (activePlayer === PLAYER_1) ? setActivePlayer(PLAYER_2) : setActivePlayer(PLAYER_1); // Change active player, if x, change to o, and if o, change to x  
   };
 
 
-  // const checkForWinner = () => {
-  function checkForWinner(boxes) {
+  const checkForWinner = () => {
+  
     // check if XXX or OOO in each column / row / diagonal
     // if a yes, player has won
       // display winner
-    // ! ADA example doesn't do the following
-    // if no AND all squares played
-      // declare tie
+    // ! ADA example doesn't do the following - optional refactor
+      // if no AND all squares played
+        // declare tie
 
     // code adapted from tic-tac-toe tutorial at https://medium.com/@shifrb/how-to-build-tic-tac-toe-with-react-hooks-ca37f6040022  
+    // function checkForWinner(squares) { // function from link above 
       const possibleLines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -85,18 +75,18 @@ const App = () => {
       // go over all possibly winning lines and check if they consist of only X's/only O's
       for (let i = 0; i < possibleLines.length; i++) {
         const [a, b, c] = possibleLines[i];
-        if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
-        // return boxes[a];
-        return setWinner(activePlayer);
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+        // return setWinner(activePlayer);
         }
       }
-      return '';
+      return null;
     }
 
   const resetGame = () => {
     setSquares(generateSquares()); // reset board
     setActivePlayer(PLAYER_1);
-    // setSquaresPlayed(0);
+    // setSquaresPlayed(0); // TODO optional refactor
     setWinner();
     }
 
