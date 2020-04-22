@@ -45,7 +45,8 @@ const App = () => {
 
   // Wave 2
 
-    // check if won?
+    // TODO check if won?
+    // TODO check if squares full?
   //   Then pass it into the squares as a callback
 
   const takeTurn = (id) => { // create fn to change square's value on click
