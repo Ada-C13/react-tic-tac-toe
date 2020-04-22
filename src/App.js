@@ -42,7 +42,7 @@ const generateSquares = () => {
 
 const App = () => {
   const [squares, setSquares] = useState(generateSquares());
-  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1)
+  const [currentPlayer, setPlayer] = useState(PLAYER_1)
   const [winner, setWinner] = useState(null);
   const [count, setCurrentCount] = useState(0)
 
@@ -59,7 +59,7 @@ const App = () => {
       while (x < squares.length){
         if (squares[i][x].id === id && squares[i][x].value === "" ){
           squares[i][x].value = currentPlayer? PLAYER_1 : PLAYER_2;
-          setCurrentPlayer(!currentPlayer)
+          setPlayer(!currentPlayer)
           setWinner(checkForWinner())
           setCurrentCount(count + 1)
         };    
@@ -87,7 +87,7 @@ const App = () => {
       }  
     }
 
-    if (!newSquare.includes("")) return "tied";
+    if (!newSquare.includes("")) return "Nobody...it's a tie. Play again?";
     return null; 
   }
 
@@ -108,7 +108,7 @@ const App = () => {
       }  
 
     setSquares(generateSquares());
-    setCurrentPlayer(PLAYER_1);
+    setPlayer(PLAYER_1);
     setWinner(null);
     setCurrentCount(0); 
     }
@@ -118,7 +118,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe : COVID-19</h1>
-        <h2>{winner? `The winner is ${winner}`: `Current Player: ${currentPlayer? "X": "O"}`}</h2>
+        {/* https://www.udemy.com/course/reactjs-tic-tac-toe-game-in-30-minutes/ and Yieni */}
+        <h2>{winner? `The winner is ${winner}`: `Current Player: ${currentPlayer? "O": "X"}`}</h2>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
