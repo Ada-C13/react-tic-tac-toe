@@ -49,6 +49,7 @@ const App = () => {
       i++
     }
     setSquares(clickedSquare);
+      
         }
 
 
@@ -59,6 +60,8 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    setSquares(generateSquares());
+    setPlayer(PLAYER_1);
   }
 
   return (
@@ -66,7 +69,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>The winner is ... -- Fill in for wave 3 </h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
         <Board
