@@ -4,18 +4,31 @@ import Square from './Square';
 import PropTypes from 'prop-types';
 
 
-const generateSquareComponents = (squares, onClickCallback) => {
-  // Complete this for Wave 1
+// Destructuring here, so using squares.whatever instead of props.whatever
+const SquareComponents = ( {squares, onClickCallback}) => {
 
-}
+  const generateSquareComponents = squares.flat().map((square) => {
 
+    return (
+        <Square
+          id={square.id}
+          value={square.value} 
+          key={square.id}
+          onClickCallback={onClickCallback}
+          
+        />
+    );
+  });
+  return generateSquareComponents;
+};
+
+// Destructuring here - takes the place of props.whatever
 const Board = ({ squares, onClickCallback }) => {
-  const squareList = generateSquareComponents(squares, onClickCallback);
-  console.log(squareList);
-  return <div className="grid" >
-    {squareList}
+  return <div className="grid">
+    <SquareComponents squares={squares} onClickCallback={onClickCallback} />
   </div>
-}
+  
+};
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(
